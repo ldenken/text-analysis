@@ -1,0 +1,55 @@
+=begin
+
+File structure
+
+common name		ibm
+shortname 		, international business machines
+fullname		, international business machines corporation
+country 		, United Kingdom of Great Britain and Northern Ireland
+description		, 
+
+=end
+
+# commented out!
+
+
+
+
+#common = shortname, fullname, country, description
+
+lavabit = lavabit, lavabit, america, Lavabit is an email service that prides itself on privacy and security
+ibm = international business machines, the international business machines corporation, america, ibm an american multinational technology and consulting corporation, with headquarters in armonk new york
+verizon = Verizon, verizon, , 
+
+nsa = nsa, National Security Agency, america, Governmental
+billion = billion, BHP Billion, England, Mineral and mining 
+guardian = Guardian, Guardian, England, News
+ap = ap, Associated Press, world, news
+fisa = Fisa court
+fbi = fbi
+cia = CIA
+dell = Dell
+cato institute = Cato Institute
+reuters = reuters, reuters, World, News
+twitter = twitter, twitter, World, media
+google = google, google, World, search
+alamy = Alamy, Alamy, world, media
+microsoft = microsoft, microsoft, world, computer
+skype = skype, skype, world, computer
+GCHQ = GCHQ, GCHQ, England, Gover
+disneyland = disneyland, disneyland, World, Ent
+corbis = corbis, corbis, world, media
+
+BND = BND, BND, Germany, Germany's intelligence agency
+getty = getty, getty images, world, media
+
+
+
+
+
+
+
+
+
+
+

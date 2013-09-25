@@ -1,0 +1,4 @@
+communicants = communicant, 31, com_ts
+commitments = commitment, 33, com_ts
+comments = comment, 6, com_ts
+components = component, 4, com_ts

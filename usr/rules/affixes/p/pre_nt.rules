@@ -1,0 +1,4 @@
+precedent = precedent, 1, pre_nt
+present = present, 7, pre_nt
+president = president, 178, pre_nt
+prevent = prevent, 41, pre_nt
