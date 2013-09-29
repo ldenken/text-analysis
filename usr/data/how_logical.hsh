@@ -1,0 +1,43 @@
+=begin
+
+=end
+
+# If the key is all uppercase it is used in an acronym search
+
+#acronym = shortname, fullname, description
+
+cde = codebreakers, code breakers, blar blar blar
+
+col = collection, collection, blar blar blar
+
+com = compromise, compromised, blar blar blar
+
+con = controlled, controlled, blar blar blar
+
+dm = datamining, data mining, blar blar blar
+
+geo = geolocating = geo locate, blar blar blar
+
+gth1 = data gather, data gathering, blar blar blar
+gth2 = info gather, info gathering, blar blar blar
+gth3 = information gather, information gathering, blar blar blar
+
+hck = hack, hacking, blar blar blar
+
+int = intelligence gathering, intelligence gather, blar blar blar
+
+inv1 = investigate, investigation, blar blar blar
+inv2 = investigating, investigating, blar blar blar
+
+rec = record gathering, record gathering, blar blar blar
+
+rem = remote, remotely, blar blar blar
+
+stn = stolen, stolen, blar blar blar
+
+
+=begin
+
+
+=end
+

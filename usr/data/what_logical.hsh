@@ -1,0 +1,70 @@
+=begin
+
+=end
+
+# If the key is all uppercase it is used in an acronym search
+
+#acronym = shortname, fullname, description
+
+CREDS = credentials, user credentials, single factor authentication "something you know"
+
+cyber = Cyber, Cyber Space, Culture of computers, information technology, and virtual reality "the cyber age"
+cyrcrm = cybercrime, Cyber Crime, blar blar blar 
+cyrttk = cyberattack, Cyber Attack, blar blar blar
+cyrsec = cybersecurity, Cyber Security, blar blar blar
+cyrwpn = cyberweapon, Cyber Weapon, blar blar blar
+
+data1 = customer data, consumer data, blar blar blar
+data2 = personal data, credit data, blar blar blar
+
+brch1 = breach, breaches, blar blar blar
+brch2 = data breach, data breaches, blar blar blar
+
+info1 = info, information, blar blar blar
+info2 = personal info, personal information, blar blar blar
+
+socsec = social security, social security numbers, blar blar blar
+
+infosec = infosec, information security, blar blar blar
+comsec = comsec, computer security, blar blar blar
+db = database, data base, blar blar blar
+pubprivrec = public record, private record, blar blar blar
+
+idthft = identity theft, identity thefts, blar blar blar
+
+fnd = fined, fined, blar blar blar
+
+
+=begin
+
+botnet
+data stolen
+fraud
+security freeze
+
+background checks and drug screenings
+
+
+#crime = crime
+#email = email
+#gmail = Gmail
+#internet = Internet
+#ip address = IP address
+#online = Online
+#private key = private key
+#public key = public key
+#website = website
+buddylist = buddy list, 198
+
+software
+
+internetbased = internet base, 0
+overip = over ip, 6
+preencryption = before encryption, 0
+skydrive = skydrive
+thirdparty = third party, 0
+webpages = webpage, 4
+websites = website, 12
+
+
+=end
