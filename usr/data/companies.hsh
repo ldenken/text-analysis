@@ -1,47 +1,79 @@
 =begin
 
-File structure
-
-common name		ibm
-shortname 		, international business machines
-fullname		, international business machines corporation
-country 		, United Kingdom of Great Britain and Northern Ireland
-description		, 
-
 =end
-
-# commented out!
-
-
-
 
 #common = shortname, fullname, country, description
 
-lavabit = lavabit, lavabit, america, Lavabit is an email service that prides itself on privacy and security
-ibm = international business machines, the international business machines corporation, america, ibm an american multinational technology and consulting corporation, with headquarters in armonk new york
-verizon = Verizon, verizon, , 
-
-nsa = nsa, National Security Agency, america, Governmental
-billion = billion, BHP Billion, England, Mineral and mining 
-guardian = Guardian, Guardian, England, News
-ap = ap, Associated Press, world, news
-fisa = Fisa court
-fbi = fbi
-cia = CIA
-dell = Dell
-cato institute = Cato Institute
-reuters = reuters, reuters, World, News
-twitter = twitter, twitter, World, media
-google = google, google, World, search
-alamy = Alamy, Alamy, world, media
-microsoft = microsoft, microsoft, world, computer
-skype = skype, skype, world, computer
-GCHQ = GCHQ, GCHQ, England, Gover
-disneyland = disneyland, disneyland, World, Ent
-corbis = corbis, corbis, world, media
-
+AP = ap, Associated Press, world, news
 BND = BND, BND, Germany, Germany's intelligence agency
-getty = getty, getty images, world, media
+CIA = CIA, CIA, America, blar blar
+FBI = fbi, FBI, America, blar blar
+FSA = FSA, Financial Services Authority, UK, Government
+GCHQ = GCHQ, GCHQ, England, Government
+IBM = International Business Machines, the International Business Machines Corporation, America, ibm an american multinational technology and consulting corporation, with headquarters in armonk new york
+NSA = NSA, National Security Agency, USA, Governmental
+ACLU = American Civil Liberties Union, The American Civil Liberties Union, USA, non-profit
+EFF = Electronic Frontier Foundation, The Electronic Frontier Foundation, USA, donor-supported
+NATO = North Atlantic Treaty Organization, The North Atlantic Treaty Organization, North Atlantic, Governmental
+
+MI5 = MI5, Military Intelligence Five, UK, Governmental
+MI6 = MI6, Military Intelligence Six, UK, Governmental
+SOCA = SOCA, The Serious and Organised Crime Agency, UK, Governmental
+
+best = bestrecovery = bestrecovery, world, email
+
+
+
+0001 = House Intelligence Committee, The House Intelligence Committee, USA, Governmental
+alamy = Alamy, Alamy, world, media
+billiton = Billiton, Bhp Billiton, England, Mineral and Mining 
+cato institute = Cato Institute, , ,
+corbis = Corbis, Corbis, world, media
+dell = Dell, Dell, America, blar blar
+disneyland = Disneyland, Disneyland, World, Ent
+ecrime Unit = Central Ecrime Unit, Police Central Ecrime Unit, England, Government
+Facebook = Facebook, Facebook, world, social media
+fisa = Fisa, Fisa court, America, blar blar
+getty = Getty, Getty Images, world, media
+google = Google, Google, World, search
+guardian = Guardian, Guardian, England, News
+lavabit = Lavabit, Lavabit, America, Lavabit is an email service that prides itself on privacy and security
+mafia = Mafia, Russian mafia, RUS, blar blar
+microsoft = Microsoft, Microsoft, world, computer
+police = Police, Police, world, blar blar
+reuters = Reuters, Reuters, World, News
+Santander = Santander, Santander, world, bank
+Scotland Yard = Scotland Yard, Scotland Yard, England, Government
+Senate = Senate, The Senate Judiciary Committee, USA, Governmental
+skype = Skype, Skype, world, computer
+sony = Sony, Sony Computer Entertainment Europe, EU, media
+twitter = Twitter, Twitter, World, media
+verizon = Verizon, Verizon, , 
+Washington Post = Washington Post, Washington Post, USA, News
+WH = White House, The White House, USA, Government
+
+gov01 = Government, The Government, World, Government
+gov02 = US Government, The US Government, US, Government
+gov03 = Congress, US Congress, US, Government
+gov04 = Justice Department, The Justice Department, US, Government
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

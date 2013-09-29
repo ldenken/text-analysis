@@ -2,44 +2,46 @@ module Normalise
 
   #----------------------------------------------------------------------------#
   def Normalise.raw(fileArray)
-    # 
+    #
     #
     def Normalise.rules(fileArray, fileHash, filename, rule)
       fileHash.each do |k,v|
-        regExp = Regexp.new(" #{k} ")
+        regExp = Regexp.new("#{k}")
         fileArray.each do |line|
           if line != ""
-            line.downcase
             if line =~ regExp
-              line.gsub!(regExp, " #{v[0]} ")
+              line.gsub!(regExp, "#{v[0]}")
               tmpNum = fileHash[k][1].to_i
               fileHash[k][1] = tmpNum += 1
-              FileIO.hashToFile(fileHash, ",", filename, "w")
             end
           end
         end
       end
+
       if rule != ""
-        regExp = Regexp.new("[a-zA-Z0-9]{1,255}" + rule + "[a-zA-Z0-9]{1,255}")
         fileArray.each do |line|
           if line != ""
-            line.downcase
+            regExp = Regexp.new("[a-zA-Z0-9]{1,}" + rule + "[ a-zA-Z0-9]{1,}")
             if line =~ regExp
-              string = line.slice(regExp)
-              if rule == "'"
-                fileHash[string.downcase] = [string.downcase.gsub!(/'s/, ""), 1, "NEW"]
+              tmpStr = line.slice(regExp)
+              tmpAry = tmpStr.split(" ")
+              string = tmpAry[0]
+              if fileHash.has_key?("#{string}") == false
+                fileHash[string] = [string, 1, "NEW"]
+                Var.info("NEW string", string)
               else
-                fileHash[string.downcase] = [string.downcase, 1, "NEW"]                
+                Var.info("-> string", string)
               end
-              FileIO.hashToFile(fileHash, ",", filename, "a+")
             end
           end
         end
-      end  
-      return fileArray
-    end 
+      end
 
-    # Ampersand
+      FileIO.hashToFile(fileHash, ",", filename, "w")
+      return fileArray
+    end
+
+   # Ampersand
     filename = "usr/rules/ampersand.rules"
     fileHash = FileIO.fileToHash(filename, ",", 0)
     fileArray = Normalise.rules(fileArray, fileHash, filename, "&")
@@ -49,15 +51,16 @@ module Normalise
     fileHash = FileIO.fileToHash(filename, ",", 0)
     fileArray = Normalise.rules(fileArray, fileHash, filename, "'")
 
-    # Clipped
-    filename = "usr/rules/clipped.rules"
-    fileHash = FileIO.fileToHash(filename, ",", 0)
-    fileArray = Normalise.rules(fileArray, fileHash, filename, "")
-
     # Hyphen
     filename = "usr/rules/hyphen.rules"
     fileHash = FileIO.fileToHash(filename, ",", 0)
     fileArray = Normalise.rules(fileArray, fileHash, filename, "-")
+
+=begin
+    # Clipped
+    filename = "usr/rules/clipped.rules"
+    fileHash = FileIO.fileToHash(filename, ",", 0)
+    fileArray = Normalise.rules(fileArray, fileHash, filename, "")
 
     # Run together
     filename = "usr/rules/runtogether.rules"
@@ -73,6 +76,7 @@ module Normalise
     filename = "usr/rules/typo.rules"
     fileHash = FileIO.fileToHash(filename, ",", 0)
     fileArray = Normalise.rules(fileArray, fileHash, filename, "")
+=end
 
     return fileArray
   end # def Normalise.raw(fileArray)

@@ -1,5 +1,6 @@
-resist = resist, 24, _ist
-assist = assist, 13, _ist
-buddylist = buddy list, 198, _ist
-insist = insist, 10, _ist
-technologist = technology, 6, _ist
+assist = assist, 4, _ist
+heist = heist, 65, _ist
+insist = insist, 2, _ist
+journalist = journal, 3, _ist
+resist = resist, 6, _ist
+technologist = technology, 1, _ist

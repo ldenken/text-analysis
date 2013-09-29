@@ -1,6 +1,7 @@
-transit = transit, 86, tra_
-travel = travel, 70, tra_
-tradecraft = trade craft, 11, tra_
-transcript = transcript, 8, tra_
-track = track, 28, tra_
-train = train, 5, tra_
+trace = trace, 30, tra_
+track = track, 33, tra_
+tradecraft = tradecraft, 6, tra_
+train = train, 6, tra_
+transcript = transcript, 10, tra_
+transit = transit, 101, tra_
+travel = travel, 82, tra_

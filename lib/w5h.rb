@@ -2,178 +2,33 @@ module W5h
   #
 
   # WHO.blue -> WHAT.green -> WHERE.red -> WHEN.brown -> HOW.cyan -> WHY.magenta
-  
+
+  #----------------------------------------------------------------------------#
   def W5h.hashToArray(tmpHsh)
-    tmpAry = []
+    acronyms = []
+    strings = []
     tmpHsh.each do |k,v|
-#      tmpAry << k
-      tmpAry << "#{v[0]}".downcase.gsub("'s", "")
-      tmpAry << "#{v[1]}".downcase.gsub("'s", "")
-      tmpAry.uniq!
-      tmpAry.compact!
+      if k =~ /\A[A-Z]{1,}\z/
+        acronyms << k
+      end
+      strings << "#{v[0]}".downcase.gsub("'s", "")
+      strings << "#{v[1]}".downcase.gsub("'s", "")
     end
-    return tmpAry
+    acronyms.uniq!
+    acronyms.compact!
+    strings.uniq!
+    strings.compact!
+    return acronyms, strings
   end
 
+
   #----------------------------------------------------------------------------#
-  def W5h.who(document)
-    # WHO
-    # Firstnames
-    print "  Firstnames..."
-    tmpAry = FileIO.fileToArray("usr/data/firstname.lst", "")
-    document.each do |line|
-      print "."
-      line["LEM"].each_with_index do |word,index|
-        if word != "" && tmpAry.include?(word) == true
-          if line["RAW"][index][0] =~ /\A[A-Z]/
-            line["W5H"][index] = "blue"
-          end
-        end 
-      end
-    end
-
-    # Lastname
-    puts ""; print "  Lastname..."
-    tmpAry = FileIO.fileToArray("usr/data/lastname.lst", "")
-    document.each do |line|
-      print "."
-      line["LEM"].each_with_index do |word,index|
-        if word != "" && tmpAry.include?(word) == true
-          if line["RAW"][index][0] =~ /\A[A-Z]/
-            line["W5H"][index] = "blue"
-          end
-        end 
-      end
-    end
-    
-    # Peoples
-    puts ""; print "  Peoples..."
-    tmpHsh = FileIO.fileToHash("usr/data/countries.hsh", ",", 0)
-    tmpAry = []
-    tmpHsh.each do |k,v|
-      if v[4] =~ /[a-z]/
-        tmpAry << "#{v[4]}".downcase
-      end
-    end
-    tmpAry.uniq!
-    tmpAry.compact!
-    document.each do |line|
-      print "."
-      line["LEM"].each_with_index do |word,index|
-        if word != "" && tmpAry.include?(word) == true
-          line["W5H"][index] = "blue"
-        end 
-      end
-    end
-
-    # Companies
-    puts ""; print "  Companies..."
-    tmpHsh = FileIO.fileToHash("usr/data/companies.hsh", ",", 0)
-    tmpAry = W5h.hashToArray(tmpHsh)
-    tmpAry.each do |e|
+  def W5h.findString(document, strings, colour)
+    strings.each do |e|
       if e =~ /[ ]/
         split = e.split(" ")
         document.each do |line|
-          print "."
-          line["LEM"].each_with_index do |word,index|
-            if word != "" && word == split[0]
-              length = split.length
-              test = false
-              length.times do |i|
-                if line["LEM"][index+i] == split[i]
-                  test = true 
-                else
-                  test = false
-                end
-              end
-              if test == true
-                length.times do |i|
-                  line["W5H"][index+i] = "blue"
-                end
-              end
-            end
-          end
-        end
-      else
-        document.each do |line|
-          print "."
-          line["LEM"].each_with_index do |word,index|
-            if word != "" && word == e
-              line["W5H"][index] = "blue"
-            end
-          end
-        end      
-      end
-    end
-  end # def W5h.who(document)
-
-
-  #----------------------------------------------------------------------------#
-  def W5h.what(document)
-    # WHAT
-    # Things
-    puts ""; print "  Things..."
-    tmpHsh = FileIO.fileToHash("usr/data/things.hsh", ",", 0)
-    tmpAry = W5h.hashToArray(tmpHsh)
-    tmpAry.each do |e|
-      if e =~ /[ ]/
-        split = e.split(" ")
-        document.each do |line|
-          print "."
-          line["LEM"].each_with_index do |word,index|
-            if word != "" && word == split[0]
-              length = split.length
-              test = false
-              length.times do |i|
-                if line["LEM"][index+i] == split[i]
-                  test = true 
-                else
-                  test = false
-                end
-              end
-              if test == true
-                length.times do |i|
-                  line["W5H"][index+i] = "green"
-                end
-              end
-            end
-          end
-        end
-      else
-        document.each do |line|
-          print "."
-          line["LEM"].each_with_index do |word,index|
-            if word != "" && word == e
-              line["W5H"][index] = "green"
-            end
-          end
-        end      
-      end
-    end
-
-
-  end # def W5h.what(document)
-  
-
-  #----------------------------------------------------------------------------#
-  def W5h.where(document)
-    # WHERE
-
-    # Countries
-    puts ""; print "  Countries..."
-    tmpHsh = FileIO.fileToHash("usr/data/countries.hsh", ",", 0)
-    tmpAry = W5h.hashToArray(tmpHsh)
-    abbreviation = []
-    tmpHsh.each do |k,v|
-      if v[4] =~ /[A-Z]/
-        abbreviation << "#{v[2]}"
-      end
-    end
-    tmpAry.each do |e|
-      if e =~ /[ ]/
-        split = e.split(" ")
-        document.each do |line|
-          print "."
+          #print "."
           line["NOR"].each_with_index do |word,index|
             if word != "" && word == split[0]
               length = split.length
@@ -187,7 +42,7 @@ module W5h
               end
               if test == true
                 length.times do |i|
-                  line["W5H"][index+i] = "red"
+                  line["W5H"][index+i] = "#{colour}"
                 end
               end
             end
@@ -195,49 +50,184 @@ module W5h
         end
       else
         document.each do |line|
-          print "."
-          line["LEM"].each_with_index do |word,index|
-            if word != "" 
+          #print "."
+          line["NOR"].each_with_index do |word,index|
+            if line["W5H"][index] == ""
               if word == e
-                line["W5H"][index] = "red"
-              end
-              if abbreviation.include?(line["RAW"][index]) == true
-                line["W5H"][index] = "red"
+                line["W5H"][index] = "#{colour}"
               end
             end
           end
         end      
       end
     end
+    return document
+  end
 
+
+  #----------------------------------------------------------------------------#
+  def W5h.who(document)
+    # WHO -> blue
+
+    # Firstnames
+    print "  Firstnames..."
+    tmpAry = FileIO.fileToArray("usr/data/firstname.lst", "")
+    document.each do |line|
+      print "."
+      line["NOR"].each_with_index do |word,index|
+        if word != "" && tmpAry.include?(word) == true
+          if line["RAW"][index][0] =~ /\A[A-Z]/
+            line["W5H"][index] = "blue"
+          end
+        end 
+      end
+    end
+
+    # Lastname
+    puts ""; print "  Lastname..."
+    tmpAry = FileIO.fileToArray("usr/data/lastname.lst", "")
+    document.each do |line|
+      print "."
+      line["NOR"].each_with_index do |word,index|
+        if word != "" && tmpAry.include?(word) == true
+          if line["RAW"][index][0] =~ /\A[A-Z]/
+            line["W5H"][index] = "blue"
+          end
+        end 
+      end
+    end
+    
+    # Peoples
+    puts ""; print "  Peoples..."
+    tmpHsh = FileIO.fileToHash("usr/data/countries.hsh", ",", 0)
+    tmpAry = []
+    tmpHsh.each do |k,v|
+      if v[3] =~ /[a-zA-Z]/
+        tmpAry << "#{v[3]}".downcase
+      end
+    end
+    tmpAry.uniq!
+    tmpAry.compact!
+    document.each do |line|
+      #print "."
+      line["LEM"].each_with_index do |word,index|
+        if line["W5H"][index] == ""  
+          if tmpAry.include?(word) == true
+            line["W5H"][index] = "blue"
+          end
+        end 
+      end
+    end
+
+    # Companies
+    puts ""; print "  Companies..."
+    tmpHsh = FileIO.fileToHash("usr/data/companies.hsh", ",", 0)
+    acronyms, strings = W5h.hashToArray(tmpHsh)
+    document = W5h.findString(document, strings, "blue")
+
+    acronyms.each do |e|
+      document.each do |line|
+        print "."
+        line["RAW"].each_with_index do |word,index|
+          if word != ""
+            regExp = Regexp.new("#{e}.*")
+            if word =~ regExp
+              line["W5H"][index] = "blue"
+            end
+          end
+        end
+      end      
+    end # acronyms.each do |e|
+
+  end # def W5h.who(document)
+
+
+  #----------------------------------------------------------------------------#
+  def W5h.what(document)
+    # WHAT -> green
+
+    # Acronyms
+    puts ""; print "  Acronyms..."
+    tmpHsh = FileIO.fileToHash("usr/data/acronyms.hsh", ",", 0)
+    acronyms, strings = W5h.hashToArray(tmpHsh)
+    document = W5h.findString(document, strings, "green")
+
+    acronyms.each do |e|
+      document.each do |line|
+        print "."
+        line["RAW"].each_with_index do |word,index|
+          if word != ""
+            regExp = Regexp.new("#{e}.*")
+            if word =~ regExp
+              line["W5H"][index] = "green"
+            end
+          end
+        end
+      end      
+    end # acronyms.each do |e|
+
+  end # def W5h.what(document)
+  
+
+  #----------------------------------------------------------------------------#
+  def W5h.where(document)
+    # WHERE -> red
+
+    # Countries
+    puts ""; print "  Countries..."
+    tmpHsh = FileIO.fileToHash("usr/data/countries.hsh", ",", 0)
+    acronyms, strings = W5h.hashToArray(tmpHsh)
+    document = W5h.findString(document, strings, "red")
+
+    acronyms.each do |e|
+      document.each do |line|
+        #print "."
+        line["RAW"].each_with_index do |word,index|
+          if line["W5H"][index] == ""
+            regExp = Regexp.new("#{e}.*")
+            if word =~ regExp
+              line["W5H"][index] = "red"
+            end
+          end
+        end
+      end      
+    end # acronyms.each do |e|
+
+    # Regions
+    puts ""; print "  Regions..."
+    tmpHsh = FileIO.fileToHash("usr/data/regions.hsh", ",", 0)
+    acronyms, strings = W5h.hashToArray(tmpHsh)
+    document = W5h.findString(document, strings, "red")
 
     # Cities
     puts ""; print "  Cities..."
     tmpHsh = FileIO.fileToHash("usr/data/cities.hsh", ",", 0)
-    # Var.info("tmpHsh", tmpHsh)
-    tmpAry = W5h.hashToArray(tmpHsh)
-    # Var.info("tmpAry", tmpAry)
-    document.each do |line|
-      print "."
-      line["LEM"].each_with_index do |word,index|
-        if word != "" && tmpAry.include?(word) == true
-          line["W5H"][index] = "red"
-        end 
-      end
-    end
+    acronyms, strings = W5h.hashToArray(tmpHsh)
+    document = W5h.findString(document, strings, "red")
+
     puts ""
   end #   
 
 
+
+
+
+
+
+
+
+
+
   #----------------------------------------------------------------------------#
   def W5h.when(document)
-    # WHEN
+    # WHEN -> brown
+
     # Days
     print "  Days..."
     tmpAry = FileIO.fileToArray("usr/data/days.lst", "")
     document.each do |line|
       print "."
-      line["LEM"].each_with_index do |word,index|
+      line["NOR"].each_with_index do |word,index|
         if word != "" && tmpAry.include?(word) == true
           line["W5H"][index] = "brown"
         end
@@ -249,10 +239,19 @@ module W5h
     tmpAry = FileIO.fileToArray("usr/data/months.lst", "")
     document.each do |line|
       print "."
-      line["LEM"].each_with_index do |word,index|
+      line["NOR"].each_with_index do |word,index|
         if word != "" && tmpAry.include?(word) == true
           if line["RAW"][index][0] =~ /\A[A-Z]/
             line["W5H"][index] = "brown"
+            if line["RAW"][index-1] == "early" || line["RAW"][index-1] == "late"
+              line["W5H"][index-1] = "brown"
+            end
+            if line["LEM"][index+1] =~ /\A[0-9]{1,4}\z/ 
+              line["W5H"][index+1] = "brown"
+            end
+            if line["RAW"][index-1] =~ /\A[0-9]{1,4}\z/ 
+                line["W5H"][index-1] = "brown"
+            end
           end
         end
       end
@@ -262,7 +261,7 @@ module W5h
     puts ""; print "  Numbers..."
     document.each do |line|
       print "."
-      line["LEM"].each_with_index do |word,index|
+      line["RAW"].each_with_index do |word,index|
         # time numbers -> 9am or 1pm
         if word =~ /\A[1-9]{1}[amp]{1,2}\z/ || word =~ /\A[1]{1}[012]{1}[amp]{1,2}\z/ 
           line["W5H"][index] = "brown"
@@ -291,9 +290,9 @@ module W5h
             line["W5H"][index] = "brown"
           end
         end
-        # year numbers -> 1000 to 2999
+        # year numbers -> 1900 to 2999
         if word =~ /\A[0-9]{4}\z/ 
-          if word.to_i >= 1900 && word.to_i <= 2359
+          if word.to_i >= 1900 && word.to_i <= 2999
             if word =~ /\A[12]{1}[0-9]{3}\z/
               line["W5H"][index] = "brown"
             end
@@ -318,6 +317,57 @@ module W5h
       end
     end
 
+
+    whenWords = []
+    whenWords << "century"
+    whenWords << "day"
+    whenWords << "hour"
+    whenWords << "night"
+    whenWords << "year"
+    whenWords << "yesterday"
+    whenWords << "month"
+    whenWords << "daily"
+    whenWords << "weekly"
+
+    accompanying = []
+    accompanying << "every"
+    accompanying << "last"
+    accompanying << "mid"
+    accompanying << "several"
+    accompanying << "since"
+    accompanying << "twice"
+
+
+    accompanying << "one"
+    accompanying << "two"
+    accompanying << "three"
+    accompanying << "four"
+    accompanying << "five"
+    accompanying << "six"
+    accompanying << "seven"
+    accompanying << "eight"
+    accompanying << "nine"
+    accompanying << "ten"
+
+
+    # whenWords
+    puts ""; print "  When Words..."
+    document.each do |line|
+      print "."
+      line["LEM"].each_with_index do |word,index|
+        if word != "" && whenWords.include?(word) == true
+          line["W5H"][index] = "brown"
+          if line["LEM"][index-1] =~ /\A[0-9]{1,2}\z/ 
+            line["W5H"][index-1] = "brown"
+          end
+          accompanying.each do |e|
+            if line["LEM"][index-1] == "#{e}" 
+              line["W5H"][index-1] = "brown"
+            end
+          end
+        end
+      end
+    end
 
 
     puts ""

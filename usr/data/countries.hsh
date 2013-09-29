@@ -1,252 +1,460 @@
 ﻿=begin
 
-
 =end
 
+#abbr = shortname, fullname, capital, peoples
 
-#abbr = shortname, fullname, abbreviation, capital, peoples, description
+ABK = Abkhazia, Republic of Abkhazia, Sukhumi, Abkhaz
+ABW = Aruba, Aruba, Oranjestad, Arabian
+AFG = Afghanistan, Islamic Republic of Afghanistan, Kabul, Afghan
+AGO = Angola, Republic of Angola, Luanda, Angolan
+AIA = Anguilla, Anguilla, The Valley, Afro-Caribbean
+ALB = Albania, Republic of Albania, Tirana, Albanian
+AND = Andorra, Principality of Andorra, Andorra la Vella, Andorran
+ARG = Argentina, Argentine Republic, Buenos Aires, Argentinean
+ARM = Armenia, Republic of Armenia, Yerevan, Armenian 
+ATA = Antarctica, South Pole, Bellingshausen Station, Antarctica 
+ATG = Antigua and Barbuda, Antigua and Barbuda, St. John's, Afro-Caribbean
+AUS = Australia, Commonwealth of Australia, Canberra, Australian
+AUT = Austria, Republic of Austria, Vienna, Austrian
+AZE = Azerbaijan, Republic of Azerbaijan, Baku, Azerbaijani
 
-AFG = afghanistan, Islamic Republic of Afghanistan, AFG, Kabul, Afghan, Afghanistan, officially the Islamic Republic of Afghanistan, is a landlocked sovereign state forming part of South Asia, Central Asia, and to some extent Western Asia
-BOL = Bolivia, Plurinational State of Bolivia, BOL, Sucre, Bolivian, Bolivia is a landlocked country located in central South America
-GB = Great Britain, Great Britain, GB, London, British, 
-GER = germany, federal republic of germany, GER, Berlin, german, blar blar
-JAP = Japan, Japan, JAP, Tokyo, Japanese, Japan is an island nation in East Asia. Located in the Pacific Ocean, it lies to the east of the Sea of Japan, China, North Korea, South Korea and Russia, stretching from the Sea of Okhotsk in the north to the East China Sea and Taiwan in the south
-PAK = pakistan, islamic republic of pakistan, PAK, Islamabad, Pakistani, Pakistan, officially the Islamic Republic of Pakistan, is a sovereign country in South Asia. With a population exceeding 180 million people, it is the sixth most populous country and with an area covering
-PAL = palestine, state of palestine, PAL, palestine, palestinian, Palestine is a geographic region in Western Asia between the Mediterranean Sea and the Jordan River. It is sometimes considered to include adjoining territories
-UK = United Kingdom, United Kingdom of Great Britain and Northern Ireland, UK, London, British, 
-US = United States, United States of America, US, Washington DC, American, The United States of America, commonly referred to as the United States, America, or simply the States, is a federal republic consisting of 50 states and a federal district.
-USA = America, United States of America, USA, Washington DC, American, The United States of America, commonly referred to as the United States, America, or simply the States, is a federal republic consisting of 50 states and a federal district.
-CHN = china, people's republic of china, CHN, Beijing, Chinese, China, officially the People's Republic of China, is a sovereign state located in East Asia. It is the world's most populous country, with a population of over 1.35 billion.
-IND = india, Republic of India, IND, New Delhi, Indian, India, officially the Republic of India, is a country in South Asia. It is the seventh-largest country by area, the second-most populous country with over 1.2 billion people, and the most populous democracy in the world.
+BOL = Bolivia, Plurinational State of Bolivia, Sucre, Bolivian
+BRA = Brazil, Federative Republic of Brazil, Brasilia, Brazilian 
+
+CAN = Canada, Canada, Ottawa, Canadian 
+CHN = China, People's Republic of China, Beijing, Chinese
+
+DZA = Algeria, People's Democratic Republic of Algeria, Algiers, Arabic
+
+ENG = England, England, London, English
+
+FRA = France, French Republic, Paris, French
+
+GBR = Britain, Great Britain, London, British
+GBR = Great Britain, Great Britain, London, British
+GER = Germany, Federal Republic of Germany, Berlin, German
+
+IND = India, Republic of India, New Delhi, Indian, India
+IRN = Iran, Islamic Republic of Iran, Tehran, Iranian
+IRQ = Iraq, Republic of Iraq, Baghdad, Iraqi
+
+JAN = Japan, Japan, Tokyo, Japanese
+
+NIG = Nigeria, Federal Republic of Nigeria, Abuja, Nigerian
+NZL = New Zealand, New Zealand, Wellington, New Zealander
+
+PAK = Pakistan, Islamic Republic of Pakistan, Islamabad, Pakistani
+PAL = Palestine, State of Palestine, Palestine, Palestinian
+POR = Portugal, Portuguese Republic, Lisbon, Portuguese
+RUS = Russia, Russian Federation, Moscow, Russian
+UK = United Kingdom, United Kingdom of Great Britain and Northern Ireland, London, British
+US = United States, United States of America, Washington DC, American
+USA = America, United States of America, Washington DC, Americans
+
+MAL = Malaysia, Malaysia, Kuala Lumpur, Malaysian 
+
 
 
 =begin
 
-abkhazia = Abkhazia, Republic of Abkhazia
-albania = Albania, Republic of Albania
-algeria = People's Democratic Republic of Algeria
-andorra = Principality of Andorra
-angola = Republic of Angola
-antigua and barbuda = Antigua and Barbuda
-argentina = Argentine Republic 
-armenia = Republic of Armenia
-australia = Commonwealth of Australia
-austria = Republic of Austria
-azerbaijan = Republic of Azerbaijan
+
+
+African = Central, 
+african republic = Central African Republic
+Antigua, 
+Antilles = Netherlands, 
+arab emirates = United Arab Emirates
+Bosnia, 
+
 bahamas = the commonwealth of the bahamas
 bahrain = kingdom of bahrain
 bangladesh = people's republic of bangladesh
 barbados = barbados
+BDI = Burundi, 
+BEL = Belgium, 
 belarus = republic of belarus
 belgium = kingdom of belgium
 belize = belize
+BEN = Benin, 
 benin = republic of benin 
+BGD = Bangladesh, 
+BGR = Bulgaria, 
+BHR = Bahrain, 
+BHS = Bahamas, 
 bhutan = kingdom of bhutan
+BLR = Belarus, 
+BLZ = Belize, 
+BMU = Bermuda, 
 bosnia and herzegovina = bosnia and herzegovina
 botswana = republic of botswana
-brazil = federative republic of brazil
+BRB = Barbados, 
+BRN = Brunei, 
 brunei = state of brunei abode of peace
+BTN = Bhutan, 
 bulgaria = republic of bulgaria
 burkina faso = burkina faso
 burma = republic of the union of myanmar 
 burundi = republic of burundi
+BWA = Botswana, 
+Caledonia = New, 
 cambodia = kingdom of cambodia
 cameroon = republic of cameroon
-canada = canada
 cape verde = republic of cape verde
-african republic = Central African Republic
 chad = republic of chad
+CHE = Switzerland, 
 chile = republic of chile
+CHL = Chile, 
+CMR = Cameroon, 
+COL = Colombia, 
 colombia = republic of colombia
+COM = Comoros, 
 comoros = union of the comoros
+congo = Democratic Republic of the Congo
 congo = democratic republic of the congo
 cook islands = cook islands
 costa rica = republic of costa rica
 cote divoire = republic of cote d'ivoire
 croatia = republic of croatia
+CUB = Cuba, 
 cuba = republic of cuba
+CYP = Cyprus, 
 cyprus = republic of cyprus
 czech republic = czech republic
-north korea = Democratic People's Republic of Korea 
-congo = Democratic Republic of the Congo
 denmark = kingdom of denmark
+DEU = Germany, 
+DJI = Djibouti, 
 djibouti = republic of djibouti
+DMA = Dominica, 
+DNK = Denmark, 
 dominica = commonwealth of dominica
 dominican republic = dominican republic
+DZA = Algeria, 
 east timor = democratic republic of timor-leste
+ECU = Ecuador, 
 ecuador = republic of ecuador
+EGY = Egypt, 
 egypt = arab republic of egypt
 el salvador = republic of el salvador
-guinea = republic of equatorial guinea
+ERI = Eritrea, 
 eritrea = state of eritrea
+ESP = Spain, 
+EST = Estonia, 
 estonia = republic of estonia
+ETH = Ethiopia, 
 ethiopia = federal democratic republic of ethiopia
+Faso = Burkina, 
 fiji = republic of fiji
+FIN = Finland, 
 finland = republic of finland
-france = french republic
+FJI = Fiji, 
+FSM = Micronesia, 
+GAB = Gabon, 
 gabon = gabonese republic
 gambia = the republic of the gambia
+Gaza Strip, 
+GEO = Georgia, 
 georgia = georgia
+GHA = Ghana, 
 ghana = republic of ghana
+GIB = Gibraltar, 
+GIN = Guinea, 
+GMB = Gambia, 
+GNB = Guinea-Bissau, 
+GRC = Greece, 
+GRD = Grenada, 
 greece = hellenic republic
 grenada = grenada
+GRL = Greenland, 
+GTM = Guatemala, 
 guatemala = republic of guatemala
+Guinea = Equatorial, 
+guinea = republic of equatorial guinea
 guinea = republic of guinea
 guinea-bissau = republic of guinea-bissau
+GUM = Guam, 
+GUY = Guyana, 
 guyana = co-operative republic of guyana
 haiti = republic of haiti
+HND = Honduras, 
 holy see = vatican city
 honduras = republic of honduras
+HRV = Croatia, 
+HTI = Haiti, 
+HUN = Hungary, 
 hungary = hungary
 iceland = republic of iceland
+ICS = Iceland, 
+IDN = Indonesia, 
+Indian = British, 
 indonesia = republic of indonesia
-iran = islamic republic of iran
-iraq = republic of iraq
 ireland = ireland
 ireland = Ireland,
+IRL = Ireland, 
+Island = Christmas, 
+Island = Norfolk, 
+Islands = Cayman, 
+Islands = Cook, 
+Islands = Falkland, 
+Islands = Faroe, 
+Islands = Marshall, 
+ISR = Israel, 
 israel = state of israel
+ITA = Italy, 
 italy = italian republic
 ivory coast = Republic of Cote D'ivoire
+Ivory Coast, 
+JAM = Jamaica, 
 jamaica = jamaica
+JEY = Jersey, 
+JOR = Jordan, 
 jordan = hashemite kingdom of jordan
+KAZ = Kazakhstan, 
 kazakhstan = republic of kazakhstan
+Keeling = Cocos, 
+KEN = Kenya, 
 kenya = republic of kenya
+KGZ = Kyrgyzstan, 
+KHM = Cambodia, 
+KIR = Kiribati, 
 kiribati = republic of kiribati
 korea = either north korea or south korea
+Korea = North, 
+korea south = Republic of South Korea 
+kosovo = Republic of Kosovo
 kosovo = republic of kosovo
+Kosovo, 
 kuwait = state of kuwait
+KWT = Kuwait, 
 kyrgyzstan = kyrgyz republic
+LAO = Laos, 
 laos = lao people's democratic republic
 latvia = republic of latvia
+LBN = Lebanon, 
+LBR = Liberia, 
+LBY = Libya, 
 lebanon = lebanese republic
 lesotho = kingdom of lesotho
 liberia = republic of liberia
 libya = state of libya
+LIE = Liechtenstein, 
 liechtenstein = principality of liechtenstein
 lithuania = republic of lithuania
+LSO = Lesotho, 
+LTU = Lithuania, 
+LUX = Luxembourg, 
 luxembourg = grand duchy of luxembourg
+LVA = Latvia, 
+MAC = Macau, 
 macedonia = republic of macedonia
 madagascar = republic of madagascar
 malawi = republic of malawi
-malaysia = malaysia
 maldives = republic of maldives
 mali = republic of mali
 malta = republic of malta
+MAR = Morocco, 
+Mariana = Northern, 
 marshall islands = republic of the marshall islands
 mauritania = islamic republic of mauritania
 mauritius = republic of mauritius
+MCO = Monaco, 
+MDA = Moldova, 
+MDG = Madagascar, 
+MDV = Maldives, 
+MEX = Mexico, 
 mexico = united mexican states
 micronesia = federated states of
+MKD = Macedonia, 
+MLI = Mali, 
+MLT = Malta, 
+MNE = Montenegro, 
+MNG = Mongolia, 
 moldova = republic of moldova
 monaco = principality of monaco
 mongolia = mongolia
 montenegro = montenegro
 morocco = kingdom of morocco
+MOZ = Mozambique, 
 mozambique = republic of mozambique
+MRT = Mauritania, 
+MSR = Montserrat, 
+MUS = Mauritius, 
+MWI = Malawi, 
 myanmar = burma
+Myanmar = Burma, 
+MYS = Malaysia, 
+MYT = Mayotte, 
 nagorno-karabakh = republic of nagorno-karabakh
+NAM = Namibia, 
 namibia = republic of namibia
 nauru = republic of nauru
 nepal = federal democratic republic of nepal
+NER = Niger, 
 netherlands = kingdom of the netherlands
-new zealand = new zealand
+NGA = Nigeria, 
+NIC = Nicaragua, 
 nicaragua = republic of nicaragua
 niger = republic of niger
-nigeria = federal republic of nigeria
+NIU = Niue, 
 niue = niue
+NLD = Netherlands, 
+NOR = Norway, 
+north korea = Democratic People's Republic of Korea 
 north korea = democratic people's republic of north korea
 northern cyprus = turkish republic of northern cyprus
 northern ireland = Northern Ireland,
 norway = kingdom of norway
+NPL = Nepal, 
+NRU = Nauru, 
 oman = sultanate of oman
+OMN = Oman, 
 palau = republic of palau
+PAN = Panama, 
 panama = republic of panama
 papua new guinea = independent state of papua new guinea
+Papua New, 
 paraguay = republic of paraguay
+PER = Peru, 
 peru = republic of peru
 philippines = republic of the philippines
+PHL = Philippines, 
+Pitcairn Islands, 
+PLW = Palau, 
+POL = Poland, 
 poland = republic of poland
-portugal = portuguese republic
+Polynesia = French, 
 pridnestrovie = transnistria
+PRT = Portugal, 
+PRY = Paraguay, 
+Puerto Rico, 
+QAT = Qatar, 
 qatar = state of qatar
-korea south = Republic of South Korea 
-kosovo = Republic of Kosovo
+Republic = Czech, 
+Republic = Democratic, 
+Republic = Dominican, 
+Rica = Costa, 
 romania = romania
-russia = russian federation
+ROU = Romania, 
+RWA = Rwanda, 
 rwanda = republic of rwanda
 sahrawi = Sahrawi Arab Democratic Republic,
+Saint Barthelemy, 
+Saint Helena, 
 saint kitts and nevis = federation of saint kitts and nevis
+Saint Kitts, 
 saint lucia = saint lucia
+Saint Lucia, 
+Saint Martin, 
+Saint Pierre, 
 saint vincent = saint vincent and the grenadines,
+Saint Vincent, 
+Salvador = El, 
+Samoa = American, 
 samoa = independent state of samoa
 san marino = republic of san marino
+San Marino, 
 sao tome = democratic republic of sao tome and principe
+Sao Tome, 
 saudi arabia = kingdom of saudi arabia
+Saudi Arabia, 
 scotland = Scotland, 
+SDN = Sudan, 
+SEN = Senegal, 
 senegal = republic of senegal
 serbia = republic of serbia
 seychelles = republic of seychelles
+SGP = Singapore, 
 sierra leone = republic of sierra leone
+Sierra Leone, 
 singapore = republic of singapore
+SJM = Svalbard, 
 slovenia = republic of slovenia
 solomon islands = solomon islands
+Solomon Islands, 
+SOM = Somalia, 
 somalia = federal republic of somalia
 somaliland = republic of somaliland
 south africa = republic of south africa
+South Africa, 
 south korea = republic of south korea
+South Korea, 
 south ossetia = republic of south ossetia
 south sudan = republic of south sudan
 spain = kingdom of spain
+SRB = Serbia, 
 sri lanka = democratic socialist republic of sri lanka
+Sri Lanka, 
 sudan = republic of the sudan
 sudan = south sudan
+SUR = Suriname, 
 suriname = republic of suriname
+SVK = Slovakia, 
+SVN = Slovenia, 
 swaziland = kingdom of swaziland
+SWE = Sweden, 
 sweden = kingdom of sweden
 switzerland = swiss confederation
+SWZ = Swaziland, 
+SYC = Seychelles, 
+SYR = Syria, 
 syria = syrian arab republic
 taiwan = republic of china
 tajikistan = republic of tajikistan
 tanzania = united republic of tanzania
+TCD = Chad, 
+TGO = Togo, 
+THA = Thailand, 
 thailand = kingdom of thailand
+TJK = Tajikistan, 
+TKL = Tokelau, 
+TKM = Turkmenistan, 
+TLS = Timor-Leste, 
 togo = togolese republic
+TON = Tonga, 
 tonga = kingdom of tonga
 transnistria = transnistria
 transnistria = Transnistrian Moldavian Republic
 trinidad and tobago = republic of trinidad and tobago
+Trinidad and, 
+TUN = Tunisia, 
 tunisia = republic of tunisia
+TUR = Turkey, 
 turkey = republic of turkey
 turkmenistan = turkmenistan
+Turks and, 
+TUV = Tuvalu, 
 tuvalu = tuvalu
+TWN = Taiwan, 
+TZA = Tanzania, 
+UGA = Uganda, 
 uganda = republic of uganda
+UKR = Ukraine, 
 ukraine = ukraine
-arab emirates = United Arab Emirates
+United Arab, 
 uruguay = oriental republic of uruguay
+URY = Uruguay, 
+US Virgin, 
+UZB = Uzbekistan, 
 uzbekistan = republic of uzbekistan
 vanuatu = republic of vanuatu
 vatican city = vatican city state
+VEN = Venezuela, 
 venezuela = bolivarian republic of venezuela
+Verde = Cape, 
 vietnam = socialist republic of vietnam
+Virgin = British, 
+VNM = Vietnam, 
+VUT = Vanuatu, 
 wales = Wales
+Western Sahara, 
+WSM = Samoa, 
+YEM = Yemen, 
 yemen = republic of yemen
 zambia = republic of zambia
+Zealand = New, 
 zimbabwe = Republic of Zimbabwe
+ZMB = Zambia, 
+ZWE = Zimbabwe,
 
 =end
-
-
-=begin
-
-File structure
-commonname = United Kingdom
-shortname, United Kingdom
-fullname, United Kingdom of Great Britain and Northern Ireland
-abbreviations , UK
-capital , London
-peoples, British
-description , 
-
-=end
-
-# commented out!
 

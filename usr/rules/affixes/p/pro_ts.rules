@@ -1,2 +1,3 @@
-products = product, 20, pro_ts
-projects = project, 40, pro_ts
+products = product, 24, pro_ts
+projects = project, 57, pro_ts
+proponents = proponent, 3, pro_ts

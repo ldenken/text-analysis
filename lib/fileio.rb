@@ -192,36 +192,35 @@ module FileIO
     if FileIO.fileExists(filename, exit) == true
       begin
         fileHash = {}
-        import = 1                              # import switch
+        import = 1                            # import switch
         File.foreach(filename) do |line|
           line.strip!
-#Var.info("line", line)
-
-          if line =~ /\A=[bdegin]{3,5}/
-            if line == "=begin"                 # begin a comment block
-              import = 2
-            end
-            if line == "=end"                   # end a comment block
-              import = 1
-            end
-#Var.info("import", import)
-
+          if line == "=begin"                 # begin a comment block
+            import = 2
+          end
+          if line == "=end"                   # end a comment block
+            import = 1
           end
 
-          if line != "" && line !~ /\A#/ && line !~ /\A=[bdegin]{3,5}\z/
-            if import == 1                      # line NOT commented out
-#Var.info("line", line)
-
-              line = FileIO.reduceUTF8String(line)
-              lineArray = line.split("=")
-#Var.info("lineArray", lineArray)
-
-              key = lineArray[0].strip
-              value = lineArray[1].strip
-              valueArray = value.split("#{delimiter} ")
-              fileHash[key] = valueArray
+          if line != ""
+            if line !~ /\A#/
+              if line != "=begin" 
+                if line != "=end"
+                  if import == 1
+                    line = FileIO.reduceUTF8String(line)
+                    lineArray = line.split("=")
+                    key = lineArray[0].strip
+                    if key != ""
+                      value = lineArray[1].strip
+                      valueArray = value.split("#{delimiter} ")
+                      fileHash[key] = valueArray
+                    end
+                  end
+                end
+              end
             end
           end
+
         end
       rescue IOError => error
         error = "#{error}"
@@ -231,6 +230,8 @@ module FileIO
       return fileHash
     end
   end
+
+
 
   #--------------------------------------------------------------------------#
   def FileIO.hashToFile(hash, delimiter, outputFilename, flag)

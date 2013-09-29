@@ -27,6 +27,7 @@ module Summarise
     selectedLineCount = 0
     selectedWordCount = 0
     selectedText = ""
+    selectedTextBlob = ""
 
     summaryLineCount = 0
     summaryWordCount = 0
@@ -83,10 +84,10 @@ summaryTextLineScore = {}
           includeCount = 0
           xArray = selectedLEMText[x]
           xArray.each do |word|
-            if word.length > 4    # length as a HACK to remove unwanted words *****
+#            if word.length > 4    # length as a HACK to remove unwanted words *****
               if yArray.include?(word) 
                 includeCount += 1 
-              end
+#              end
             end
           end
           arrayCountsAndTotals << includeCount
@@ -163,13 +164,15 @@ summaryTextLineScore = {}
       selectedText << "[#{k}/#{summaryMatrixCounts[k]}]"
       v.each {|e| selectedText << " #{e}"}
       selectedText << "\n"
+      v.each {|e| selectedTextBlob << "#{e} "}
     end
 
     # Create SUMMARY text for output
     summaryTextLineScore.sort_by {|k,v| k}.each do |k,v|
       summaryText << "[#{k}/#{v}]"
       selectedRAWText[k].each {|w| summaryText << " #{w}"}
-      summaryText << "\n"      
+      summaryText << "\n"
+      selectedRAWTitles[1].each {|w| summaryTextBlob << "#{w} "}
       selectedRAWText[k].each {|w| summaryTextBlob << "#{w} "}
     end
 
@@ -178,8 +181,10 @@ summaryTextLineScore = {}
     tmpStr << "#{summaryTextBlob}\n\n"
     tmpStr << "\n\n"
 
-    tmpStr << "Selected Text:\n"
-    tmpStr << "#{selectedText}\n"
+    tmpStr << "Selected Blob:\n"
+    tmpStr << "#{selectedTextBlob}\n\n"
+    tmpStr << "\n\n"
+    
     tmpStr << "lines: #{selectedLineCount} words: #{selectedWordCount}\n\n"
     tmpStr << "Selected BoW: #{selectedBoW.length}\n"
     selectedBoW.sort_by {|k,v| v}.reverse.each {|k,v| tmpStr << "#{k}(#{v}) "}
@@ -227,6 +232,38 @@ summaryTextLineScore = {}
     puts "\n\n"
     puts "                 WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
     puts ""
+
+    puts "\nDocument:\n"
+    document.each do |line|
+      line["RAW"].each_with_index do |w,i|
+        case line["W5H"][i]
+        when "blue"
+          print "#{w}".blue
+        when "green"
+          print "#{w}".green
+        when "red"
+          print "#{w}".red
+        when "brown"
+          print "#{w}".brown
+        when "cyan"
+          print "#{w}".cyan
+        when "magenta"
+          print "#{w}".magenta
+        else
+          print "#{w}"
+        end
+        print " "
+      end
+    end
+    puts "\n\n"
+    puts "                 WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
+    puts ""
+
+
+#Var.info("selectedRAWTitles", selectedRAWTitles)
+#Var.info("selectedRAWTitles", selectedRAWTitles[1])
+
+#selectedRAWTitles[1].each {|w| summaryTextBlob << "#{w} "}
 
   	return document
   end # 
