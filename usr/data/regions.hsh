@@ -1,0 +1,21 @@
+=begin
+
+
+=end
+
+#abbr = shortname, fullname, countries
+
+BER = Berkshire, Berkshire County, South East England
+CAL = California, California, USA
+EEU = Europe, Eastern Europe, Brussels, European
+HK = Hong Kong, Hong Kong, China 
+HOU = Hounslow, London Borough of Hounslow, England
+Ny = North Yorkshire, North Yorkshire, England
+SEL = South East London, South East London, England
+SU = Surrey, Surrey, England
+SUR = Surrey, Surrey County, England
+WB = West Bank, West Bank, Israel 
+WL = West London, West London, England
+NC = North Cornwall, North Cornwall, England
+
+
