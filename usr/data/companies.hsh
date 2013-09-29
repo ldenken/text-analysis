@@ -19,6 +19,10 @@ NATO = North Atlantic Treaty Organization, The North Atlantic Treaty Organizatio
 MI5 = MI5, Military Intelligence Five, UK, Governmental
 MI6 = MI6, Military Intelligence Six, UK, Governmental
 SOCA = SOCA, The Serious and Organised Crime Agency, UK, Governmental
+SSA = SSA, Social Security Administration, US, Government
+NBPCA = NBPCA, Network Branded Prepaid Card Association, US, Association
+
+
 
 best = bestrecovery = bestrecovery, world, email
 
@@ -56,29 +60,29 @@ gov01 = Government, The Government, World, Government
 gov02 = US Government, The US Government, US, Government
 gov03 = Congress, US Congress, US, Government
 gov04 = Justice Department, The Justice Department, US, Government
+gov05 = Treasury Department, U.S. Treasury Department, US, Government
+gov06 = Trade Commission, Federal Trade Commission, US, Government
 
 
+a = Altegrity, Altegrity Inc, US, data
+cp = ChoicePoint, ChoicePoint, US, data
+D&B = D&B, Dun & Bradstreet, Dun and Bradstreet Inc, US, data, a Short Hills, New Jersey data aggregator
+Equifax = Equifax, Equifax, World, data
+g = Gartner, Gartner Inc, US, stuff
+IDC = IDC, IDC Financial Insight, US, blar
+KOS = Krebs, KrebsOnSecurity, US, news
+kroll = Kroll Background America, Kroll Background America Inc, US, Data, blar
+ln = LexisNexis, LexisNexis Inc, US, data, blar
+re = Reed Elsevier, Reed Elsevier, US, Blar, the parent company of LexisNexis
+vto = virustotal.com, Virustotal, US, anti virus
 
+AJC = Journal Constitution, Atlanta Journal Constitution, US, News
+PRC = Privacy Rights Clearinghouse, Privacy Rights Clearinghouse, US, privacy
 
+JSR = Javelin Strategy & Research, Javelin Strategy & Research, US, research
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+hthcr = healthcare, healthcare providers, world, health care
+hthcr = health care, health care providers, world, health care
 
 
 

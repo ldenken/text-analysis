@@ -106,11 +106,32 @@ module W5h
         tmpAry << "#{v[3]}".downcase
       end
     end
+    tmpAry << "adults"
+    tmpAry << "agencies"
+    tmpAry << "banks"
+    tmpAry << "businesses"
+    tmpAry << "clients"
+    tmpAry << "companies"
+    tmpAry << "company"
+    tmpAry << "consumers"
+    tmpAry << "hackers"
+    tmpAry << "individuals"
+    tmpAry << "institutions"
+    tmpAry << "insurers"
+    tmpAry << "investigators"
+    tmpAry << "offices"
+    tmpAry << "personnel"
+    tmpAry << "spokesman"
+    tmpAry << "spokeswoman"
+    tmpAry << "victims"
+ 
+ 
+    
     tmpAry.uniq!
     tmpAry.compact!
     document.each do |line|
       #print "."
-      line["LEM"].each_with_index do |word,index|
+      line["NOR"].each_with_index do |word,index|
         if line["W5H"][index] == ""  
           if tmpAry.include?(word) == true
             line["W5H"][index] = "blue"
@@ -151,7 +172,6 @@ module W5h
     tmpHsh = FileIO.fileToHash("usr/data/acronyms.hsh", ",", 0)
     acronyms, strings = W5h.hashToArray(tmpHsh)
     document = W5h.findString(document, strings, "green")
-
     acronyms.each do |e|
       document.each do |line|
         print "."
@@ -165,6 +185,46 @@ module W5h
         end
       end      
     end # acronyms.each do |e|
+
+    # What Logical
+    puts ""; print "  What Logical..."
+    tmpHsh = FileIO.fileToHash("usr/data/what_logical.hsh", ",", 0)
+    acronyms, strings = W5h.hashToArray(tmpHsh)
+    document = W5h.findString(document, strings, "green")
+    acronyms.each do |e|
+      document.each do |line|
+        print "."
+        line["RAW"].each_with_index do |word,index|
+          if word != ""
+            regExp = Regexp.new("#{e}.*")
+            if word =~ regExp
+              line["W5H"][index] = "green"
+            end
+          end
+        end
+      end      
+    end # acronyms.each do |e|
+
+
+
+
+    # Currency 
+    puts ""; print "  Currency..."
+    document.each do |line|
+      print "."
+      line["RAW"].each_with_index do |word,index|
+        # $ or £ and one to six digits with or without . or ,  
+        if word =~ /\A[$|£][0-9\.\,]{1,6}\z/ 
+          line["W5H"][index] = "green"
+        end
+
+        # daymonthyear numbers -> eight digits, lessthan 31122999, uk DDMMYYYY 01 12 2003
+#        if word =~ /\A[0-9]{8}\z/ 
+#          line["W5H"][index] = "green"
+#        end
+      end
+    end
+
 
   end # def W5h.what(document)
   
@@ -261,7 +321,7 @@ module W5h
     puts ""; print "  Numbers..."
     document.each do |line|
       print "."
-      line["RAW"].each_with_index do |word,index|
+      line["NOR"].each_with_index do |word,index|
         # time numbers -> 9am or 1pm
         if word =~ /\A[1-9]{1}[amp]{1,2}\z/ || word =~ /\A[1]{1}[012]{1}[amp]{1,2}\z/ 
           line["W5H"][index] = "brown"
@@ -298,6 +358,12 @@ module W5h
             end
           end
         end
+      end
+    end
+
+    document.each do |line|
+      print "."
+      line["RAW"].each_with_index do |word,index|
         # daymonthyear numbers -> six digits, lessthan 311299, uk DDMMYY 01 12 03 
         if word =~ /\A[0-9]{6}\z/ 
           if word.to_i <= 311299
@@ -317,15 +383,18 @@ module W5h
       end
     end
 
-
     whenWords = []
     whenWords << "century"
     whenWords << "day"
     whenWords << "hour"
     whenWords << "night"
     whenWords << "year"
+    whenWords << "this year"
+    whenWords << "earlier this year"
     whenWords << "yesterday"
     whenWords << "month"
+    whenWords << "this month"
+    whenWords << "earlier this month"
     whenWords << "daily"
     whenWords << "weekly"
 
@@ -336,8 +405,7 @@ module W5h
     accompanying << "several"
     accompanying << "since"
     accompanying << "twice"
-
-
+    accompanying << "earlier"
     accompanying << "one"
     accompanying << "two"
     accompanying << "three"
@@ -349,19 +417,22 @@ module W5h
     accompanying << "nine"
     accompanying << "ten"
 
-
     # whenWords
     puts ""; print "  When Words..."
+    document = W5h.findString(document, whenWords, "brown")
+
     document.each do |line|
       print "."
-      line["LEM"].each_with_index do |word,index|
-        if word != "" && whenWords.include?(word) == true
-          line["W5H"][index] = "brown"
-          if line["LEM"][index-1] =~ /\A[0-9]{1,2}\z/ 
+      line["NOR"].each_with_index do |word,index|
+        if line["W5H"][index] == "brown"
+          if line["NOR"][index-1] =~ /\A[0-9]{1,2}\z/ 
             line["W5H"][index-1] = "brown"
           end
           accompanying.each do |e|
-            if line["LEM"][index-1] == "#{e}" 
+            if line["NOR"][index+1] == "#{e}" 
+              line["W5H"][index+1] = "brown"
+            end
+            if line["NOR"][index-1] == "#{e}" 
               line["W5H"][index-1] = "brown"
             end
           end
@@ -369,9 +440,36 @@ module W5h
       end
     end
 
-
     puts ""
   end # def W5h.where(document)
+
+  #----------------------------------------------------------------------------#
+  def W5h.how(document)
+    # HOW -> cyan
+
+    # how Logical
+    puts ""; print "  How Logical..."
+    tmpHsh = FileIO.fileToHash("usr/data/how_logical.hsh", ",", 0)
+    acronyms, strings = W5h.hashToArray(tmpHsh)
+    document = W5h.findString(document, strings, "cyan")
+
+=begin
+    acronyms.each do |e|
+      document.each do |line|
+        print "."
+        line["RAW"].each_with_index do |word,index|
+          if word != ""
+            regExp = Regexp.new("#{e}.*")
+            if word =~ regExp
+              line["W5H"][index] = "cyan"
+            end
+          end
+        end
+      end      
+    end # acronyms.each do |e|
+=end
+
+  end # def W5h.how(document)
 
 
   #----------------------------------------------------------------------------#
@@ -380,6 +478,9 @@ module W5h
     W5h.what(document)
     W5h.where(document)
     W5h.when(document)
+    W5h.how(document)
+#    W5h.why(document)
+
     return document
   end #
 

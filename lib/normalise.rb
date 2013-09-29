@@ -56,11 +56,10 @@ module Normalise
     fileHash = FileIO.fileToHash(filename, ",", 0)
     fileArray = Normalise.rules(fileArray, fileHash, filename, "-")
 
-=begin
     # Clipped
-    filename = "usr/rules/clipped.rules"
-    fileHash = FileIO.fileToHash(filename, ",", 0)
-    fileArray = Normalise.rules(fileArray, fileHash, filename, "")
+#    filename = "usr/rules/clipped.rules"
+#    fileHash = FileIO.fileToHash(filename, ",", 0)
+#    fileArray = Normalise.rules(fileArray, fileHash, filename, "")
 
     # Run together
     filename = "usr/rules/runtogether.rules"
@@ -76,7 +75,6 @@ module Normalise
     filename = "usr/rules/typo.rules"
     fileHash = FileIO.fileToHash(filename, ",", 0)
     fileArray = Normalise.rules(fileArray, fileHash, filename, "")
-=end
 
     return fileArray
   end # def Normalise.raw(fileArray)

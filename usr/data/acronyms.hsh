@@ -14,5 +14,7 @@ prism = prism, prism, blar
 XKS = XKeyScore, XKeyScore, A system for developing intelligence from the internet
 SIGINT = SigInt, Signals Intelligence, blar
 CEO = CEO, Chief Executive Officer, business 
+KBA = KBA, Knowledge Based Authentication, blar
+
 
 
