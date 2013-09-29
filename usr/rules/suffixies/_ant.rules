@@ -1,8 +1,10 @@
 accountant = account, 4, _ant
-assistant = assist, 9, _ant
+applicant = applicant, 18, _ant
+assistant = assist, 14, _ant
 giant = giant, 11, _ant
 grant = grant, 1, _ant
-important = import, 53, _ant
+important = import, 68, _ant
+informant = inform, 2, _ant
 instant = instant, 7, _ant
 meant = mean, 11, _ant
 redundant = redundant, 8, _ant
@@ -10,4 +12,3 @@ relevant = relevant, 11, _ant
 reliant = reliant, 17, _ant
 vigilant = vigil, 65, _ant
 warrant = warrant, 40, _ant
-informant = inform, 2, _ant

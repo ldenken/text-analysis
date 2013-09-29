@@ -1,3 +1,4 @@
-impact = impact, 140, _act
+impact = impact, 173, _act
 exact = exact, 10, _act
-'contact = , 20, _act
+interact = interact, 5, _act
+attract = attract, 3, _act

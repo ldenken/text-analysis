@@ -1,2 +1,3 @@
 persistent = persistent, 16, per_ent
 pertinent = pertinent, 10, per_ent
+percent = percent, 7, per_ent

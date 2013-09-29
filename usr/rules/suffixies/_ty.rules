@@ -1,6 +1,6 @@
 anxiety = anxiety, 80, _ty
 certainty = certain, 14, _ty
-city = city, 74, _ty
+city = city, 77, _ty
 deputy = deputy, 199, _ty
 dirty = dirt, 62, _ty
 getty = getty, 14, _ty
@@ -10,7 +10,8 @@ honesty = honest, 115, _ty
 kammafpgetty = kammafpgetty, 1, _ty
 liberty = liberty, 28, _ty
 majesty = majesty, 7, _ty
-party = par, 38, _ty
+party = party, 75, _ty
+safety = safe, 8, _ty
 stockgetty = stock getty, 10, _ty
 third party = third, 2, _ty
 third-party = third-party, 1, _ty

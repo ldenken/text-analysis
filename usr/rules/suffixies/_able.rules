@@ -1,11 +1,16 @@
 accountable = account, 3, _able
 admirable = admire, 3, _able
+affordable = afford, 16, _able
 applicable = applicable, 2, _able
 articulable = articulable, 3, _able
-available = available, 93, _able
+available = available, 104, _able
+identifiable = identify, 9, _able
 irrevocable = irrevocable, 6, _able
 reasonable = reason, 17, _able
 recognisable = recognise, 8, _able
+reliable = rely, 16, _able
 remarkable = remark, 9, _able
 searchable = search, 4, _able
 usable = use, 3, _able
+vulnerable = vulnerable, 6, _able
+viable = viable, 3, _able

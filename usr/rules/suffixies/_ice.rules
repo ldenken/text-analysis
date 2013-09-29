@@ -1,10 +1,10 @@
 choice = choice, 12, _ice
-device = device, 72, _ice
+device = device, 77, _ice
 justice = justice, 26, _ice
 notice = notice, 10, _ice
-office = office, 103, _ice
-police = police, 332, _ice
+office = office, 113, _ice
+police = police, 338, _ice
 practice = practice, 15, _ice
-service = service, 131, _ice
+service = service, 268, _ice
 twice = twice, 20, _ice
 voice = voice, 13, _ice

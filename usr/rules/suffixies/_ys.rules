@@ -1,11 +1,12 @@
-always = alway, 106, _ys
-days = day, 51, _ys
-guys = guy, 77, _ys
+always = alway, 114, _ys
+days = day, 65, _ys
+guys = guy, 85, _ys
 keys = key, 75, _ys
 quays = quay, 64, _ys
-says = say, 71, _ys
+says = say, 265, _ys
 ways = way, 85, _ys
-employs = employ, 11, _ys
+employs = employ, 14, _ys
 blackberrys = blackberry, 8, _ys
 pays = pay, 11, _ys
 plays = play, 2, _ys
+birthdays = birthday, 57, _ys

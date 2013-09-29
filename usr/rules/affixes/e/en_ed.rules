@@ -1,5 +1,5 @@
 entitled = entitle, 95, en_ed
-encrypted = encrypt, 194, en_ed
+encrypted = encrypt, 204, en_ed
 entered = enter, 73, en_ed
 ended = end, 47, en_ed
 ensconced = ensconce, 28, en_ed
@@ -10,3 +10,4 @@ encouraged = encourage, 28, en_ed
 enacted = enact, 11, en_ed
 engaged = engage, 14, en_ed
 enjoyed = enjoy, 11, en_ed
+engineered = engineer, 7, en_ed

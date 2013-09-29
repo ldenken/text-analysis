@@ -2,14 +2,15 @@
 advantage = advantage, 62, _age
 average = average, 5, _age
 coverage = cover, 7, _age
-damage = damage, 140, _age
+damage = damage, 147, _age
 espionage = espionage, 139, _age
 image = image, 16, _age
 language = language, 213, _age
-leverage = lever, 25, _age
+leverage = lever, 31, _age
 message = message, 339, _age
 outrage = outrage, 16, _age
 stage = stage, 56, _age
 storage = storage, 56, _age
+teenage = teenage, 7, _age
 triage = triage, 7, _age
 usage = use, 21, _age

@@ -2,4 +2,4 @@ communicants = communicant, 35, com_ts
 commitments = commitment, 44, com_ts
 comments = comment, 19, com_ts
 components = component, 5, com_ts
-complaints = complaint, 3, com_ts
+complaints = complaint, 18, com_ts
