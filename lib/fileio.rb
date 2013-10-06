@@ -133,7 +133,7 @@ module FileIO
             if import == 1                      # line NOT in a comment block
               line = FileIO.reduceUTF8String(line)
               if delimiter != ""
-                lineArray = line.split("#{delimiter} ")
+                lineArray = line.split("#{delimiter} ") # with or without space?
                 fileArray << lineArray
               else
                 fileArray << line
@@ -188,7 +188,7 @@ module FileIO
     # or lines begining with #, line comment.
     # Lines are split by = to provide the key/value pairs and value is split
     # by the delimiter to create an array for the value,
-    # file format => key = value[0], value[1], value[2], etc...
+    # file format = key = value[0], value[1], value[2], etc...
     if FileIO.fileExists(filename, exit) == true
       begin
         fileHash = {}
@@ -260,6 +260,43 @@ module FileIO
       file.close unless file == nil
     end
   end
+
+
+
+  #----------------------------------------------------------------------------#
+  def FileIO.loadHash(filename, exit)
+    # file format = key = value[0], value[1], value[2], etc...
+    if FileIO.fileExists(filename, exit) == true
+      text = []   # document
+      line = {}   # sentence(s)
+      token = ""  # word
+      begin
+        File.foreach(filename) do |string|
+          string.strip!
+          key = string[/\A[A-Z0-9]{3}/]
+          string.slice!(/\A[A-Z0-9]{3} \= /) 
+          stringArray = string.split(", ") 
+          # comma space used to split string to accommodate comma's in string!
+          if key == "INF"
+            if line.length >= 1
+              text << line
+            end
+            line = {}
+            line[key] = stringArray
+          else
+            line[key] = stringArray            
+          end
+        end
+
+      rescue IOError => error
+        error = "#{error}"
+        location = "def FileIO.loadHash(filename)"
+        FileIO.errorAndExit(error, location)
+      end
+      return text
+    end
+  end
+
 
 end # module FileIO
 

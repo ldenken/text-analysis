@@ -306,15 +306,43 @@ documentArrayPARSE.each do |e|
   tmpArray = []; lineLength.times {tmpArray << ""}; line["NOR"] = tmpArray
   tmpArray = []; lineLength.times {tmpArray << ""}; line["LEM"] = tmpArray
   tmpArray = []; lineLength.times {tmpArray << ""}; line["RUL"] = tmpArray
+  tmpArray = []; lineLength.times {tmpArray << ""}; line["POS"] = tmpArray
+  tmpArray = []; lineLength.times {tmpArray << ""}; line["DEP"] = tmpArray
   tmpArray = []; lineLength.times {tmpArray << ""}; line["W5H"] = tmpArray
+  
   document << line 
 end
 #Var.info("document", document)
+
+
+puts "-"*80
+document.each do |line|
+  line.keys.each do |k|
+    print "#{k}=#{line[k].length} "
+  end
+  puts ""
+end
+puts ""
 
 #------------------------------------------------------------------------------#
 puts "Normalise"
 document = Normalise.document(document)
 #Var.info("document", document)
+
+outputFilename = filename.gsub(".txt", ".nor")
+puts "output : #{outputFilename}"
+document.each_with_index do |line,index|
+  tmpString = ""
+  line["NOR"].each do |word|
+    tmpString << "#{word} "
+  end
+  if index == 0
+    FileIO.string(outputFilename, tmpString, "w")
+  else
+    FileIO.string(outputFilename, tmpString, "a")      
+  end
+end
+
 
 #------------------------------------------------------------------------------#
 puts "Inflectional"
@@ -336,11 +364,24 @@ puts "Summarise"
 document = Summarise.document(filename, document)
 
 #------------------------------------------------------------------------------#
+=begin
 outputFilename = filename.gsub(".txt", ".sum")
 document.each_with_index do |e,i|
   FileIO.hashToFile(e, ",", outputFilename, "a+")
 end
 puts "output : #{outputFilename}"
+=end
+
+outputFilename = filename.gsub(".txt", ".hsh")
+puts "output : #{outputFilename}"
+document.each_with_index do |e,i|
+  if i == 0
+    FileIO.hashToFile(e, ",", outputFilename, "w")
+  else
+    FileIO.hashToFile(e, ",", outputFilename, "a")
+  end
+end
+
 
 
 puts ""
