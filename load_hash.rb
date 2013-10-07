@@ -18,95 +18,95 @@ don't colour punctuation
 
 
 #------------------------------------------------------------------------------#
-if ARGV.size != 1
-  puts "Usage: ruby #{__FILE__} [dir]"
+column = 14
+fileAry = []
+puts "-"*80
+
+if ARGV.size == 2 && ARGV[0] =~ /[\-f|\-d]/ 
+  case ARGV[0]
+  when "-f"
+    if FileIO.fileExists(ARGV[1], 1) == true
+      fileAry << ARGV[1]
+    end
+  when "-d"
+    if FileIO.directoryExists(ARGV[1], 1) == true
+      Dir.glob(ARGV[1] + "*.hsh") do |file|
+        next if file == '.' or file == '..'
+        fileAry << file
+      end
+    end
+  else
+    puts ""
+    print "#{__FILE__} "
+    ARGV.each {|e| print "#{e} "}
+    puts "\n\n"    
+    puts "Usage: ruby #{__FILE__} -f|-d [file]|[dir]"
+    puts ""
+    exit(1)    
+  end
+else
+  puts ""
+  print "#{__FILE__} "
+  ARGV.each {|e| print "#{e} "}
+  puts "\n\n"
+  puts "Usage: ruby #{__FILE__} -f|-d [file]|[dir]"
   puts ""
   exit(1)
 end
-directory = ARGV[0]
-#Var.info("directory", directory)
 
-fileAry = []
-Dir.glob(directory + "*.hsh") do |file|
-  next if file == '.' or file == '..'
-  fileAry << file
-end
-#Var.info("fileAry", fileAry)
-
-=begin
-text = FileIO.loadHash(fileAry[0], 1)
-puts "#{text.class}"
-puts "#{text.length}"
-#Var.info("text", text)
-puts "#{text[0].keys}"
-
-text[0].keys.each do |k|
-  puts "#{k} = #{text[0][k]}"
-end
-
-puts ""
-text.each do |line|
-  line["RAW"].each do |token|
-    print "#{token} "
-  end
-  puts ""
-end
-puts ""
-=end
-
-puts "-"*80
-puts "Directory = #{directory}"
-puts "File(s)   = #{fileAry.length}"
-puts ""
 fileAry.each do |file|
   puts "#{file.bold}"
+  puts ""
   text = FileIO.loadHash(file, 1)
+
+  #text[#]["INF"] = line, section, subsection, paragraph, sentence, begin, end, tag, text
+  #text[#]["INF"] = 0,    1,       2,          3,         4,        5,     6,   7,   8
+  puts "line(s)".ljust(column) + text.last["INF"][0]
+  puts "section(s)".ljust(column) + text.last["INF"][1]
+  puts "subsection(s)".ljust(column) + text.last["INF"][2]
+  puts "paragraph(s)".ljust(column) + text.last["INF"][3]
+  puts "sentence(s)".ljust(column) + text.last["INF"][4]
+  words = 0
+  text.each do |line|
+    words += line["RAW"].length
+  end
+  puts "word(s)".ljust(column) + words.to_s
+
+  lastLineNumber = 0
   text.each do |line|
 
-    # Fix empty array length because no text before/after comma on import
-    line.keys.each do |k| 
-      if line[k].length < line["RAW"].length
-        line[k] << ""
-      end
-      #print "#{k}=#{line[k].length} "
+    # Run sentences into a paragraph and separate paragraphs from one another
+    if lastLineNumber != line["INF"][0]
+      puts "\n\n"
+      lastLineNumber = line["INF"][0]
     end
-    #puts ""
-
-
 
     line["RAW"].each_with_index do |token,index|
-      if line["W5H"][index] != "" 
+      if line["W5H"][index] != ""
         case line["W5H"][index]
         when "blue"
-          print "#{token}".blue
+          print "#{token} ".blue
         when "green"
-          print "#{token}".green
+          print "#{token} ".green
         when "red"
-          print "#{token}".red
+          print "#{token} ".red
         when "brown"
-          print "#{token}".brown
+          print "#{token} ".brown
         when "cyan"
-          print "#{token}".cyan
+          print "#{token} ".cyan
         when "magenta"
-          print "#{token}".magenta
-        else
-          print "#{token}"
+          print "#{token} ".magenta
         end
-        print " "
+      else
+        print "#{token} "
       end
-    end
-    puts ""
-  end
+    end # line["RAW"].each_with_index do |token,index|
+
+  end # text.each do |line|
+  puts "\n\n"
+  puts "".ljust(18) + "WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
   puts ""
-  puts "                 WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
-  puts ""
-
-
-end
-
-
-
-
+end # fileAry.each do |file|
 
 
 
@@ -114,6 +114,18 @@ end
 puts ""
 #------------------------------------------------------------------------------#
 __END__
+
+
+
+    #puts "line, section, subsection, paragraph, sentence, begin, end, tag, text"
+    #puts "0,    1,       2,          3,         4,        5,     6,   7,   8"
+    
+
+# ADD NEWLINES FOR TITLES AND PARAGRAPS, RUN TOGETHER PARAGRAPHS
+
+
+
+
 
 
 

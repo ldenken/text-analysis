@@ -1,4 +1,7 @@
-congressionally = congressional, 18, con_ly
-constantly = constant, 230, con_ly
-continuously = continue, 64, con_ly
-consistently = consistent, 75, con_ly
+congressionally = congressional, 20, con_ly
+constantly = constant, 235, con_ly
+continuously = continue, 67, con_ly
+consistently = consistent, 87, con_ly
+confidentially = confidential, 2, con_ly, NEW
+convincingly = convincing, 2, con_ly, NEW
+considerably = considerab, 2, con_ly, NEW

@@ -1,6 +1,7 @@
-entries = entry, 62, en_es
-envelopes = envelope, 28, en_es
-enemies = enemy, 40, en_es
-enables = enable, 63, en_es
-entities = entity, 6, en_es
-enterprises = enterprise, 4, en_es
+entries = entry, 64, en_es
+envelopes = envelope, 30, en_es
+enemies = enemy, 49, en_es
+enables = enable, 71, en_es
+entities = entity, 8, en_es
+enterprises = enterprise, 5, en_es
+engages = engage, 4, en_es

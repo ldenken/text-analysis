@@ -1,2 +1,3 @@
-authorities = authority, 132, aut_es
-authorizes = authorize, 6, aut_es
+authorities = authority, 159, aut_es
+authorizes = authorize, 8, aut_es
+authenticates = authenticate, 2, aut_es

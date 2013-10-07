@@ -1,7 +1,8 @@
-conclusion = conclusion, 56, con_ion
-condition = condition, 63, con_ion
-connection = connect, 39, con_ion
-constitution = constitute, 252, con_ion
-construction = construct, 27, con_ion
-contribution = contribute, 142, con_ion
-contention = content, 6, con_ion
+conclusion = conclusion, 65, con_ion
+condition = condition, 71, con_ion
+connection = connect, 48, con_ion
+constitution = constitute, 282, con_ion
+construction = construct, 31, con_ion
+contribution = contribute, 166, con_ion
+contention = content, 8, con_ion
+confusion = confusion, 2, con_ion

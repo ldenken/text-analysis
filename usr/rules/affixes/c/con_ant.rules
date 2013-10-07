@@ -1,1 +1,2 @@
-consultant = consult, 4, con_ant
+consultant = consult, 5, con_ant
+constant = const, 1, con_ant, NEW

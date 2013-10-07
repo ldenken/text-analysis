@@ -1,1 +1,2 @@
-sentient = sentient, 8, sen_ent
+sentient = sentient, 10, sen_ent
+sentiment = sentim, 2, sen_ent, NEW

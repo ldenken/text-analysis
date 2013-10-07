@@ -1,4 +1,6 @@
-itemize = item, 29, _ize
-jeopardize = jeopard, 8, _ize
-characterize = character, 8, _ize
-seize = seize, 13, _ize
+itemize = item, 31, _ize
+jeopardize = jeopard, 10, _ize
+characterize = character, 10, _ize
+seize = seize, 17, _ize
+realize = real, 3, _ize
+recognize = recognize, 4, _ize

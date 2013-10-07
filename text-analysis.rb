@@ -11,6 +11,7 @@ require_relative 'lib/summarise'
 require_relative 'lib/var'
 require_relative 'lib/w5h'
 require_relative 'lib/wn'
+require_relative 'lib/pos'
 
 =begin
 
@@ -306,23 +307,13 @@ documentArrayPARSE.each do |e|
   tmpArray = []; lineLength.times {tmpArray << ""}; line["NOR"] = tmpArray
   tmpArray = []; lineLength.times {tmpArray << ""}; line["LEM"] = tmpArray
   tmpArray = []; lineLength.times {tmpArray << ""}; line["RUL"] = tmpArray
+  tmpArray = []; lineLength.times {tmpArray << ""}; line["W5H"] = tmpArray
   tmpArray = []; lineLength.times {tmpArray << ""}; line["POS"] = tmpArray
   tmpArray = []; lineLength.times {tmpArray << ""}; line["DEP"] = tmpArray
-  tmpArray = []; lineLength.times {tmpArray << ""}; line["W5H"] = tmpArray
   
   document << line 
 end
 #Var.info("document", document)
-
-
-puts "-"*80
-document.each do |line|
-  line.keys.each do |k|
-    print "#{k}=#{line[k].length} "
-  end
-  puts ""
-end
-puts ""
 
 #------------------------------------------------------------------------------#
 puts "Normalise"
@@ -352,6 +343,11 @@ document = Inflectional.document(document)
 #------------------------------------------------------------------------------#
 puts "Derivational"
 document = Derivational.document(document)
+#Var.info("document", document)
+
+#------------------------------------------------------------------------------#
+puts "Pos"
+document = Pos.document(filename, document)
 #Var.info("document", document)
 
 #------------------------------------------------------------------------------#

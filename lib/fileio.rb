@@ -52,6 +52,25 @@ module FileIO
   end
 
   #----------------------------------------------------------------------------#
+  def FileIO.directoryExists(directory, exit)
+    #
+    dirtest = File.directory?(directory)
+    if dirtest == false
+      if exit == 0
+        puts "Error".ljust(10) + ": Directory not found! -> #{directory}"
+      else
+        error = "Directory not found!"
+        location = "def FileIO.directoryExists(#{directory}, #{exit})"
+        FileIO.errorAndExit(error, location)
+      end
+    else
+      dirtest = true
+    end
+    return dirtest
+  end
+
+
+  #----------------------------------------------------------------------------#
   def FileIO.reduceUTF8String(string)
     #  £
     #
@@ -66,8 +85,12 @@ module FileIO
         newString << 39
       when c == 169      # 169 -> ©
         newString << c
+
+      when c == 173      # 173 -> ­ -> 45 -> -
+        newString << 45
       when c == 8212     # 8212 -> — -> 45 -> -
         newString << 45
+
       when c == 8217     # 8217 -> ’ -> 39 -> '
         newString << 39
       when c == 8220     # 8220 -> “ -> 34 -> "
@@ -287,11 +310,21 @@ module FileIO
             line[key] = stringArray            
           end
         end
-
       rescue IOError => error
         error = "#{error}"
         location = "def FileIO.loadHash(filename)"
         FileIO.errorAndExit(error, location)
+      end
+      # Fix empty array length because no text before, after comma on import
+      # i.e. RAW = I, cannot & NOR = i, cannot & POS = , & DEP = ,
+      text.each do |line|
+        line.keys.each do |k| 
+          if line[k].length < line["RAW"].length
+            line[k] << ""
+          end
+          #print "#{k}=#{line[k].length} "
+        end
+        #puts ""
       end
       return text
     end

@@ -1,5 +1,7 @@
-contents = content, 104, con_ts
-contexts = context, 6, con_ts
-constraints = constraint, 7, con_ts
+contents = content, 112, con_ts
+contexts = context, 8, con_ts
+constraints = constraint, 10, con_ts
 contacts = contact, 2, con_ts
-contracts = contract, 3, con_ts
+contracts = contract, 6, con_ts
+conflicts = conflict, 2, con_ts
+constants = constant, 2, con_ts

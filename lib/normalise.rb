@@ -28,9 +28,9 @@ module Normalise
               string = tmpAry[0]
               if fileHash.has_key?("#{string}") == false
                 fileHash[string] = [string, 1, "NEW"]
-                Var.info("NEW string", string)
+                #Var.info("NEW string", string)
               else
-                Var.info("-> string", string)
+                #Var.info("-> string", string)
               end
             end
           end
@@ -89,6 +89,7 @@ module Normalise
       "[\£]",     # 1 £ pound sign
       "[\$]",     # 2 $ dollar sign
       "[\%]",     # 3 % percent sign
+      "[\']",     # 4 '      
       "[\*]",     # 5 * asterisk
       "[\_]",     # 6 _ low line
       "[\+]",     # 7 + plus sign

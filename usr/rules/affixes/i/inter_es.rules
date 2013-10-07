@@ -1,1 +1,2 @@
-interfaces = interface, 8, inter_es
+interfaces = interface, 10, inter_es
+intermediaries = intermediary, 2, inter_es

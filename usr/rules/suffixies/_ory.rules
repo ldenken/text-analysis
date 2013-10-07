@@ -1,8 +1,9 @@
-advisory = advisory, 7, _ory
-defamatory = defamatory, 22, _ory
-directory = direct, 30, _ory
-history = history, 497, _ory
-investigatory = investigate, 27, _ory
-repository = repository, 19, _ory
-story = story, 75, _ory
-theory = theory, 6, _ory
+advisory = advisory, 10, _ory
+defamatory = defamatory, 24, _ory
+directory = direct, 35, _ory
+history = history, 540, _ory
+investigatory = investigate, 31, _ory
+repository = repository, 21, _ory
+story = story, 103, _ory
+theory = theory, 14, _ory
+memory = memory, 8, _ory

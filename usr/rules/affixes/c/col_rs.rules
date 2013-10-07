@@ -1,2 +1,3 @@
-colours = colour, 34, col_rs
-collectors = collector, 41, col_rs
+colours = colour, 36, col_rs
+collectors = collector, 44, col_rs
+collaborators = collaborator, 2, col_rs

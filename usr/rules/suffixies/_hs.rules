@@ -1,7 +1,9 @@
-lengths = length, 125, _hs
-maths = math, 120, _hs
+lengths = length, 152, _hs
+maths = math, 139, _hs
 bushs = bush, 11, _hs
-swaths = swath, 19, _hs
+swaths = swath, 22, _hs
 heaths = heath, 3, _hs
-deaths = death, 11, _hs
-graphs = graph, 11, _hs
+deaths = death, 22, _hs
+graphs = graph, 12, _hs
+breakthroughs = breakthrough, 10, _hs
+strengths = strength, 2, _hs

@@ -1,7 +1,10 @@
 trace = trace, 31, tra_
-track = track, 38, tra_
+track = track, 48, tra_
 tradecraft = tradecraft, 6, tra_
-train = train, 7, tra_
-transcript = transcript, 11, tra_
-transit = transit, 105, tra_
-travel = travel, 85, tra_
+train = train, 9, tra_
+transcript = transcript, 13, tra_
+transit = transit, 113, tra_
+travel = travel, 99, tra_
+trait = trait, 2, tra_
+tradeoffs = tradeoff, 4, tra_
+transparenot = nsparenot, 1, tra_, NEW

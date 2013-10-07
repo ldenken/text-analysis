@@ -1,1 +1,2 @@
-registries = registry, 6, reg_es
+registries = registry, 9, reg_es
+regulates = regulate, 2, reg_es

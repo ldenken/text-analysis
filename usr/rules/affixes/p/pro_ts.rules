@@ -1,4 +1,7 @@
-products = product, 26, pro_ts
-projects = project, 62, pro_ts
-proponents = proponent, 3, pro_ts
-profits = profit, 7, pro_ts
+products = product, 43, pro_ts
+projects = project, 72, pro_ts
+proponents = proponent, 4, pro_ts
+profits = profit, 9, pro_ts
+prohibits = prohibit, 2, pro_ts
+protects = protect, 2, pro_ts
+protests = protest, 1, pro_ts

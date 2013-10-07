@@ -1,2 +1,3 @@
-video = eo, 96, vid_, NEW
-videos = video, 2, vid_
+video = eo, 116, vid_, NEW
+videos = video, 4, vid_
+videochat = eochat, 1, vid_, NEW

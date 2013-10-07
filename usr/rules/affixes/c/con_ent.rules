@@ -1,4 +1,6 @@
-content = content, 528, con_ent
-confident = confident, 27, con_ent
-consistent = consist, 34, con_ent
-consent = consent, 26, con_ent
+content = content, 580, con_ent
+confident = confident, 29, con_ent
+consistent = consist, 40, con_ent
+consent = consent, 35, con_ent
+consequent = consequ, 2, con_ent, NEW
+convenient = conveni, 1, con_ent, NEW

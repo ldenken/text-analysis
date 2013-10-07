@@ -1,4 +1,6 @@
-understandable = understand, 118, un_able
-unpredictable = predict, 33, un_able
-unreasonable = reason, 43, un_able
-unworkable = work, 3, un_able
+understandable = understand, 141, un_able
+unpredictable = predict, 38, un_able
+unreasonable = reason, 49, un_able
+unworkable = work, 4, un_able
+undetectable = undetect, 2, un_able, NEW
+uncomfortable = uncomfort, 1, un_able, NEW

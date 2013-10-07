@@ -1,3 +1,6 @@
-submit = submit, 95, sub_
+submit = submit, 114, sub_
 subpoenas = subpoena, 12, sub_
-subject = subject, 12, sub_
+subject = subject, 16, sub_
+subvert = vert, 7, sub_, NEW
+subpoena = poena, 4, sub_, NEW
+subscribe = scribe, 2, sub_, NEW

@@ -1,7 +1,8 @@
-assist = assist, 5, _ist
-hacktivist = hacktivist, 8, _ist
+assist = assist, 7, _ist
+hacktivist = hacktivist, 10, _ist
 heist = heist, 66, _ist
-insist = insist, 3, _ist
-journalist = journal, 3, _ist
-resist = resist, 9, _ist
-technologist = technology, 2, _ist
+insist = insist, 6, _ist
+journalist = journal, 4, _ist
+resist = resist, 15, _ist
+technologist = technology, 6, _ist
+futurologist = futurologist, 3, _ist

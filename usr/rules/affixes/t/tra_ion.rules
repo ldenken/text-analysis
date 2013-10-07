@@ -1,2 +1,3 @@
-traction = tract, 27, tra_ion
-transaction = transact, 5, tra_ion
+traction = tract, 31, tra_ion
+transaction = transact, 6, tra_ion
+transition = transit, 2, tra_ion, NEW

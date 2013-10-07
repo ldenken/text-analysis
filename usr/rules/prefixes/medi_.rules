@@ -1,3 +1,4 @@
-medium = medium, 16, medi_
-medicare = medicare, 11, medi_
-medicaid = medicaid, 11, medi_
+medium = medium, 20, medi_
+medicare = medicare, 12, medi_
+medicaid = medicaid, 12, medi_
+medicine = cine, 2, medi_, NEW
