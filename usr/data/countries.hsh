@@ -18,32 +18,25 @@ ATG = Antigua and Barbuda, Antigua and Barbuda, St. John's, Afro-Caribbean
 AUS = Australia, Commonwealth of Australia, Canberra, Australian
 AUT = Austria, Republic of Austria, Vienna, Austrian
 AZE = Azerbaijan, Republic of Azerbaijan, Baku, Azerbaijani
-
 BOL = Bolivia, Plurinational State of Bolivia, Sucre, Bolivian
 BRA = Brazil, Federative Republic of Brazil, Brasilia, Brazilian 
-
 CAN = Canada, Canada, Ottawa, Canadian 
 CHN = China, People's Republic of China, Beijing, Chinese
-
 DZA = Algeria, People's Democratic Republic of Algeria, Algiers, Arabic
-
 ENG = England, England, London, English
-
 FRA = France, French Republic, Paris, French
-
 GBR = Britain, Great Britain, London, British
 GBR = Great Britain, Great Britain, London, British
 GER = Germany, Federal Republic of Germany, Berlin, German
-
+GRC = Greece, Hellenic Republic, Athens, Greek
 IND = India, Republic of India, New Delhi, Indian, India
 IRN = Iran, Islamic Republic of Iran, Tehran, Iranian
 IRQ = Iraq, Republic of Iraq, Baghdad, Iraqi
-
+ITA = Italy, Republic of Italy, Rome, Italian
 JAN = Japan, Japan, Tokyo, Japanese
-
+MAL = Malaysia, Malaysia, Kuala Lumpur, Malaysian 
 NIG = Nigeria, Federal Republic of Nigeria, Abuja, Nigerian
 NZL = New Zealand, New Zealand, Wellington, New Zealander
-
 PAK = Pakistan, Islamic Republic of Pakistan, Islamabad, Pakistani
 PAL = Palestine, State of Palestine, Palestine, Palestinian
 POR = Portugal, Portuguese Republic, Lisbon, Portuguese
@@ -51,8 +44,12 @@ RUS = Russia, Russian Federation, Moscow, Russian
 UK = United Kingdom, United Kingdom of Great Britain and Northern Ireland, London, British
 US = United States, United States of America, Washington DC, American
 USA = America, United States of America, Washington DC, Americans
+IRL = Ireland, Ireland, Dublin, Irish
 
-MAL = Malaysia, Malaysia, Kuala Lumpur, Malaysian 
+ISR = Israel, State of Israel, Jerusalem, Israeli
+
+ART = Arab States, Arab States, ,Arab
+
 
 
 
@@ -161,7 +158,6 @@ GIB = Gibraltar,
 GIN = Guinea, 
 GMB = Gambia, 
 GNB = Guinea-Bissau, 
-GRC = Greece, 
 GRD = Grenada, 
 greece = hellenic republic
 grenada = grenada
@@ -188,9 +184,6 @@ ICS = Iceland,
 IDN = Indonesia, 
 Indian = British, 
 indonesia = republic of indonesia
-ireland = ireland
-ireland = Ireland,
-IRL = Ireland, 
 Island = Christmas, 
 Island = Norfolk, 
 Islands = Cayman, 
@@ -198,10 +191,6 @@ Islands = Cook,
 Islands = Falkland, 
 Islands = Faroe, 
 Islands = Marshall, 
-ISR = Israel, 
-israel = state of israel
-ITA = Italy, 
-italy = italian republic
 ivory coast = Republic of Cote D'ivoire
 Ivory Coast, 
 JAM = Jamaica, 

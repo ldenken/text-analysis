@@ -2,17 +2,17 @@
 
 =end
 
-# If the key is all uppercase it is used in an acronym search
+# if the key is all uppercase it is used in an acronym search
 
 #acronym = shortname, fullname, description
 
-CREDS = credentials, user credentials, single factor authentication "something you know"
+creds = credentials, user credentials, single factor authentication "something you know"
 
-cyber = Cyber, Cyber Space, Culture of computers, information technology, and virtual reality "the cyber age"
-cyrcrm = cybercrime, Cyber Crime, blar blar blar 
-cyrttk = cyberattack, Cyber Attack, blar blar blar
-cyrsec = cybersecurity, Cyber Security, blar blar blar
-cyrwpn = cyberweapon, Cyber Weapon, blar blar blar
+cyber = cyber, cyber space, culture of computers, information technology, and virtual reality "the cyber age"
+cyrcrm = cybercrime, cyber crime, blar blar blar 
+cyrttk = cyberattack, cyber attack, blar blar blar
+cyrsec = cybersecurity, cyber security, blar blar blar
+cyrwpn = cyberweapon, cyber weapon, blar blar blar
 
 data1 = customer data, consumer data, blar blar blar
 data2 = personal data, credit data, blar blar blar
@@ -38,6 +38,18 @@ btnt = botnet, bot net, blar blar blar
 
 dtstln = data stolen, stolen data, blar blar blar
 
+cry = cryptogram newsletter, crypto-gram, blar blar
+mvt = movable type, movable type, blar blar
+sch = schneier on security, schneier on security blog, blar blar blar
+int = internet, internet, blar
+
+gmail = gmail, gmail, blar
+
+
+bitlocker = bitlocker, bitlocker, blar
+truecrypt = truecrypt, truecrypt, blar
+mlaw = moores law, moore law, blar
+stuxnet = stuxnet, stuxnet, blar
 
 =begin
 
@@ -49,10 +61,10 @@ background checks and drug screenings
 
 #crime = crime
 #email = email
-#gmail = Gmail
-#internet = Internet
-#ip address = IP address
-#online = Online
+#gmail = gmail
+#internet = internet
+#ip address = ip address
+#online = online
 #private key = private key
 #public key = public key
 #website = website

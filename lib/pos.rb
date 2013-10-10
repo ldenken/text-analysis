@@ -3,11 +3,10 @@ module Pos
   
   #----------------------------------------------------------------------------#
   def Pos.document(filename, text)
-    
-Var.info("filename", filename)
-
-    puts "-"*80
-    puts ""
+    #
+    #
+    #
+    puts "Parts of Speach"
     pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :parse)
 
     text.each do |line|
@@ -19,10 +18,10 @@ Var.info("filename", filename)
 
       tokenAry = []
       posAry = []
-      basic_dependencies = ""
+      basic_dependencies = "\n"
 
       string.get(:sentences).each do |token|
-        basic_dependencies = token.get(:basic_dependencies).to_s
+        basic_dependencies << token.get(:basic_dependencies).to_s
       end
 
 #      puts ""
@@ -55,7 +54,7 @@ Var.info("filename", filename)
 
     end # text.each do |line|
 
-    
+    puts ""
     return text
   end
   

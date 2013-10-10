@@ -205,6 +205,7 @@ summaryTextLineScore = {}
     
     #puts "#{tmpStr}"
 
+=begin
     puts "\nSummary Blob:\n"
     summaryTextLineScore.sort_by {|k,v| k}.each do |k,v|
       selectedRAWText[k].each_with_index do |w,i| 
@@ -232,6 +233,7 @@ summaryTextLineScore = {}
     puts "\n\n"
     puts "                 WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
     puts ""
+=end
 
     puts "\nDocument:\n"
     document.each do |line|
@@ -258,7 +260,6 @@ summaryTextLineScore = {}
     puts "\n\n"
     puts "                 WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
     puts ""
-
 
 #Var.info("selectedRAWTitles", selectedRAWTitles)
 #Var.info("selectedRAWTitles", selectedRAWTitles[1])

@@ -24,7 +24,7 @@ puts "© -> #{"©".codepoints[0]}"
 puts "Â -> #{"Â".codepoints[0]}"
 
 puts "­ -> #{"­".codepoints[0]}"
-puts "- -> #{"-".codepoints[0]}"
+puts "­ -> #{"­".codepoints[0]}"
  
  
 

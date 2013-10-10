@@ -1,8 +1,8 @@
-staff = staff, 248, sta_
-statute = statute, 25, sta_
+staff = staff, 268, sta_
+statute = statute, 28, sta_
 standalone = standalone, 2, sta_
-status = status, 8, sta_
+status = status, 15, sta_
 states' = , 1, sta_
-stark = stark, 2, sta_
-stand = stand, 4, sta_
-stamp = mp, 1, sta_, NEW
+stark = stark, 5, sta_
+stand = stand, 55, sta_
+stamp = stamp, 6, sta_

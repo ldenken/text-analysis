@@ -22,7 +22,12 @@ column = 14
 fileAry = []
 puts "-"*80
 
-if ARGV.size == 2 && ARGV[0] =~ /[\-f|\-d]/ 
+invalid ="
+Usage: ruby #{__FILE__} -f|-d [file|dir] key [word |word]
+
+"
+
+if ARGV.size >= 2 && ARGV[0] =~ /[\-f|\-d]/ 
   case ARGV[0]
   when "-f"
     if FileIO.fileExists(ARGV[1], 1) == true
@@ -36,22 +41,38 @@ if ARGV.size == 2 && ARGV[0] =~ /[\-f|\-d]/
       end
     end
   else
-    puts ""
-    print "#{__FILE__} "
-    ARGV.each {|e| print "#{e} "}
-    puts "\n\n"    
-    puts "Usage: ruby #{__FILE__} -f|-d [file]|[dir]"
-    puts ""
+    puts "#{invalid}"
     exit(1)    
   end
 else
-  puts ""
-  print "#{__FILE__} "
-  ARGV.each {|e| print "#{e} "}
-  puts "\n\n"
-  puts "Usage: ruby #{__FILE__} -f|-d [file]|[dir]"
-  puts ""
-  exit(1)
+  puts "#{invalid}"
+  exit(1)    
+end
+
+w5hString = ""
+w5hString << "\n\n"
+w5hString << "".ljust(18) + "WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
+w5hString << "\n\n"
+
+def printLine(line, key)
+  line[key].each_with_index do |token,index|
+    case line["W5H"][index]
+    when "blue"
+      print "#{token} ".blue
+    when "green"
+      print "#{token} ".green
+    when "red"
+      print "#{token} ".red
+    when "brown"
+      print "#{token} ".brown
+    when "cyan"
+      print "#{token} ".cyan
+    when "magenta"
+      print "#{token} ".magenta
+    else
+      print "#{token} "
+    end
+  end # line["RAW"].each_with_index do |token,index|      
 end
 
 fileAry.each do |file|
@@ -72,40 +93,58 @@ fileAry.each do |file|
   end
   puts "word(s)".ljust(column) + words.to_s
 
-  lastLineNumber = 0
-  text.each do |line|
 
-    # Run sentences into a paragraph and separate paragraphs from one another
-    if lastLineNumber != line["INF"][0]
-      puts "\n\n"
-      lastLineNumber = line["INF"][0]
-    end
-
-    line["RAW"].each_with_index do |token,index|
-      if line["W5H"][index] != ""
-        case line["W5H"][index]
-        when "blue"
-          print "#{token} ".blue
-        when "green"
-          print "#{token} ".green
-        when "red"
-          print "#{token} ".red
-        when "brown"
-          print "#{token} ".brown
-        when "cyan"
-          print "#{token} ".cyan
-        when "magenta"
-          print "#{token} ".magenta
-        end
+  if ARGV[2] =~ /[A-Z0-9]{3}/ && ARGV[3] =~ /[a-zA-Z0-9 ]/
+    # keys
+    key = ARGV[2]
+    keys = text.last.keys
+    tmpStr = ""
+    keys.each do |e| 
+      if e == key
+        tmpStr << "(#{e}) "
       else
-        print "#{token} "
+        tmpStr << "#{e} "        
       end
-    end # line["RAW"].each_with_index do |token,index|
+    end
+    puts "key(s)".ljust(column) + "#{tmpStr}"
+    # search 
+    search = ARGV[3]
+    if ARGV[4]
+      search = "#{ARGV[3]} #{ARGV[4]}"
+    end
+    puts "search".ljust(column) + search
 
-  end # text.each do |line|
-  puts "\n\n"
-  puts "".ljust(18) + "WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
-  puts ""
+    if search =~ /[ ]/
+      text.each do |line|
+        line[key].each_with_index do |token,index|
+          if token == ARGV[3] && line[key][index+1] == ARGV[4]
+            printLine(line, key)
+            puts ""
+          end
+        end
+      end
+    else
+      text.each do |line|
+        if line[key].include?(search) == true
+          printLine(line, key)
+          puts ""
+        end
+      end
+    end
+  else
+    lastLineNumber = 0
+    text.each do |line|
+      # Run sentences into a paragraph and separate paragraphs from one another
+      if lastLineNumber != line["INF"][0]
+        puts "\n\n"
+        lastLineNumber = line["INF"][0]
+      end
+      printLine(line, "RAW")
+    end
+  end # if ARGV[2] =~ /[A-Z0-9]{3}/ && ARGV[3] =~ /[a-zA-Z0-9 ]/
+
+  puts "#{w5hString}"
+
 end # fileAry.each do |file|
 
 

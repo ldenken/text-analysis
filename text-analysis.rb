@@ -31,6 +31,9 @@ fileArray = FileIO.fileToArray(filename, "")
 $logfile = "#{__FILE__}".gsub(".rb", ".log")
 #Var.info("$logfile", $logfile)
 
+puts ""
+print "-"*80
+
 
 #------------------------------------------------------------------------------#
 rawArray = Normalise.raw(fileArray)
@@ -264,14 +267,15 @@ end # def documentArrays(rawArray)
 documentArrayHTML, documentArrayPARSE = documentArrays(rawArray)
 
 outputFilename = filename.gsub(".txt", ".html")
-puts "\noutput : #{outputFilename}"
+puts "output : #{outputFilename}"
 FileIO.arrayToFile(documentArrayHTML, "", outputFilename, "w")
 
+=begin
 outputFilename = filename.gsub(".txt", ".ary")
 puts "output : #{outputFilename}"
 FileIO.arrayToFile(documentArrayPARSE, ",", outputFilename, "w")
 #Var.info("documentArrayPARSE", documentArrayPARSE)
-
+=end
 
 
 
@@ -282,7 +286,7 @@ FileIO.arrayToFile(documentArrayPARSE, ",", outputFilename, "w")
 #puts "0,    1,       2,          3,         4,        5,     6,   7,   8"
 # document -> line -> word
 
-puts "Document"
+puts "Building text hash"
 document = []
 documentArrayPARSE.each do |e|
   line = {}
@@ -315,11 +319,12 @@ documentArrayPARSE.each do |e|
 end
 #Var.info("document", document)
 
+
 #------------------------------------------------------------------------------#
-puts "Normalise"
 document = Normalise.document(document)
 #Var.info("document", document)
 
+=begin
 outputFilename = filename.gsub(".txt", ".nor")
 puts "output : #{outputFilename}"
 document.each_with_index do |line,index|
@@ -333,22 +338,23 @@ document.each_with_index do |line,index|
     FileIO.string(outputFilename, tmpString, "a")      
   end
 end
+=end
 
 
 #------------------------------------------------------------------------------#
-puts "Inflectional"
 document = Inflectional.document(document)
 #Var.info("document", document)
 
+
 #------------------------------------------------------------------------------#
-puts "Derivational"
 document = Derivational.document(document)
 #Var.info("document", document)
 
+
 #------------------------------------------------------------------------------#
-puts "Pos"
 document = Pos.document(filename, document)
 #Var.info("document", document)
+
 
 #------------------------------------------------------------------------------#
 puts "W5H"

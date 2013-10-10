@@ -4,23 +4,28 @@
 
 #common = shortname, fullname, country, description
 
+
+ACLU = American Civil Liberties Union, The American Civil Liberties Union, USA, non-profit
+AJC = Journal Constitution, Atlanta Journal Constitution, US, News
 AP = ap, Associated Press, world, news
 BND = BND, BND, Germany, Germany's intelligence agency
 CIA = CIA, CIA, America, blar blar
+EFF = Electronic Frontier Foundation, The Electronic Frontier Foundation, USA, donor-supported
 FBI = fbi, FBI, America, blar blar
 FSA = FSA, Financial Services Authority, UK, Government
 GCHQ = GCHQ, GCHQ, England, Government
 IBM = International Business Machines, the International Business Machines Corporation, America, ibm an american multinational technology and consulting corporation, with headquarters in armonk new york
-NSA = NSA, National Security Agency, USA, Governmental
-ACLU = American Civil Liberties Union, The American Civil Liberties Union, USA, non-profit
-EFF = Electronic Frontier Foundation, The Electronic Frontier Foundation, USA, donor-supported
-NATO = North Atlantic Treaty Organization, The North Atlantic Treaty Organization, North Atlantic, Governmental
-
+ITU = International Telecommunications Union, United Nations International Telecommunications Union, World, blar blar
+JSR = Javelin Strategy & Research, Javelin Strategy & Research, US, research
 MI5 = MI5, Military Intelligence Five, UK, Governmental
 MI6 = MI6, Military Intelligence Six, UK, Governmental
+NATO = North Atlantic Treaty Organization, The North Atlantic Treaty Organization, North Atlantic, Governmental
+NBPCA = NBPCA, Network Branded Prepaid Card Association, US, Association
+NSA = NSA, National Security Agency, USA, Governmental
+PRC = Privacy Rights Clearinghouse, Privacy Rights Clearinghouse, US, privacy
 SOCA = SOCA, The Serious and Organised Crime Agency, UK, Governmental
 SSA = SSA, Social Security Administration, US, Government
-NBPCA = NBPCA, Network Branded Prepaid Card Association, US, Association
+WSJ = Wall Street Journal, The Wall Street Journal, blar
 
 
 
@@ -40,7 +45,7 @@ Facebook = Facebook, Facebook, world, social media
 fisa = Fisa, Fisa court, America, blar blar
 getty = Getty, Getty Images, world, media
 google = Google, Google, World, search
-guardian = Guardian, Guardian, England, News
+guardian = The Guardian, Guardian, England, News
 lav = Lavabit, Lavabit, America, Lavabit is an email service that prides itself on privacy and security
 mafia = Mafia, Russian mafia, RUS, blar blar
 microsoft = Microsoft, Microsoft, world, computer
@@ -76,15 +81,13 @@ ln = LexisNexis, LexisNexis Inc, US, data, blar
 re = Reed Elsevier, Reed Elsevier, US, Blar, the parent company of LexisNexis
 vto = virustotal.com, Virustotal, US, anti virus
 
-AJC = Journal Constitution, Atlanta Journal Constitution, US, News
-PRC = Privacy Rights Clearinghouse, Privacy Rights Clearinghouse, US, privacy
-
-JSR = Javelin Strategy & Research, Javelin Strategy & Research, US, research
-
 hthcr = healthcare, healthcare providers, world, health care
 hthcr = health care, health care providers, world, health care
 
 
+nyt = New York Times, The New York Times, blar
+
+sc = Silent Circle, Silent Circle Inc, blar
 
 
 

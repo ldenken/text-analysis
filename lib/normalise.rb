@@ -4,6 +4,8 @@ module Normalise
   def Normalise.raw(fileArray)
     #
     #
+    puts "Normalise raw"
+
     def Normalise.rules(fileArray, fileHash, filename, rule)
       fileHash.each do |k,v|
         regExp = Regexp.new("#{k}")
@@ -18,7 +20,67 @@ module Normalise
         end
       end
 
-      if rule != ""
+      case rule
+      when "@"
+        fileArray.each do |line|
+          regExp = Regexp.new("[a-zA-Z0-9\.\_\-]{1,}" + rule + "[a-zA-Z0-9\.\-]{1,}\.[a-zA-Z]{2,4}") # 
+          if line =~ regExp 
+            tmpStr = line.slice(regExp)
+            tmpAry = tmpStr.split(" ")
+            string = tmpAry[0]
+            if fileHash.has_key?("#{string}") == false
+              time = Time.new
+              values = time.to_a
+              fileHash[string] = [Time.utc(*values), 1]
+            end
+          end
+          regExp = Regexp.new(rule + "[a-zA-Z0-9\_\-]{1,}") # twitter @XXX names
+          if line =~ regExp 
+            tmpStr = line.slice(regExp)
+            tmpAry = tmpStr.split(" ")
+            string = tmpAry[0]
+            if fileHash.has_key?("#{string}") == false
+              time = Time.new
+              values = time.to_a
+              fileHash[string] = [Time.utc(*values), 1]
+            end
+          end
+        end        
+
+      when "http"
+        fileArray.each do |line|
+          regExp = Regexp.new(rule + "[:\/a-zA-Z0-9\.\-\_]{1,}") # 
+          if line =~ regExp
+            tmpStr = line.slice(regExp)
+#Var.info("tmpStr", tmpStr)
+            tmpAry = tmpStr.split(" ")
+            string = tmpAry[0]
+            if fileHash.has_key?("#{string}") == false
+              time = Time.new
+              values = time.to_a
+              fileHash[string] = [Time.utc(*values), 1]
+            end
+          end
+        end        
+
+        
+      when "'"
+        fileArray.each do |line|
+          regExp = Regexp.new("[a-zA-Z0-9]{1,}" + rule + "[delmrtv]{1,}\z") # NOT 's
+          if line =~ regExp
+            tmpStr = line.slice(regExp)
+            tmpAry = tmpStr.split(" ")
+            string = tmpAry[0]
+            if fileHash.has_key?("#{string}") == false
+              fileHash[string] = [string, 1, "NEW"]
+              #Var.info("NEW string", string)
+            else
+              #Var.info("-> string", string)
+            end
+          end
+        end        
+
+      else
         fileArray.each do |line|
           if line != ""
             regExp = Regexp.new("[a-zA-Z0-9]{1,}" + rule + "[ a-zA-Z0-9]{1,}")
@@ -41,12 +103,22 @@ module Normalise
       return fileArray
     end
 
-   # Ampersand
+    # email and twitter @handels 
+    filename = "usr/rules/emailandats.rules"
+    fileHash = FileIO.fileToHash(filename, ",", 0)
+    fileArray = Normalise.rules(fileArray, fileHash, filename, "@")
+
+    # urls
+    filename = "usr/rules/urls.rules"
+    fileHash = FileIO.fileToHash(filename, ",", 0)
+    fileArray = Normalise.rules(fileArray, fileHash, filename, "http")
+
+    # Ampersand
     filename = "usr/rules/ampersand.rules"
     fileHash = FileIO.fileToHash(filename, ",", 0)
     fileArray = Normalise.rules(fileArray, fileHash, filename, "&")
 
-    # Apostrophe
+    # Apostrophe FIX FOR NOT 's words
     filename = "usr/rules/apostrophe.rules"
     fileHash = FileIO.fileToHash(filename, ",", 0)
     fileArray = Normalise.rules(fileArray, fileHash, filename, "'")
@@ -84,6 +156,8 @@ module Normalise
   def Normalise.document(document)
     # 
     # 
+    puts "Normalise document"
+
     aryRules = [
       "[\!]",     # 0 ! exclamation mark
       "[\£]",     # 1 £ pound sign

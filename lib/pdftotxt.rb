@@ -5,6 +5,7 @@ module Parse
 
   require 'rubygems'
   require 'digest'
+  require_relative 'fileio'
 
   #----------------------------------------------------------------------------#
   # Run a system command, return the output or exit if command fails
@@ -104,6 +105,38 @@ module Parse
     command = "mv -f #{txtFile}.utf8 #{txtFile}"
     output = Parse.doSystemCommand(command)
 
+    # end of sentence formating 
+    fileArray = []
+    begin
+      File.foreach(txtFile) do |line|
+        line.gsub!('."', '".')
+        line.gsub!(',"', '",')
+        line.gsub!(':"', '":')
+        line.gsub!(';"', '";')
+        line.gsub!('!"', '"!')
+        line.gsub!('?"', '"?')
+        line.gsub!('.)', ').')
+
+        fileArray << line
+      end
+    rescue IOError => error
+      error = "#{error}"
+    end
+
+    begin
+      file = File.open(txtFile, "w+:UTF-8")
+      fileArray.each do |line|
+        file.write("#{line}")
+      end
+    rescue IOError => error
+      error = "#{error}"
+    ensure
+      file.close unless file == nil
+    end
+
+
+
+
 =begin
     # UTF8 RAW file, REPLACING the original file!
     document = []
@@ -151,6 +184,8 @@ Parse.doPDFfile(filename)
 
 #-----------------------------------------------------------------------------#
 __END__
+
+
 
 
 

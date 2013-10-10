@@ -1,5 +1,6 @@
-prevented = prevent, 50, pre_ed
-prepared = prepare, 40, pre_ed
-presumed = presume, 44, pre_ed
-presented = present, 10, pre_ed
+prevented = prevent, 52, pre_ed
+prepared = prepare, 42, pre_ed
+presumed = presume, 46, pre_ed
+presented = present, 14, pre_ed
 preceded = precede, 10, pre_ed
+preserved = preserve, 32, pre_ed

@@ -35,6 +35,10 @@ module Inflectional
 
   #----------------------------------------------------------------------------#
   def Inflectional.document(document)
+    # 
+    # 
+    puts "Inflectional"
+    
 
     filename = "usr/rules/singular_nouns.rules"
     singularNounsHash = FileIO.fileToHash(filename, ",", 1)

@@ -1,5 +1,5 @@
-telephone = telephone, 1233, tele_
-telephony = telephone, 123, tele_
+telephone = telephone, 1251, tele_
+telephony = telephone, 130, tele_
 telecoms = telecom, 2, tele_
 telegrams = telegram, 2, tele_
-telecom = telecom, 21, tele_
+telecom = telecom, 26, tele_

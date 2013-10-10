@@ -1,4 +1,4 @@
-interception = intercept, 326, inter_ion
-interaction = interact, 10, inter_ion
-intervention = intervent, 4, inter_ion, NEW
-intersection = intersect, 2, inter_ion, NEW
+interception = intercept, 334, inter_ion
+interaction = interact, 12, inter_ion
+intervention = intervent, 10, inter_ion, NEW
+intersection = intersect, 5, inter_ion, NEW

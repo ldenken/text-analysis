@@ -1,5 +1,5 @@
-impact = impact, 231, _act
-exact = exact, 16, _act
-interact = interact, 6, _act
-attract = attract, 12, _act
+impact = impact, 255, _act
+exact = exact, 23, _act
+interact = interact, 7, _act
+attract = attract, 13, _act
 'contact = , 1, _act

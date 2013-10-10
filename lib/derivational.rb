@@ -2,6 +2,10 @@ module Derivational
 # find usr/rules/affixes/ -type f -exec rm {} \;
   #----------------------------------------------------------------------------#
   def Derivational.document(document)
+    # 
+    # 
+    puts "Derivational"
+    
 
     # Load prefix and suffixes into arrays
     filename = "usr/rules/prefix.rules"
