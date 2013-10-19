@@ -1,4 +1,4 @@
 trainers = trainer, 32, tra_ers
 transfers = transfer, 34, tra_ers
-traffickers = trafficker, 32, tra_ers
-trackers = tracker, 32, tra_ers
+traffickers = trafficker, 33, tra_ers
+trackers = tracker, 33, tra_ers

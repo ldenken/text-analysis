@@ -200,7 +200,7 @@ summaryTextLineScore = {}
     summaryBoW.sort_by {|k,v| v}.reverse.each {|k,v| tmpStr << "#{k}(#{v}) "}
     tmpStr << "\n\n"
     outputFilename = filename.gsub(".txt", ".sum")
-#    puts "output : #{outputFilename}"
+    puts "output : #{outputFilename}"
     FileIO.string(outputFilename, tmpStr, "w")
     
     #puts "#{tmpStr}"

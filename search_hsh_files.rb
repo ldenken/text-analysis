@@ -75,6 +75,14 @@ def printLine(line, key)
   end # line["RAW"].each_with_index do |token,index|      
 end
 
+
+
+
+
+
+
+
+
 fileAry.each do |file|
   puts "#{file.bold}"
   puts ""
@@ -132,6 +140,7 @@ fileAry.each do |file|
       end
     end
   else
+    w5hCounts = {}
     lastLineNumber = 0
     text.each do |line|
       # Run sentences into a paragraph and separate paragraphs from one another
@@ -141,6 +150,7 @@ fileAry.each do |file|
       end
       printLine(line, "RAW")
     end
+
   end # if ARGV[2] =~ /[A-Z0-9]{3}/ && ARGV[3] =~ /[a-zA-Z0-9 ]/
 
   puts "#{w5hString}"
@@ -149,148 +159,243 @@ end # fileAry.each do |file|
 
 
 
-
-puts ""
 #------------------------------------------------------------------------------#
-__END__
+w5hBlueCounts = {}
+w5hGreenCounts = {}
+w5hRedCounts = {}
+w5hBrownCounts = {}
+w5hCyanCounts = {}
+w5hMagentaCounts = {}
+@lastToken = ""
 
-
-
-    #puts "line, section, subsection, paragraph, sentence, begin, end, tag, text"
-    #puts "0,    1,       2,          3,         4,        5,     6,   7,   8"
-    
-
-# ADD NEWLINES FOR TITLES AND PARAGRAPS, RUN TOGETHER PARAGRAPHS
-
-
-
-
-
-
-
-
-penta = {}
-fileAry.each do |filename|
-  count = 0
-  fileArray = FileIO.fileToArray(filename, "")
-  lineArray = []
-  fileArray.each do |line|
-    lineArray << line.split(" ")
+def w5hCounts(line, hash, i, colour)
+  tokens = ""
+  5.times do |n|
+    if line["W5H"][i+n] == colour 
+      if line["RAW"][i+n] =~ /[\,]\z/
+        tokens << " #{line["NOR"][i+n]}"
+        break
+      else
+        tokens << " #{line["NOR"][i+n]}"          
+      end
+    else
+      break
+    end
   end
-  lineArray.each_with_index do |l,i|
-    l.each_with_index do |word,index|
-      if word == w
-        count += 1
-        id = Digest::MD5.hexdigest("#{l[index-2]} #{l[index-1]} #{word} #{l[index+1]} #{l[index+2]}")
-        if penta.has_key?(id) == true
-          tmpInt = penta[id][5]
-          tmpInt += 1
-          penta[id] = [l[index-2], l[index-1], word, l[index+1], l[index+2], tmpInt]
-        else
-          penta[id] = [l[index-2], l[index-1], word, l[index+1], l[index+2], 1]
+  tokens.strip!
+
+  tmpAry = tokens.split(" ")
+  if @lastToken != tmpAry.last
+    if hash.has_key?(tokens) == true
+      wordCount = hash[tokens]
+      wordCount += 1
+      hash[tokens] = wordCount
+    else
+      if tokens != ""
+        hash[tokens] = 1
+      end
+    end    
+  end
+  @lastToken = tmpAry.last
+  return hash
+end
+
+
+def printCountsHash(hash, num)
+  if num == 0
+    amount = hash.length
+  else
+    amount = (hash.length / num)    
+  end
+
+  count = 0
+  width = 0
+  hash.sort_by {|k,v| v}.reverse.each do |k,v|
+    width += (k.length + 5)
+    if width > 75
+      puts ""
+      width = k.length
+    end 
+    print "#{k}(#{v}) "
+    count += 1
+    if count >= amount
+      break
+    end
+  end
+  puts ""
+end
+
+fileAry.each do |file|
+  text = FileIO.loadHash(file, 1)
+  text.each do |line|
+    (line["W5H"].length).times do |i|
+      if line["W5H"][i] =~ /[a-z]/
+        case line["W5H"][i]
+        when "blue"
+          w5hCounts(line, w5hBlueCounts, i, "blue")
+        when "green"
+          w5hCounts(line, w5hGreenCounts, i, "green")
+        when "red"
+          w5hCounts(line, w5hRedCounts, i, "red")
+        when "brown"
+          w5hCounts(line, w5hBrownCounts, i, "brown")
+        when "cyan"
+          w5hCounts(line, w5hCyanCounts, i, "cyan")
+        when "magenta"
+          w5hCounts(line, w5hMagentaCounts, i, "magenta")
         end
       end
     end
   end
-  puts "#{filename} (#{count})"
-end # fileAry.each do |filename|
-puts "#{fileAry.length}"
-
-
-col = 0
-count = "#{penta.length}".length
-#puts "#{count}"
-penta.each do |k,v|
-  tmpInt = v[0].length + v[1].length + count + 1
-  if tmpInt > col
-    col = tmpInt
-  end
 end
 
-
-block = 0
-penta.each do |k,v|
-  puts ""
-  print "#{v[5]}".rjust(count)
-  space = col - block
-  print "#{v[0]} #{v[1]} ".rjust(space) 
-  print "#{v[2].bold}"
-  print " #{v[3]} #{v[4]}"
-end
-puts ""
-puts "#{penta.length}"
-#Var.info("penta", penta)
-
-=begin
-puts ""
-penta.each do |k,v|
-  puts "#{v[0]} #{v[1]} #{v[2].bold} #{v[3]} #{v[4]}"
-end
-puts ""
-puts "#{penta.length}"
-=end
+puts "WHO".blue
+printCountsHash(w5hBlueCounts, 0)
+puts "WHAT".green
+printCountsHash(w5hGreenCounts, 0)
+puts "WHERE".red
+printCountsHash(w5hRedCounts, 0)
+puts "WHEN".brown
+printCountsHash(w5hBrownCounts, 0)
+puts "HOW".cyan
+printCountsHash(w5hCyanCounts, 0)
+puts "WHY".magenta
+printCountsHash(w5hMagentaCounts, 0)
 
 
-
-puts ""
 #------------------------------------------------------------------------------#
-__END__
-
-
-=begin
-puts ""
-lineArray.each do |line|
-  line.each_with_index do |word,index|
-    print "#{word} "
-  end
-  puts ""
-end
-=end
-
-
-
-
-
-
-
-Dir.foreach('.') do |item|
-  next if item == '.' or item == '..'
-  puts "#{item}"
-  # do work on real items
-end
-puts ""
-
-Dir.glob('*.rb') do |rb_file|
-  # do work on files ending in .rb in the desired directory
-  puts "#{rb_file}"
-end
-puts ""
-
-Dir.glob('/Users/alexis/pdfs/identity_theft/*.nor') do |file|
-  next if file == '.' or file == '..'
-  puts "#{file}"
-  # do work on real items
-end
-puts ""
-
-
-
-
-
-
-puts ""
-#------------------------------------------------------------------------------#
-__END__
-
-
-
-fileArray.each do |line|
-  tmpString = "#{line[8]}"
-  if line.length > 9
-    x = line.length - 9
-    x.times do |i|
-      tmpString << "#{line[(x+8)]} "
+tmpAry = FileIO.fileToArray("usr/data/bow_excludes.lst", "")
+nounsBoW = {}
+fileAry.each do |file|
+  text = FileIO.loadHash(file, 1)
+  text.each do |line|
+    (line["POS"].length).times do |i|
+      if line["POS"][i] =~ /\ANN/
+        if tmpAry.include?(line["NOR"][i]) == false 
+          token = line["NOR"][i]
+          if nounsBoW.has_key?(token) == true
+            wordCount = nounsBoW[token]
+            wordCount += 1
+            nounsBoW[token] = wordCount
+          else
+            if token != ""
+              nounsBoW[token] = 1
+            end
+          end    
+        end
+      end
     end
   end
-  puts "#{tmpString}"
 end
+divide = 10
+puts "Nouns BoW...#{nounsBoW.length}/#{divide}=#{(nounsBoW.length/divide)}"
+printCountsHash(nounsBoW, divide)
+
+
+#------------------------------------------------------------------------------#
+pharseBoW = {}
+bow_excludes = FileIO.fileToArray("usr/data/bow_excludes.lst", "")
+def bowHash(bow_excludes, hash, token)
+  if bow_excludes.include?(token) == false 
+    if hash.has_key?(token) == true
+      wordCount = hash[token]
+      wordCount += 1
+      hash[token] = wordCount
+    else
+      if token != ""
+        hash[token] = 1
+      end
+    end    
+  end
+  return hash
+end
+
+fileAry.each do |file|
+  text = FileIO.loadHash(file, 1)
+  text.each do |line|
+
+    (line["NOR"].length).times do |i|
+      if line["DEP"][i] =~ /root/
+        #print "#{line["NOR"][i]} ".bold
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+      end
+      if line["DEP"][i] =~ /subj/
+        #print "#{line["NOR"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+      end
+      if line["DEP"][i] =~ /obj/
+        #print "#{line["NOR"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+      end
+      if line["DEP"][i] =~ /nn/
+        #print "#{line["NOR"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+      end
+      if line["DEP"][i] =~ /attr/
+        #print "#{line["NOR"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+      end
+      if line["DEP"][i] =~ /amod|advmod/
+        #print "#{line["NOR"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+      end
+      if line["DEP"][i] =~ /conj/
+        #print "#{line["NOR"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+      end
+      if line["DEP"][i] =~ /comp/
+        #print "#{line["NOR"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+      end
+    end
+  end
+end
+puts ""
+divide = 10
+puts "Pharse BoW...#{pharseBoW.length}/#{divide}=#{(pharseBoW.length/divide)}"
+printCountsHash(pharseBoW, divide)
+
+
+#------------------------------------------------------------------------------#
+allBoW = {}
+bow_excludes = FileIO.fileToArray("usr/data/bow_excludes.lst", "")
+def allBoWHash(allBoW, bow_excludes, hash)
+  hash.each do |key,value|
+    if bow_excludes.include?(key) == false 
+      if allBoW.has_key?(key) == true
+        wordCount = allBoW[key]
+        wordCount += value
+        allBoW[key] = wordCount
+      else
+        allBoW[key] = value
+      end
+    end    
+  end
+end
+
+
+allBoWHash(allBoW, bow_excludes, w5hBlueCounts)
+allBoWHash(allBoW, bow_excludes, w5hGreenCounts)
+allBoWHash(allBoW, bow_excludes, w5hRedCounts)
+allBoWHash(allBoW, bow_excludes, w5hBrownCounts)
+allBoWHash(allBoW, bow_excludes, w5hCyanCounts)
+allBoWHash(allBoW, bow_excludes, w5hMagentaCounts)
+
+allBoWHash(allBoW, bow_excludes, nounsBoW)
+allBoWHash(allBoW, bow_excludes, pharseBoW)
+
+puts ""
+divide = 10
+puts "All BoW...#{allBoW.length}/#{divide}=#{(allBoW.length/divide)}"
+printCountsHash(allBoW, divide)
+
+
+
+
+
+
+puts ""
+#------------------------------------------------------------------------------#
+__END__
+
+

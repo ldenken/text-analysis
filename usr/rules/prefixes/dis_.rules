@@ -1,8 +1,8 @@
+discipline = discipline, 6, dis_
 discomfort = comfort, 32, dis_
-discuss = discuss, 64, dis_
+discrete = discrete, 24, dis_
+discuss = discuss, 65, dis_
+disease = disease, 12, dis_
+disney = disney, 6, dis_
 disneyland = disneyland, 33, dis_
-discrete = crete, 20, dis_, NEW
-disease = ease, 10, dis_, NEW
-discipline = cipline, 5, dis_, NEW
-disney = ney, 5, dis_, NEW
-disrupt = rupt, 5, dis_, NEW
+disrupt = disrupt, 6, dis_

@@ -1,11 +1,11 @@
 encode = code, 111, en_
-encrypt = crypt, 121, en_
+encrypt = crypt, 123, en_
 envelope = envelope, 62, en_
-entire = tire, 87, en_
-entry = entry, 132, en_
+entire = tire, 89, en_
+entry = entry, 134, en_
 energy = energy, 16, en_
-enough = enough, 207, en_
+enough = enough, 218, en_
 enjoy = joy, 9, en_
 entail = tail, 16, en_
-enforce = force, 5, en_
-entropy = entropy, 25, en_
+enforce = force, 6, en_
+entropy = entropy, 30, en_

@@ -22,7 +22,7 @@ module Derivational
       ruleString = ""
 
       line["NOR"].each_with_index do |word,index|      # each word
-        if word.length > 3
+        if word.length >= 3
           #Var.info("-> word", word)
           first = word[0..1]
           last = word[word.length-2..word.length-1]

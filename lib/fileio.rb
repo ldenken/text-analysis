@@ -293,43 +293,46 @@ module FileIO
       text = []   # document
       line = {}   # sentence(s)
       token = ""  # word
+      fileArray = []
       begin
         File.foreach(filename) do |string|
           string.strip!
-          key = string[/\A[A-Z0-9]{3}/]
-          string.slice!(/\A[A-Z0-9]{3} \= /) 
-          stringArray = string.split(", ") 
-          # comma space used to split string to accommodate comma's in string!
-          if key == "INF"
-            if line.length >= 1
-              text << line
-            end
-            line = {}
-            line[key] = stringArray
-          else
-            line[key] = stringArray            
-          end
+          fileArray << string
         end
       rescue IOError => error
         error = "#{error}"
         location = "def FileIO.loadHash(filename)"
         FileIO.errorAndExit(error, location)
       end
+
+      fileArray.each do |string|
+        key = string[/\A[A-Z0-9]{3}/]
+        string.slice!(/\A[A-Z0-9]{3} \= /)
+        # comma space used to split string to accommodate comma's in string!
+        stringArray = string.split(", ")
+        if key == "INF"
+          line = {}
+          line[key] = stringArray
+          if line.length >= 1
+            text << line
+          end
+        else
+          line[key] = stringArray
+        end
+      end
+
       # Fix empty array length because no text before, after comma on import
       # i.e. RAW = I, cannot & NOR = i, cannot & POS = , & DEP = ,
       text.each do |line|
-        line.keys.each do |k| 
+        line.keys.each do |k|
           if line[k].length < line["RAW"].length
             line[k] << ""
           end
-          #print "#{k}=#{line[k].length} "
         end
-        #puts ""
       end
       return text
     end
   end
-
 
 end # module FileIO
 

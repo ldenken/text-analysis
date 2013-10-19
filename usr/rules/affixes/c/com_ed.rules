@@ -1,10 +1,10 @@
-compromised = compromise, 325, com_ed
+compromised = compromise, 327, com_ed
 communicated = communicate, 64, com_ed
 completed = complete, 41, com_ed
-complied = comply, 36, com_ed
+complied = comply, 38, com_ed
 committed = commit, 49, com_ed
 compared = compare, 42, com_ed
 combined = combine, 45, com_ed
-commented = comment, 11, com_ed
-commandeered = commandeer, 34, com_ed
-complicated = complicate, 10, com_ed
+commented = comment, 15, com_ed
+commandeered = commandeer, 39, com_ed
+complicated = complicate, 12, com_ed

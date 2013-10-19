@@ -1,4 +1,4 @@
-enforcement = enforce, 198, en_ent
+enforcement = enforce, 201, en_ent
 engagement = engage, 33, en_ent
-entertainment = entertain, 32, en_ent
-environment = environm, 74, en_ent, NEW
+entertainment = entertain, 36, en_ent
+environment = environment, 78, en_ent

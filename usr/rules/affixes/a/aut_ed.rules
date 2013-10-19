@@ -1,4 +1,4 @@
-authorized = authorize, 204, aut_ed
+authorized = authorize, 208, aut_ed
 authorised = authorise, 46, aut_ed
-automated = automate, 44, aut_ed
+automated = automate, 46, aut_ed
 authenticated = authenticate, 5, aut_ed

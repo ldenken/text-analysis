@@ -1,7 +1,7 @@
-agency = agency, 2939, _cy
+agency = agency, 2951, _cy
 urgency = urgency, 32, _cy
-policy = policy, 188, _cy
+policy = policy, 193, _cy
 saliency = saliency, 20, _cy
 dependency = dependent, 11, _cy
-emergency = emergency, 10, _cy
-efficiency = efficient, 5, _cy
+emergency = emergency, 12, _cy
+efficiency = efficient, 6, _cy

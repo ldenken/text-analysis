@@ -2,4 +2,4 @@ telephone = telephone, 1251, tele_
 telephony = telephone, 130, tele_
 telecoms = telecom, 2, tele_
 telegrams = telegram, 2, tele_
-telecom = telecom, 26, tele_
+telecom = telecom, 27, tele_

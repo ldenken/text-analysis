@@ -1,0 +1,4 @@
+
+awk '{ print "mate "$2}' text-analysis.log >tmp.bsh
+bash tmp.bsh 
+echo "" >text-analysis.log
