@@ -1,3 +1,6 @@
-leadership = lead, 69, _ship
+leadership = lead, 72, _ship
 relationship = relation, 177, _ship
-partnership = partner, 143, _ship
+partnership = partner, 148, _ship
+ownership = owner, 3, _ship
+censorship = censor, 2, _ship
+directorship = director, 1, _ship

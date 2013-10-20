@@ -1,7 +1,7 @@
 contents = content, 117, con_ts
 contexts = context, 9, con_ts
-constraints = constraint, 17, con_ts
-contacts = contact, 2, con_ts
-contracts = contract, 11, con_ts
-conflicts = conflict, 6, con_ts
-constants = constant, 6, con_ts
+constraints = constraint, 18, con_ts
+contacts = contact, 5, con_ts
+contracts = contract, 15, con_ts
+conflicts = conflict, 7, con_ts
+constants = constant, 7, con_ts

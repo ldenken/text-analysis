@@ -1,5 +1,6 @@
-started = start, 352, sta_ed
+started = start, 373, sta_ed
 stacked = stack, 153, sta_ed
 stationed = station, 82, sta_ed
-stated = state, 235, sta_ed
+stated = state, 237, sta_ed
 stamped = stamp, 14, sta_ed
+statesponsored = statesponsor, 1, sta_ed, NEW

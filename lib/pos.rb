@@ -2,10 +2,10 @@ module Pos
   require 'stanford-core-nlp'
   
   #----------------------------------------------------------------------------#
-  def Pos.document(filename, text)
+  def Pos.text(filename, text)
     #
     #
-    #
+    #text
     puts "Parts of Speach"
     pipeline =  StanfordCoreNLP.load(:tokenize, :ssplit, :pos, :parse)
 
@@ -50,7 +50,7 @@ module Pos
           line["DEP"][i] = tmpHsh[e][1]
         end
       end
-      line["DEP"] << basic_dependencies
+      #line["DEP"] << basic_dependencies
 
     end # text.each do |line|
 

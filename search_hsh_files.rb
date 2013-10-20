@@ -121,19 +121,26 @@ fileAry.each do |file|
       search = "#{ARGV[3]} #{ARGV[4]}"
     end
     puts "search".ljust(column) + search
+    puts ""
 
     if search =~ /[ ]/
+      i = 0
       text.each do |line|
         line[key].each_with_index do |token,index|
           if token == ARGV[3] && line[key][index+1] == ARGV[4]
+            i += 1
+            print "#{i} "
             printLine(line, key)
             puts ""
           end
         end
       end
     else
+      i = 0
       text.each do |line|
         if line[key].include?(search) == true
+          i += 1
+          print "#{i} "
           printLine(line, key)
           puts ""
         end
@@ -173,10 +180,10 @@ def w5hCounts(line, hash, i, colour)
   5.times do |n|
     if line["W5H"][i+n] == colour 
       if line["RAW"][i+n] =~ /[\,]\z/
-        tokens << " #{line["NOR"][i+n]}"
+        tokens << " #{line["LEM"][i+n]}"
         break
       else
-        tokens << " #{line["NOR"][i+n]}"          
+        tokens << " #{line["LEM"][i+n]}"          
       end
     else
       break
@@ -271,8 +278,8 @@ fileAry.each do |file|
   text.each do |line|
     (line["POS"].length).times do |i|
       if line["POS"][i] =~ /\ANN/
-        if tmpAry.include?(line["NOR"][i]) == false 
-          token = line["NOR"][i]
+        if tmpAry.include?(line["LEM"][i]) == false 
+          token = line["LEM"][i]
           if nounsBoW.has_key?(token) == true
             wordCount = nounsBoW[token]
             wordCount += 1
@@ -314,38 +321,38 @@ fileAry.each do |file|
   text = FileIO.loadHash(file, 1)
   text.each do |line|
 
-    (line["NOR"].length).times do |i|
+    (line["LEM"].length).times do |i|
       if line["DEP"][i] =~ /root/
-        #print "#{line["NOR"][i]} ".bold
-        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+        #print "#{line["LEM"][i]} ".bold
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["LEM"][i])
       end
       if line["DEP"][i] =~ /subj/
-        #print "#{line["NOR"][i]} "
-        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+        #print "#{line["LEM"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["LEM"][i])
       end
       if line["DEP"][i] =~ /obj/
-        #print "#{line["NOR"][i]} "
-        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+        #print "#{line["LEM"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["LEM"][i])
       end
       if line["DEP"][i] =~ /nn/
-        #print "#{line["NOR"][i]} "
-        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+        #print "#{line["LEM"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["LEM"][i])
       end
       if line["DEP"][i] =~ /attr/
-        #print "#{line["NOR"][i]} "
-        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+        #print "#{line["LEM"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["LEM"][i])
       end
       if line["DEP"][i] =~ /amod|advmod/
-        #print "#{line["NOR"][i]} "
-        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+        #print "#{line["LEM"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["LEM"][i])
       end
       if line["DEP"][i] =~ /conj/
-        #print "#{line["NOR"][i]} "
-        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+        #print "#{line["LEM"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["LEM"][i])
       end
       if line["DEP"][i] =~ /comp/
-        #print "#{line["NOR"][i]} "
-        pharseBoW = bowHash(bow_excludes, pharseBoW, line["NOR"][i])
+        #print "#{line["LEM"][i]} "
+        pharseBoW = bowHash(bow_excludes, pharseBoW, line["LEM"][i])
       end
     end
   end

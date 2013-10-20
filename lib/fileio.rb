@@ -22,6 +22,7 @@ require 'time'
 
 module FileIO
 
+=begin
   #----------------------------------------------------------------------------#
   def FileIO.errorAndExit(error, location)
     #
@@ -68,6 +69,56 @@ module FileIO
     end
     return dirtest
   end
+=end
+
+  def FileIO.errorAndExit(error, location)
+    puts ""
+    puts "Location".ljust(@column) + ": #{location}"
+    puts "Error".ljust(@column) + ": #{error}"
+    puts ""
+    exit(1)
+  end
+
+  def FileIO.fileExists(filename, exit)
+    filetest = File.exist?(filename)
+    if filetest == false
+      case exit
+      when 0
+        # do nothing!
+      when 1
+        puts "Error".ljust(@column) + ": File not found! -> #{filename}"
+      when 3
+        error = "File not found!"
+        location = "def fileExists(#{filename}, #{exit})"
+        FileIO.errorAndExit(error, location)
+      end
+    else
+      filetest = true
+    end
+    return filetest
+  end
+
+  def FileIO.directoryExists(directory, exit)
+    dirtest = File.directory?(directory)
+    if dirtest == false
+      case exit
+      when 0
+        # do nothing!
+      when 1
+        puts "Error".ljust(@column) + ": Directory not found! -> #{directory}"
+      when 2
+        error = "Directory not found!"
+        location = "def directoryExists(#{directory}, #{exit})"
+        FileIO.errorAndExit(error, location)
+      end
+    else
+      dirtest = true
+    end
+    return dirtest
+  end
+
+
+
 
 
   #----------------------------------------------------------------------------#
@@ -293,6 +344,7 @@ module FileIO
       text = []   # document
       line = {}   # sentence(s)
       token = ""  # word
+      info = []   # text information
       fileArray = []
       begin
         File.foreach(filename) do |string|
@@ -310,7 +362,13 @@ module FileIO
         string.slice!(/\A[A-Z0-9]{3} \= /)
         # comma space used to split string to accommodate comma's in string!
         stringArray = string.split(", ")
-        if key == "INF"
+        if key == "TXT"
+          #puts "#{key}"
+          #puts "#{stringArray}"
+          info = stringArray
+        end
+
+        if key == "INF" 
           line = {}
           line[key] = stringArray
           if line.length >= 1
@@ -330,9 +388,51 @@ module FileIO
           end
         end
       end
-      return text
+      return info, text
     end
   end
+
+
+
+
+  #----------------------------------------------------------------------------#
+  def FileIO.fileComments(filename, delimiter)
+    if FileIO.fileExists(filename, 1) == true
+      begin
+        fileArray = []
+        import = 1                              # import switch
+        File.foreach(filename) do |line|
+          line.strip!
+          if line =~ /\A=[bdegin]{3,5}\z/
+            if line == "=begin"                 # begin a comment block
+              import = 2
+            end
+            if line == "=end"                   # end a comment block
+              import = 1
+            end
+          end
+          if line !~ /\A#/ && line !~ /\A=[bdegin]{3,5}\z/
+            if import == 2 && line != ""                      # line IS in a comment block
+              #line = FileIO.reduceUTF8String(line)
+              if delimiter != ""
+                lineArray = line.split("#{delimiter} ") # with or without space?
+                fileArray << lineArray
+              else
+                fileArray << line
+              end
+            end
+          end
+        end
+      rescue IOError => error
+        error = "#{error}"
+        location = "def FileIO.fileToArray(#{filename})"
+        FileIO.errorAndExit(error, location)
+      end
+      return fileArray
+    end
+  end
+
+
 
 end # module FileIO
 

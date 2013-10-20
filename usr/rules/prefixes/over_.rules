@@ -1,9 +1,10 @@
-oversight = sight, 593, over_
+oversight = sight, 602, over_
 oversee = see, 44, over_
-overall = overall, 23, over_
+overall = overall, 27, over_
 overcome = come, 10, over_
-overlook = look, 7, over_
+overlook = look, 10, over_
 overip = overip, 2, over_
-overreach = reach, 28, over_
-overturn = turn, 6, over_
-override = ride, 13, over_
+overreach = reach, 30, over_
+overturn = turn, 8, over_
+override = ride, 56, over_
+overview = view, 2, over_

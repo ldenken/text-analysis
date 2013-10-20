@@ -1,7 +1,9 @@
-decade = decade, 159, _ade
-meade = meade, 41, _ade
-upgrade = upgrade, 44, _ade
-invade = invade, 32, _ade
-trade = trade, 55, _ade
-evade = evade, 6, _ade
+decade = decade, 163, _ade
+degrade = degrade, 2, _ade
+evade = evade, 9, _ade
+grade = grade, 3, _ade
 grenade = grenade, 7, _ade
+invade = invade, 32, _ade
+meade = meade, 41, _ade
+trade = trade, 60, _ade
+upgrade = upgrade, 44, _ade

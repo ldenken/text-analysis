@@ -1,273 +1,426 @@
 module Summarise
 
+  @column = 14
 
-  #------------------------------------------------------------------------------#
-  def Summarise.document(filename, document)
-    #puts ""; print "-"*80; puts ""
-    #puts "Summarise.document(document)"
-
-    selectedRAWText = {}
-    selectedLEMText = {}                # array for all RAW text
-    selectedW5HText = {}                # array for all RAW text
-
-    selectedRAWTitles = {}                 # array for titles RAW text
-    selectedLEMTitles = {}                 # array for titles RAW text
-    selectedW5HTitles = {}                 # array for titles RAW text
-
-    aListTextRAW = []               # array for list sentences RAW text
-
-    summaryMatrix = {}
-    summaryMatrixCounts = {}
-    summaryTextCounts = {}
-    summaryBoW = {}            # hash of summary, normailsed (Bag of Words) 
-
-
-    selectedBoW = {}                # hash of all text, normailsed (Bag of Words)
-
-    selectedLineCount = 0
-    selectedWordCount = 0
-    selectedText = ""
-    selectedTextBlob = ""
-
-    summaryLineCount = 0
-    summaryWordCount = 0
-    summaryText = ""
-summaryTextBlob = ""
-summaryTextLineScore = {}
-
-#puts "line, section, subsection, paragraph, sentence, begin, end, tag, text"
-#puts "0,    1,       2,          3,         4,        5,     6,   7,   8"
-
-    # create SELECTED text arrays
-    document.each_with_index do |line,index|
-      selectedRAWText[index+1] = line["RAW"]
-      selectedLEMText[index+1] = line["LEM"]
-      selectedW5HText[index+1] = line["W5H"]      
-
-      if line["INF"][7] == "h1" || line["INF"][7] == "h2" || line["INF"][7] == "h3"
-        selectedRAWTitles[index+1] = line["RAW"]
-        selectedLEMTitles[index+1] = line["LEM"]
-        selectedW5HTitles[index+1] = line["W5H"]
-      end
-    end
-    selectedLineCount = selectedLEMText.length
-
-    # create Bag of Words SELECTED hash
-    selectedLEMText.each do |k,v|
-      v.each do |word|
-        wordCount = 0
-        if selectedBoW.has_key?(word) == true
-          wordCount = selectedBoW[word]
-          wordCount += 1
-          selectedBoW[word] = wordCount
-        else
-          selectedBoW[word] = 1
-        end
-      end
-      selectedWordCount = selectedWordCount + v.length
-    end
-
-
-    # Repetition Matrix
-    # y axis ^ top to bottom, step through the sentences hash once as the sentence being analysed  
-    # x axis > left to right, step through the sentences hash once for each time of the y axis
-    yArray = []
-    xArray = []
-    y = selectedLEMText.keys[0]
-    while y < (selectedLEMText.length + 1)
-      yArray = selectedLEMText[y]
-      x = selectedLEMText.keys[0]
-      total = 0
-      arrayCountsAndTotals = []
-      while x < (selectedLEMText.length + 1)
-        if x != y
-          includeCount = 0
-          xArray = selectedLEMText[x]
-          xArray.each do |word|
-#            if word.length > 4    # length as a HACK to remove unwanted words *****
-              if yArray.include?(word) 
-                includeCount += 1 
-#              end
+  #----------------------------------------------------------------------------#
+  def Summarise.createBoW(bow_excludes, text, key, regexp)
+    hashBoW = {}
+    regExp = Regexp.new(regexp)
+    text.each do |line|
+      (line[key].length).times do |i|
+        if line[key][i] =~ regExp
+          if bow_excludes.include?(line["LEM"][i]) == false
+            token = line["LEM"][i]
+            if hashBoW.has_key?(token) == true
+              wordCount = hashBoW[token]
+              wordCount += 1
+              hashBoW[token] = wordCount
+            else
+              if token != ""
+                hashBoW[token] = 1
+              end
             end
           end
-          arrayCountsAndTotals << includeCount
-          total = total + includeCount
-        else
-          arrayCountsAndTotals << ""
         end
-        x += 1
-      end
-      arrayCountsAndTotals << total
-      summaryMatrix[y] = arrayCountsAndTotals
-      y += 1
-    end
-    summaryMatrix.each do |k,v|
-      summaryMatrixCounts[k] = v[(selectedLEMText.length)]
-    end
-
-    matrixText = ""
-    spaces = 0
-    block = selectedLEMText.length.to_s.length + 1
-    matrixText << " ".ljust(block)
-    (selectedLEMText.length).times do |e|
-      matrixText << "#{e+1}".ljust(block)
-    end
-    matrixText << "\n"
-    summaryMatrix.each do |k,v| 
-      spaces = block - k.to_s.length
-      matrixText << "#{k}".ljust(block)
-      v.each do |e| 
-        matrixText << "#{e}".ljust(block)
-      end
-      matrixText << "\n"
-    end
-
-
-    # create summary text
-    wordCount = 0
-    summaryMatrixCounts.sort_by {|k,v| v}.reverse.each do |k,v|
-      if wordCount < selectedWordCount/3 # divide by 3 HACK 
-        tmpArray = selectedLEMText[k-1]
-        if tmpArray && tmpArray.length >= 1
-          summaryTextLineScore[k] = v
-          wordCount = wordCount + tmpArray.length
-          summaryTextCounts[k] = tmpArray.length
-        end
-        #if selectedLEMTitles.include?(selectedLEMText[k-1]) == false # exclude titles from summirisation text
-        #  if aListTextRAW.include?(selectedLEMText[k-1]) == false # exclude ordered/unordered list text
-        #  end
-        #end
       end
     end
-    summaryLineCount = summaryTextCounts.length
+    return hashBoW
+    Var.info("hashBoW", hashBoW)
+  end
 
-    summaryTextCounts.sort_by {|k,v| k}.each do |k,v|
-      tmpArray = []
-      tmpArray = selectedLEMText[k]
-      tmpArray.each do |word|
-#        if word.length > 4    # length as a HACK to remove unwanted words ******
-          wordCount = 0
-          if summaryBoW.has_key?(word) == true
-            wordCount = summaryBoW[word]
-            wordCount += 1
-            summaryBoW[word] = wordCount
-          else
-            summaryBoW[word] = 1
+  def Summarise.printBoW(hashBoW)
+    width = 0
+    hashBoW.sort_by {|k,v| v}.reverse.each do |k,v|
+      width += (k.length + 5)
+      if width > 75
+        puts ""
+        width = k.length
+      end
+      print "#{k}(#{v}) "
+    end
+    puts ""
+  end
+
+  def Summarise.printW5H(line)
+    line["RAW"].each_with_index do |t,i|
+      case line["W5H"][i]
+      when "blue"
+        print "#{t}".blue
+      when "green"
+        print "#{t}".green
+      when "red"
+        print "#{t}".red
+      when "brown"
+        print "#{t}".brown
+      when "cyan"
+        print "#{t}".cyan
+      when "magenta"
+        print "#{t}".magenta
+      else
+        print "#{t}"
+      end
+      print " "
+    end
+  end
+
+
+  #puts "line, section, subsection, paragraph, sentence, begin, end, tag, text"
+  #puts "0,    1,       2,          3,         4,        5,     6,   7,   8"
+
+  #------------------------------------------------------------------------------#
+  def Summarise.text(filename, text)
+
+    #puts "-"*80
+    titleCount = 0
+    textTokenCount = 0
+    text.each do |line|
+      if line["INF"][7] == "h1" || line["INF"][7] == "h2" || line["INF"][7] == "h3"
+        titleCount += 1
+      end
+      textTokenCount += line["LEM"].length
+    end
+    tmpInt = (textTokenCount.to_s.length + 1)
+    infoBlock = ""
+    infoBlock << "lines".ljust(@column)       + "#{(text.last["INF"][0].to_i - text.first["INF"][0].to_i) + 1}".ljust(tmpInt) + text.first["INF"][0]  + "-" + text.last["INF"][0] + "\n"
+    infoBlock << "section".ljust(@column)     + "#{(text.last["INF"][1].to_i - text.first["INF"][1].to_i) + 1}".ljust(tmpInt) + text.first["INF"][1]  + "-" + text.last["INF"][1] + "\n"
+    infoBlock << "subsection".ljust(@column)  + "#{(text.last["INF"][2].to_i - text.first["INF"][2].to_i) + 1}".ljust(tmpInt) + text.first["INF"][2]  + "-" + text.last["INF"][2] + "\n"
+    infoBlock << "paragraphs".ljust(@column)  + "#{(text.last["INF"][3].to_i - text[1]["INF"][3].to_i) + 1}".ljust(tmpInt)    + text[1]["INF"][3]     + "-" + text.last["INF"][3] + "\n"
+    infoBlock << "titles".ljust(@column)      + titleCount.to_s  + "\n"
+    infoBlock << "sentences".ljust(@column)   + "#{(text.last["INF"][4].to_i - text[1]["INF"][4].to_i) + 1}".ljust(tmpInt)    + text[1]["INF"][4]     + "-" + text.last["INF"][4] + "\n"
+    infoBlock << "words".ljust(@column)       + textTokenCount.to_s  + "\n"
+    puts "#{infoBlock}"
+    puts ""
+
+    # create All Bag of Words hashes
+    allBoW = {}
+    bow_excludes = FileIO.fileToArray("usr/data/bow_excludes.lst", "")
+    allBoW = Summarise.createBoW(bow_excludes, text, "POS", "")
+    #puts "All BoW...#{allBoW.length}"
+    #Summarise.printBoW(allBoW)
+    #puts ""
+
+    # build all token repetition matrix...
+    allTokenMatrix = {}
+    allTokenCounts = {}
+    lineCounter = 0
+    loopCounter = text.length
+    largestCount = 0
+    while lineCounter <= (text.length - 1)
+      #print "#{lineCounter} - "
+      countsArray = []
+      lineCount = 0
+      loopCounter.times do |l|
+        if l != lineCounter
+          tokenCount = 0
+          text[l]["LEM"].each do |token|
+            if text[lineCounter]["LEM"].include?(token)
+              tokenCount += 1
+            end
           end
-#        end
+          #print "#{tokenCount} "
+          countsArray << tokenCount
+          lineCount += tokenCount
+        else
+          countsArray << ""
+          #print "x "
+        end
       end
-      summaryWordCount = summaryWordCount + tmpArray.length
+      #print "(#{lineCount})"
+      if largestCount < lineCount
+        largestCount = lineCount
+      end
+      countsArray << lineCount
+      allTokenMatrix[lineCounter] = countsArray
+      allTokenCounts[lineCounter] = lineCount
+      lineCounter += 1
+      #puts ""
     end
 
-    # Create SELECTED text for output
-    selectedRAWText.each do |k,v|
-      selectedText << "[#{k}/#{summaryMatrixCounts[k]}]"
-      v.each {|e| selectedText << " #{e}"}
-      selectedText << "\n"
-      v.each {|e| selectedTextBlob << "#{e} "}
+    # create token repetition matrix
+    matrixText = ""
+    block = largestCount.to_s.length + 1
+    #print "".ljust(block)
+    matrixText << "".ljust(block)
+    #allTokenMatrix.length.times {|n| print "#{n+1}".ljust(block)}
+    allTokenMatrix.length.times {|n| matrixText << "#{n+1}".ljust(block)}
+
+    allTokenMatrix.each do |k,v|
+      #puts ""
+      matrixText << "\n"
+      #print "#{k+1}".ljust(block)
+      matrixText << "#{k+1}".ljust(block)
+      v.each_with_index do |e,i|
+        if i == (v.length - 1)
+          #print "- #{e}".ljust(block)
+          matrixText << "- #{e}".ljust(block)
+        else
+          #print "#{e}".ljust(block)
+          matrixText << "#{e}".ljust(block)
+        end
+      end
     end
+    #puts "Repetition matrix..."
+    #puts "#{matrixText}"
+    #puts ""
 
-    # Create SUMMARY text for output
-    summaryTextLineScore.sort_by {|k,v| k}.each do |k,v|
-      summaryText << "[#{k}/#{v}]"
-      selectedRAWText[k].each {|w| summaryText << " #{w}"}
-      summaryText << "\n"
-      selectedRAWTitles[1].each {|w| summaryTextBlob << "#{w} "}
-      selectedRAWText[k].each {|w| summaryTextBlob << "#{w} "}
+    # line scores
+    lineScoresText = ""
+    allTokenCounts.sort_by {|k,v| v}.reverse.each {|k,v| lineScoresText << "#{k+1}/#{v} "}
+    #puts "Line scores..."
+    #puts "#{lineScoresText}"
+    #puts ""
+
+    # create summary line array
+    summaryLineArrayAll = []
+    summaryTokenCount = 0
+    allTokenCounts.sort_by {|k,v| v}.reverse.each do |k,v|
+      if summaryTokenCount < textTokenCount/3 # divide by 3 HACK
+        summaryLineArrayAll << k
+        summaryTokenCount += text[k]["RAW"].length
+      end
     end
-
-    tmpStr = ""
-    tmpStr << "Summary Blob:\n"
-    tmpStr << "#{summaryTextBlob}\n\n"
-    tmpStr << "\n\n"
-
-    tmpStr << "Selected Blob:\n"
-    tmpStr << "#{selectedTextBlob}\n\n"
-    tmpStr << "\n\n"
-    
-    tmpStr << "lines: #{selectedLineCount} words: #{selectedWordCount}\n\n"
-    tmpStr << "Selected BoW: #{selectedBoW.length}\n"
-    selectedBoW.sort_by {|k,v| v}.reverse.each {|k,v| tmpStr << "#{k}(#{v}) "}
-    tmpStr << "\n\n"
-    tmpStr << "Matrix:\n"
-    tmpStr << "#{matrixText}\n"
-    tmpStr << "lines: #{summaryLineCount} words: #{summaryWordCount}\n"
-    tmpStr << "line/scores: "; summaryTextLineScore.sort_by {|k,v| k}.each {|k,v| tmpStr << "#{k}/#{v} "}
-    tmpStr << "\n\n"
-    tmpStr << "Summary Text:\n"
-    tmpStr << "#{summaryText}\n\n"
-    tmpStr << "Summary BoW: #{summaryBoW.length}\n"
-    summaryBoW.sort_by {|k,v| v}.reverse.each {|k,v| tmpStr << "#{k}(#{v}) "}
-    tmpStr << "\n\n"
-    outputFilename = filename.gsub(".txt", ".sum")
-    puts "output : #{outputFilename}"
-    FileIO.string(outputFilename, tmpStr, "w")
-    
-    #puts "#{tmpStr}"
+    summaryLineArrayAll.sort!
+    summaryLineArrayAllText = ""
+    summaryLineArrayAll.each {|e| summaryLineArrayAllText << "#{e} "}
+    #puts "Summary line array... total tokens #{textTokenCount} / 3 = #{textTokenCount/3} min summary tokens"
+    #puts "#{summaryLineArrayAllText}"
+    #puts ""
 
 =begin
-    puts "\nSummary Blob:\n"
-    summaryTextLineScore.sort_by {|k,v| k}.each do |k,v|
-      selectedRAWText[k].each_with_index do |w,i| 
-        if selectedW5HText[k][i] != "" 
-          case selectedW5HText[k][i]
-          when "blue"
-            print "#{w}".blue
-          when "green"
-            print "#{w}".green
-          when "red"
-            print "#{w}".red
-          when "brown"
-            print "#{w}".brown
-          when "cyan"
-            print "#{w}".cyan
-          when "magenta"
-            print "#{w}".magenta
-          end
-        else
-          print "#{w}"
-        end
-        print " "
+    summaryText = ""
+    summaryTokenCount = 0
+    unless summaryLineArrayAll.include?(0)
+      text[0]["RAW"].each do |t|
+        summaryText << "#{t} "
+        summaryTokenCount += 1
       end
+      Summarise.printW5H(text[0])
     end
+    summaryLineArrayAll.each do |n|
+      text[n]["RAW"].each do |t|
+        summaryText << "#{t} "
+        summaryTokenCount += 1
+      end
+      Summarise.printW5H(text[n])
+    end
+    puts ""
+    print "All Tokens... "
+    print "lines: "
+    summaryLineArrayAll.each {|e| print "#{e} "}
+    print "(#{summaryLineArrayAll.length}) "
+    print "tokens: #{summaryTokenCount}"
     puts "\n\n"
-    puts "                 WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
+    puts "#{summaryText}"
+
+    rawText = ""
+    text.each do |line|
+      line["RAW"].each {|e| rawText << "#{e} "}
+    end
+    puts "Text..."
+    puts "#{rawText}"
     puts ""
 =end
 
-    puts "\nDocument:\n"
-    document.each do |line|
-      line["RAW"].each_with_index do |w,i|
-        case line["W5H"][i]
-        when "blue"
-          print "#{w}".blue
-        when "green"
-          print "#{w}".green
-        when "red"
-          print "#{w}".red
-        when "brown"
-          print "#{w}".brown
-        when "cyan"
-          print "#{w}".cyan
-        when "magenta"
-          print "#{w}".magenta
-        else
-          print "#{w}"
+
+#------------------------------------------------------------------------------#
+
+    # Penn Tree Tagset
+    penntreeBoW = {}
+    penntreeBoW = Summarise.createBoW(bow_excludes, text, "POS", "\\A[FJNV]")
+    #puts "Penn Tree Tagset BoW...#{penntreeBoW.length}"
+    #Summarise.printBoW(penntreeBoW)
+    #puts ""
+
+    tokenCounts = {}
+    text.each_with_index do |line,index|
+      tokenCounts[index] = 0
+      line["LEM"].each do |token|
+        if penntreeBoW.include?(token)
+          #puts "#{index} #{token} "
+          tokenCounts[index] += 1
         end
-        print " "
       end
     end
+
+    # line scores
+    lineScoresText = ""
+    tokenCounts.sort_by {|k,v| v}.reverse.each {|k,v| lineScoresText << "#{k+1}/#{v} "}
+    #puts "Line scores..."
+    #puts "#{lineScoresText}"
+    #puts ""
+
+    # create summary line array
+    summaryLineArrayTagged = []
+    summaryTokenCount = 0
+    tokenCounts.sort_by {|k,v| v}.reverse.each do |k,v|
+      if summaryTokenCount < textTokenCount/3 # divide by 3 HACK
+        summaryLineArrayTagged << k
+        summaryTokenCount += text[k]["RAW"].length
+      end
+    end
+    summaryLineArrayTagged.sort!
+    summaryLineArrayTaggedText = ""
+    summaryLineArrayTagged.each {|e| summaryLineArrayTaggedText << "#{e} "}
+    #puts "Summary line array... total tokens #{textTokenCount} / 3 = #{textTokenCount/3} min summary tokens"
+    #puts "#{summaryLineArrayTaggedText}"
+    #puts ""
+=begin
+    summaryText = ""
+    summaryTokenCount = 0
+    unless summaryLineArrayTagged.include?(0)
+      text[0]["RAW"].each do |t|
+        summaryText << "#{t} "
+        summaryTokenCount += 1
+      end
+      Summarise.printW5H(text[0])
+    end
+    summaryLineArrayTagged.each do |n|
+      text[n]["RAW"].each do |t|
+        summaryText << "#{t} "
+        summaryTokenCount += 1
+      end
+      Summarise.printW5H(text[n])
+    end
+    puts ""
+    print "Penn Tree Tagged... "
+    print "lines: "
+    summaryLineArrayTagged.each {|e| print "#{e} "}
+    print "(#{summaryLineArrayTagged.length}) "
+    print "tokens: #{summaryTokenCount}"
     puts "\n\n"
+    #puts "#{summaryText}"
+=end
+
+#------------------------------------------------------------------------------#
+
+    # Concatenate All and Tagged summaries into one
+    summaryLineArrayConcat = []
+    summaryLineArrayConcat.concat(summaryLineArrayAll)
+    summaryLineArrayConcat.concat(summaryLineArrayTagged)
+    summaryLineArrayConcat.uniq!
+    summaryLineArrayConcat.sort!
+
+    summaryText = ""
+    summaryTokenCount = 0
+    unless summaryLineArrayConcat.include?(0)
+      text[0]["RAW"].each do |t|
+        summaryText << "#{t} "
+        summaryTokenCount += 1
+      end
+      Summarise.printW5H(text[0])
+    end
+    summaryLineArrayConcat.each do |n|
+      text[n]["RAW"].each do |t|
+        summaryText << "#{t} "
+        summaryTokenCount += 1
+      end
+      Summarise.printW5H(text[n])
+    end
+    puts "\n\n"
+    #print "Concatenated... "
+    #print "lines: "
+    #summaryLineArrayConcat.each {|e| print "#{e} "}
+    #print "(#{summaryLineArrayConcat.length}) "
+    #print "tokens: #{summaryTokenCount}"
+    #puts ""
+    #puts "#{summaryText}"
+
+
+    puts ""
     puts "                 WHO".blue + " -> " + "WHAT".green + " -> " + "WHERE".red + " -> " + "WHEN".brown + " -> " + "HOW".cyan + " -> " + "WHY".magenta
     puts ""
 
-#Var.info("selectedRAWTitles", selectedRAWTitles)
-#Var.info("selectedRAWTitles", selectedRAWTitles[1])
+    # w5h bow
+    w5hTokens = {}
+    @lastToken = ""
+    text.each_with_index do |line,index|
+      line["W5H"].each_with_index do |t,i|
+        if t =~ /[a-z]/
+          colour = t
+          tokens = ""
+          5.times do |n|
+            if line["W5H"][i+n] == colour
+              if line["RAW"][i+n] =~ /[\,]\z/
+                tokens << " #{line["LEM"][i+n]}"
+                break
+              else
+                tokens << " #{line["LEM"][i+n]}"
+              end
+            else
+              break
+            end
+          end
+          tokens.strip!
 
-#selectedRAWTitles[1].each {|w| summaryTextBlob << "#{w} "}
+          tmpAry = tokens.split(" ")
+          if @lastToken != tmpAry.last
+            if w5hTokens.has_key?(tokens) == true
+              wordCount = w5hTokens[tokens]
+              wordCount += 1
+              w5hTokens[tokens] = wordCount
+            else
+              if tokens != ""
+                w5hTokens[tokens] = 1
+              end
+            end    
+          end
+          @lastToken = tmpAry.last
+        end
+      end
+    end
+    puts "W5H..."
+    Summarise.printBoW(w5hTokens)
+    puts ""
 
-  	return document
-  end # 
-  
-  
+
+
+
+
+
+    return summaryText
+  end # def Summarise.text(filename, text)
 end # module Summarise
+
+puts ""
+#------------------------------------------------------------------------------#
+__END__
+
+Var.info("selectedWordCount", selectedWordCount)
+
+
+=begin
+    # adjectives
+    adjectivesBoW = {}
+    adjectivesBoW = Summarise.createBoW(bow_excludes, text, "POS", "\\AJJ")
+    puts "Adjectives BoW...#{adjectivesBoW.length}"
+    Summarise.printBoW(adjectivesBoW)
+    puts ""
+
+    # nouns
+    nounsBoW = {}
+    nounsBoW = Summarise.createBoW(bow_excludes, text, "POS", "\\ANN")
+    puts "Nouns BoW...#{nounsBoW.length}"
+    Summarise.printBoW(nounsBoW)
+    puts ""
+
+    # adverbs
+    adverbsBoW = {}
+    adverbsBoW = Summarise.createBoW(bow_excludes, text, "POS", "\\ARB")
+    puts "Adverbs BoW...#{adverbsBoW.length}"
+    Summarise.printBoW(adverbsBoW)
+    puts ""
+
+    # verbs
+    verbsBoW = {}
+    verbsBoW = Summarise.createBoW(bow_excludes, text, "POS", "\\AVB")
+    puts "Verbs BoW...#{verbsBoW.length}"
+    Summarise.printBoW(verbsBoW)
+    puts ""
+
+    # Penn Tree Tagset
+    penntreeBoW = {}
+    penntreeBoW = Summarise.createBoW(bow_excludes, text, "POS", "\\A[FJNRV]")
+    puts "Penn Tree Tagset BoW...#{penntreeBoW.length}"
+    Summarise.printBoW(penntreeBoW)
+    puts ""
+=end

@@ -84,6 +84,7 @@ def doFile(filename)
     puts "length".ljust(@column)        + text.length.to_s
     puts ""
 
+=begin
     (text.last["INF"][2].to_i).times do |n|
       text_subsection = []
       text.each do |line|
@@ -93,7 +94,7 @@ def doFile(filename)
       end 
       text_subsection = Summarise_II.text(filename, text_subsection)
     end
-
+=end
   end # fileAry.each do |file|
 end
 

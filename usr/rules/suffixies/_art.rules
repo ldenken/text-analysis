@@ -1,5 +1,6 @@
-start = start, 240, _art
+start = start, 268, _art
 apart = apart, 22, _art
-smart = smart, 73, _art
+smart = smart, 77, _art
 chart = chart, 5, _art
 heart = heart, 7, _art
+flowchart = flowch, 3, _art, NEW

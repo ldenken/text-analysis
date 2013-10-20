@@ -153,10 +153,10 @@ module Normalise
 
 
   #----------------------------------------------------------------------------#
-  def Normalise.document(document)
+  def Normalise.text(text)
     # 
     # 
-    puts "Normalise document"
+    puts "Normalise text"
 
     aryRules = [
       "[\!]",     # 0 ! exclamation mark
@@ -186,7 +186,7 @@ module Normalise
 
     ] # aryRules
 
-    document.each do |line|
+    text.each do |line|
       line["RAW"].each_with_index do |w,index|
         word = w.dup
 
@@ -218,7 +218,7 @@ module Normalise
       end
     end 
 
-  	return document
+  	return text
   end # def doNormaliseWord(style, hash)
 end # module Normalise
 

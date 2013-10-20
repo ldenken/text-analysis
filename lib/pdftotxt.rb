@@ -89,6 +89,21 @@ module Parse
     command = "echo '#{tmp}' >> #{txtFile}"
     output = Parse.doSystemCommand(command)
 
+
+    command = "echo 'title : ' >> #{txtFile}"
+    output = Parse.doSystemCommand(command)
+    command = "echo 'source : ' >> #{txtFile}"
+    output = Parse.doSystemCommand(command)
+    command = "echo 'site : ' >> #{txtFile}"
+    output = Parse.doSystemCommand(command)
+    command = "echo 'url : ' >> #{txtFile}"
+    output = Parse.doSystemCommand(command)
+    command = "echo 'date : ' >> #{txtFile}"
+    output = Parse.doSystemCommand(command)
+    command = "echo 'author : ' >> #{txtFile}"
+    output = Parse.doSystemCommand(command)
+
+
     command = "echo '=end' >> #{txtFile}"
     output = Parse.doSystemCommand(command)
     command = "echo ' ' >> #{txtFile}"
@@ -116,6 +131,19 @@ module Parse
         line.gsub!('!"', '"!')
         line.gsub!('?"', '"?')
         line.gsub!('.)', ').')
+
+        line.gsub!(".'", "'.")
+        line.gsub!(",'", "',")
+        line.gsub!(":'", "':")
+        line.gsub!(";'", "';")
+        line.gsub!("!'", "'!")
+        line.gsub!("?'", "'?")
+
+        line.gsub!(/[ ]{2,}/, " ")
+        line.gsub!("--", " ")
+        line.gsub!("s'", "s")
+
+
 
         fileArray << line
       end

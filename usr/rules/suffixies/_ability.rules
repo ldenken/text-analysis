@@ -1,4 +1,5 @@
 inability = inability, 35, _ability
 equability = equability, 16, _ability
-accountability = account, 39, _ability
-vulnerability = vulnerable, 39, _ability
+accountability = account, 46, _ability
+vulnerability = vulnerable, 73, _ability
+deniability = deni, 4, _ability, NEW

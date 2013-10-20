@@ -7,72 +7,34 @@ require_relative 'lib/derivational'
 require_relative 'lib/fileio'
 require_relative 'lib/inflectional'
 require_relative 'lib/normalise'
-require_relative 'lib/summarise'
+#require_relative 'lib/summarise'
 require_relative 'lib/var'
 require_relative 'lib/w5h'
 require_relative 'lib/wn'
 require_relative 'lib/pos'
 
+@column = 14
+
 =begin
 
 =end
 
-
-#------------------------------------------------------------------------------#
-if ARGV.size != 1
-  puts "Usage: ruby #{__FILE__} [dir/file]"
-  puts ""
-  exit(1)
-end
-filename = ARGV[0]
-
-fileArray = FileIO.fileToArray(filename, "")
-#Var.info("fileArray", fileArray)
-$logfile = "#{__FILE__}".gsub(".rb", ".log")
-#Var.info("$logfile", $logfile)
-
-puts ""
-print "-"*80
-
-
-#------------------------------------------------------------------------------#
-rawArray = Normalise.raw(fileArray)
-#Var.info("rawArray", rawArray)
-
-
 #----------------------------------------------------------------------------#
-def doSentences(wordsArray)
-  sentenceArray = []
-  sentencesArray = []
-  wordsArray.each do |word|
-    if word =~ /[a-z0-9\]\)][\.|\!|\?]\z/ && word != "i.e." && word != "e.g." && word != "etc." # word with . or ! or ? or i.e.
-      sentenceArray << word
-      sentencesArray << sentenceArray
-      sentenceArray = []
-    else
-      sentenceArray << word
-    end
-  end #
-  sentencesArray << sentenceArray
-  return sentencesArray
-end
-
-#----------------------------------------------------------------------------#
-def documentArrays(rawArray)
+def textArrays(rawArray)
   #puts "line, section, subsection, paragraph, sentence, begin, end, tag, text"
   #puts "0,    1,       2,          3,         4,        5,     6,   7,   8"
 
   # create HTML and ary files
   i = 0                             # loop iterator 
-  l = rawArray.length - 1   # raw document length
+  l = rawArray.length - 1   # raw text length
   t = rawArray.clone        # clone of the raw text array
-  documentArrayHTML = []            # for html text
-  documentArrayPARSE = []           # for parsed text
+  textArrayHTML = []            # for html text
+  textArrayPARSE = []           # for parsed text
   parseLineArray = []               # for parsed line
-  section = 0                       # document section counter based on h2 tags
+  section = 0                       # text section counter based on h2 tags
   subsection = 0 
-  paragraph = 0                     # document paragraph counter
-  sentence = 0                      # document sentence counter
+  paragraph = 0                     # text paragraph counter
+  sentence = 0                      # text sentence counter
   b = 1                             # begining character counter
   e = 0                             # end character counter
   listSwitch = 0                    # html list tag switch, for end tag
@@ -80,7 +42,7 @@ def documentArrays(rawArray)
 
   while i <= l # loop through the rawArray array
     writeLine = 0
-    # h1 title on the first line of the document
+    # h1 title on the first line of the text
     if i == 0 
       h1test = "|#{t[i].codepoints[0]}|#{t[i+1].codepoints[0]}|#{t[i+2].codepoints[0]}|"
       if h1test =~ /\A\|[0-9]{2,3}\|\|\|/               # h1 tag, |text|blank|blank|
@@ -90,9 +52,9 @@ def documentArrays(rawArray)
         subsection += 1
         e = b + (t[i].length - 1)
         parseLineArray = [i+1, section, subsection, 0, 0, b, e, tag, t[i]]
-        documentArrayPARSE << parseLineArray
+        textArrayPARSE << parseLineArray
         b = (e + 1)
-        documentArrayHTML << "<#{tag}>#{t[i]}</#{tag}>" #puts "<#{tag}>#{t[i]}</#{tag}>"
+        textArrayHTML << "<#{tag}>#{t[i]}</#{tag}>" #puts "<#{tag}>#{t[i]}</#{tag}>"
       end
     end
 
@@ -107,9 +69,9 @@ def documentArrays(rawArray)
             subsection += 1
             e = b + (t[i].length - 1)
             parseLineArray = [i+1, section, subsection, 0, 0, b, e, tag, t[i]]
-            documentArrayPARSE << parseLineArray
+            textArrayPARSE << parseLineArray
             b = (e + 1)
-            documentArrayHTML << "<#{tag}>#{t[i]}</#{tag}>"   #puts "<#{tag}>#{t[i]}</#{tag}>"
+            textArrayHTML << "<#{tag}>#{t[i]}</#{tag}>"   #puts "<#{tag}>#{t[i]}</#{tag}>"
           end
         end
       end
@@ -123,9 +85,9 @@ def documentArrays(rawArray)
             subsection += 1
             e = b + (t[i].length - 1)
             parseLineArray = [i+1, section, subsection, 0, 0, b, e, tag, t[i]]
-            documentArrayPARSE << parseLineArray
+            textArrayPARSE << parseLineArray
             b = (e + 1)
-            documentArrayHTML << "<#{tag}>#{t[i]}</#{tag}>"   #puts "<#{tag}>#{t[i]}</#{tag}>"
+            textArrayHTML << "<#{tag}>#{t[i]}</#{tag}>"   #puts "<#{tag}>#{t[i]}</#{tag}>"
           end
         end
       end
@@ -158,11 +120,11 @@ def documentArrays(rawArray)
               sentence += 1
               e = b + (temp.length - 1)
               parseLineArray = [i+1, section, subsection, paragraph, sentence, b, e, tag, temp.strip]
-              documentArrayPARSE << parseLineArray
+              textArrayPARSE << parseLineArray
               b = (e + 1)
             end
           end
-          documentArrayHTML << "#{tmp}<#{listTag}>" #puts "#{tmp}<#{listTag}>"
+          textArrayHTML << "#{tmp}<#{listTag}>" #puts "#{tmp}<#{listTag}>"
         end
       end
 
@@ -176,9 +138,9 @@ def documentArrays(rawArray)
             e = b + (t[i].length - 1)
             tag = "li"
             parseLineArray = [i+1, section, subsection, paragraph, sentence, b, e, tag, t[i]]
-            documentArrayPARSE << parseLineArray
+            textArrayPARSE << parseLineArray
             b = (e + 1)
-            documentArrayHTML << "<#{tag}>#{t[i]}</#{tag}>" #puts "<#{tag}>#{t[i]}</#{tag}>"
+            textArrayHTML << "<#{tag}>#{t[i]}</#{tag}>" #puts "<#{tag}>#{t[i]}</#{tag}>"
           end
         end
       end
@@ -194,9 +156,9 @@ def documentArrays(rawArray)
             tag = "li"
             listSwitch = 0
             parseLineArray = [i+1, section, subsection, paragraph, sentence, b, e, tag, t[i]]
-            documentArrayPARSE << parseLineArray
+            textArrayPARSE << parseLineArray
             b = (e + 1)
-            documentArrayHTML << "<#{tag}>#{t[i]}</#{tag}></#{listTag}></p>" #puts "<#{tag}>#{t[i]}</#{tag}></#{listTag}></p>"
+            textArrayHTML << "<#{tag}>#{t[i]}</#{tag}></#{listTag}></p>" #puts "<#{tag}>#{t[i]}</#{tag}></#{listTag}></p>"
           end
         end
       end
@@ -225,28 +187,28 @@ def documentArrays(rawArray)
               #puts "temp |#{temp}|"
               #puts ""
               parseLineArray = [i+1, section, subsection, paragraph, sentence, b, e, tag, temp.strip]
-              documentArrayPARSE << parseLineArray
+              textArrayPARSE << parseLineArray
               b = (e + 1)
             end
           end
           tmp << "</p>"                               #puts "</p>"
-          documentArrayHTML << "#{tmp}"               #puts "#{tmp}"
+          textArrayHTML << "#{tmp}"               #puts "#{tmp}"
         else
           writeLine = 1
           tag = "p"
           test = "|#{t[i-1].codepoints[0]}|#{t[i].codepoints[0]}|"
           if test =~ /\|\|[0-9]{2,3}\|/
-            documentArrayHTML << "<#{tag}>"           #puts "<#{tag}>"
+            textArrayHTML << "<#{tag}>"           #puts "<#{tag}>"
           end
-          documentArrayHTML << "#{t[i]}<br>"          #puts "#{t[i]}"
+          textArrayHTML << "#{t[i]}<br>"          #puts "#{t[i]}"
           sentence += 1
           e = b + (t[i].length - 1)
           parseLineArray = [i+1, section, subsection, paragraph, sentence, b, e, tag, t[i]]
-          documentArrayPARSE << parseLineArray
+          textArrayPARSE << parseLineArray
           b = (e + 1)
           test = "|#{t[i].codepoints[0]}|#{t[i+1].codepoints[0]}|"
           if test =~ /\|[0-9]{2,3}\|\|/
-            documentArrayHTML << "</#{tag}>"          #puts "</#{tag}>"
+            textArrayHTML << "</#{tag}>"          #puts "</#{tag}>"
           end
         end
       end # if writeLine == 0 && listSwitch == 0
@@ -260,74 +222,208 @@ def documentArrays(rawArray)
     i += 1
   end # while i <= l
 
-  return documentArrayHTML, documentArrayPARSE
-end # def documentArrays(rawArray)
+  return textArrayHTML, textArrayPARSE
+end # def textArrays(rawArray)
+
+#----------------------------------------------------------------------------#
+def doSentences(wordsArray)
+  sentenceArray = []
+  sentencesArray = []
+  wordsArray.each do |word|
+    if word =~ /[a-z0-9\]\)][\.|\!|\?]\z/ && word != "i.e." && word != "e.g." && word != "etc." # word with . or ! or ? or i.e.
+      sentenceArray << word
+      sentencesArray << sentenceArray
+      sentenceArray = []
+    else
+      sentenceArray << word
+    end
+  end #
+  sentencesArray << sentenceArray
+  return sentencesArray
+end
 
 
-documentArrayHTML, documentArrayPARSE = documentArrays(rawArray)
 
-outputFilename = filename.gsub(".txt", ".html")
-puts "output : #{outputFilename}"
-FileIO.arrayToFile(documentArrayHTML, "", outputFilename, "w")
+#------------------------------------------------------------------------------#
+def doProcessFile(filename)
+  fileArray = FileIO.fileToArray(filename, "")
+  #Var.info("fileArray", fileArray)
+  #puts "fileArray..."
+  #fileArray.each {|e| puts "#{e}"}
 
+  infoArray = FileIO.fileComments(filename, "")
+  #Var.info("infoArray", infoArray)
+  #puts "infoArray..."
+  #infoArray.each {|e| puts "#{e}"}
+
+  rawArray = Normalise.raw(fileArray)
+  #Var.info("rawArray", rawArray)
+  #puts "rawArray..."
+  #rawArray.each {|e| puts "#{e}"}
+
+  textArrayHTML, textArrayPARSE = textArrays(rawArray)
+
+  # Build text array of line hashes containing arrays of words
+  #puts "line, section, subsection, paragraph, sentence, begin, end, tag, text"
+  #puts "0,    1,       2,          3,         4,        5,     6,   7,   8"
+  # text -> line -> word
+
+  puts "Building hashs"
+  text = []
+
+  textArrayPARSE.each do |e|
+    line = {}
+
+    # line information
+    aryInfo = []
+    8.times do |n|
+      aryInfo << e[n]
+    end
+    aryInfo << Digest::MD5.hexdigest(e[8])
+    tmpArray = filename.split("/")
+    aryInfo << tmpArray.last.gsub(/\.[a-z]{3,}\z/,"")
+    line["INF"] = aryInfo
+
+    # line text
+    tmpArray = []
+    tmpArray = e[8].split(" ")
+    lineLength = tmpArray.length
+    line["RAW"] = tmpArray
+
+    # create INDIVIDUAL OBJECT elements for each word in array
+    tmpArray = []; lineLength.times {tmpArray << ""}; line["NOR"] = tmpArray
+    tmpArray = []; lineLength.times {tmpArray << ""}; line["LEM"] = tmpArray
+    tmpArray = []; lineLength.times {tmpArray << ""}; line["RUL"] = tmpArray
+    tmpArray = []; lineLength.times {tmpArray << ""}; line["W5H"] = tmpArray
+    tmpArray = []; lineLength.times {tmpArray << ""}; line["POS"] = tmpArray
+    tmpArray = []; lineLength.times {tmpArray << ""}; line["DEP"] = tmpArray
+    text << line 
+  end
+  #Var.info("text", text)
+
+  text = Normalise.text(text)
+  #Var.info("text", text)
+
+  text = Inflectional.text(text)
+  #Var.info("text", text)
+
+  text = Derivational.text(text)
+  #Var.info("text", text)
+
+  text = Pos.text(filename, text)
+  #Var.info("text", text)
+
+  text = W5h.text(text)
+  #Var.info("text", text)
+
+  puts ""
+  outputFilename = filename.gsub(".txt", ".html")
+  puts "output : #{outputFilename}"
+  FileIO.arrayToFile(textArrayHTML, "", outputFilename, "w")
+
+  #outputFilename = filename.gsub(".txt", ".ary")
+  #puts "output : #{outputFilename}"
+  #FileIO.arrayToFile(textArrayPARSE, ",", outputFilename, "w")
+  #Var.info("textArrayPARSE", textArrayPARSE)
+
+  outputFilename = filename.gsub(".txt", ".hsh")
+  puts "output : #{outputFilename}"
+
+  infoArray << "summary_text\n"
+  tmpHsh = {}
+  tmpHsh["TXT"] = infoArray
+  FileIO.hashToFile(tmpHsh, ",", outputFilename, "w")
+  text.each_with_index do |e,i|
+    FileIO.hashToFile(e, ",", outputFilename, "a")
+  end
+  puts ""
+
+end # doProcessFile(filename)
+
+
+def doFile(filename)
+  puts "-"*80
+  $logfile = "#{__FILE__}".gsub(".rb", ".log")
+  puts "#{filename}".bold
+  doProcessFile(filename)
+end # def doFile(filename)
+
+
+def doDir(directory)
+  puts "-"*80
+  $logfile = "#{__FILE__}".gsub(".rb", ".log")
+  fileArray = []
+  Dir.glob(directory + "*.txt") do |file|
+    next if file == '.' or file == '..'
+    fileArray << file
+  end
+  puts "#{directory}... #{fileArray.length}"
+  fileArray.each_with_index do |filename,index| 
+    puts "#{filename} #{index+1}/#{fileArray.length}".bold
+    doProcessFile(filename)
+  end
+end # def doDir(directory)
+
+
+#------------------------------------------------------------------------------#
+invalid ="
+Usage    : ruby #{__FILE__} filename.txt | dir/
+
+"
+if ARGV.size == 1
+  case ARGV[0]
+  when /\.txt\z/
+    if FileIO.fileExists(ARGV[0], 0) == true
+      doFile(ARGV[0])
+    end
+  when /\/\z/
+    if FileIO.directoryExists(ARGV[0], 2) == true
+      doDir(ARGV[0])
+    end
+  else
+    puts "\nError".ljust(@column) + ": Not found! -> #{ARGV[0]}"
+    puts "#{invalid}"
+    exit(1)    
+  end
+else
+  puts "#{invalid}"
+  exit(1)
+end
+
+puts ""
+#------------------------------------------------------------------------------#
+__END__
+
+#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+#puts "Summarise"
+#text = Summarise.text(filename, text)
+
+#------------------------------------------------------------------------------#
 =begin
-outputFilename = filename.gsub(".txt", ".ary")
+outputFilename = filename.gsub(".txt", ".sum")
+text.each_with_index do |e,i|
+  FileIO.hashToFile(e, ",", outputFilename, "a+")
+end
 puts "output : #{outputFilename}"
-FileIO.arrayToFile(documentArrayPARSE, ",", outputFilename, "w")
-#Var.info("documentArrayPARSE", documentArrayPARSE)
 =end
 
 
 
 
+puts ""
 #------------------------------------------------------------------------------#
-# Build document array of line hashes containing arrays of words
-#puts "line, section, subsection, paragraph, sentence, begin, end, tag, text"
-#puts "0,    1,       2,          3,         4,        5,     6,   7,   8"
-# document -> line -> word
+__END__
 
-puts "Building text hash"
-document = []
-documentArrayPARSE.each do |e|
-  line = {}
-
-  # line information
-  aryInfo = []
-  8.times do |n|
-    aryInfo << e[n]
-  end
-  aryInfo << Digest::MD5.hexdigest(e[8])
-  tmpArray = filename.split("/")
-  aryInfo << tmpArray.last.gsub(/\.[a-z]{3,}\z/,"")
-  line["INF"] = aryInfo
-
-  # line text
-  tmpArray = []
-  tmpArray = e[8].split(" ")
-  lineLength = tmpArray.length
-  line["RAW"] = tmpArray
-
-  # create INDIVIDUAL OBJECT elements for each word in array
-  tmpArray = []; lineLength.times {tmpArray << ""}; line["NOR"] = tmpArray
-  tmpArray = []; lineLength.times {tmpArray << ""}; line["LEM"] = tmpArray
-  tmpArray = []; lineLength.times {tmpArray << ""}; line["RUL"] = tmpArray
-  tmpArray = []; lineLength.times {tmpArray << ""}; line["W5H"] = tmpArray
-  tmpArray = []; lineLength.times {tmpArray << ""}; line["POS"] = tmpArray
-  tmpArray = []; lineLength.times {tmpArray << ""}; line["DEP"] = tmpArray
-  
-  document << line 
-end
-#Var.info("document", document)
-
-
-#------------------------------------------------------------------------------#
-document = Normalise.document(document)
-#Var.info("document", document)
 
 =begin
 outputFilename = filename.gsub(".txt", ".nor")
 puts "output : #{outputFilename}"
-document.each_with_index do |line,index|
+text.each_with_index do |line,index|
   tmpString = ""
   line["NOR"].each do |word|
     tmpString << "#{word} "
@@ -339,56 +435,4 @@ document.each_with_index do |line,index|
   end
 end
 =end
-
-
-#------------------------------------------------------------------------------#
-document = Inflectional.document(document)
-#Var.info("document", document)
-
-
-#------------------------------------------------------------------------------#
-document = Derivational.document(document)
-#Var.info("document", document)
-
-
-#------------------------------------------------------------------------------#
-document = Pos.document(filename, document)
-#Var.info("document", document)
-
-
-#------------------------------------------------------------------------------#
-puts "W5H"
-document = W5h.document(document)
-#Var.info("document", document)
-
-#------------------------------------------------------------------------------#
-puts "Summarise"
-document = Summarise.document(filename, document)
-
-#------------------------------------------------------------------------------#
-=begin
-outputFilename = filename.gsub(".txt", ".sum")
-document.each_with_index do |e,i|
-  FileIO.hashToFile(e, ",", outputFilename, "a+")
-end
-puts "output : #{outputFilename}"
-=end
-
-outputFilename = filename.gsub(".txt", ".hsh")
-puts "output : #{outputFilename}"
-document.each_with_index do |e,i|
-  if i == 0
-    FileIO.hashToFile(e, ",", outputFilename, "w")
-  else
-    FileIO.hashToFile(e, ",", outputFilename, "a")
-  end
-end
-
-
-
-puts ""
-#------------------------------------------------------------------------------#
-__END__
-
-
 

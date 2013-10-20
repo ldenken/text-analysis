@@ -1,10 +1,12 @@
-trace = trace, 36, tra_
-track = track, 53, tra_
+trace = trace, 39, tra_
+track = track, 60, tra_
 trade-craft = trade-craft, 1, tra_
 tradecraft = tradecraft, 6, tra_
-tradeoffs = tradeoff, 12, tra_
+tradeoff = tradeoff, 5, tra_
+tradeoffs = tradeoff, 15, tra_
+trail = trail, 1, tra_
 train = train, 10, tra_
-trait = trait, 6, tra_
+trait = trait, 10, tra_
 transcript = transcript, 14, tra_
 transit = transit, 117, tra_
 transparenot = transparenot, 8, tra_

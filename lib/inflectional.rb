@@ -34,7 +34,7 @@ nominative pronoun (e.g. whom who)
 module Inflectional 
 
   #----------------------------------------------------------------------------#
-  def Inflectional.document(document)
+  def Inflectional.text(text)
     # 
     # 
     puts "Inflectional"
@@ -61,7 +61,7 @@ module Inflectional
 #    Var.info("nominativePronounHash", nominativePronounHash)
 
 
-    document.each do |line|
+    text.each do |line|
       line["NOR"].each_with_index do |w,index|
         word = w.dup
 
@@ -102,7 +102,7 @@ module Inflectional
 #        end
 
       end
-    end # document.each do |line|
+    end # text.each do |line|
 
     if singularNounFlag > 0
       filename = "usr/rules/singular_nouns.rules"
@@ -121,7 +121,7 @@ module Inflectional
       FileIO.hashToFile(nominativePronounHash, ",", filename, "w")
     end
 
-    return document
+    return text
   end
 
 end # module Inflectional

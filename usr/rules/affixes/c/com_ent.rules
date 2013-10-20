@@ -1,3 +1,5 @@
 commitment = commit, 71, com_ent
-comment = comment, 145, com_ent
+comment = comment, 150, com_ent
 complement = complement, 14, com_ent
+competent = competent, 3, com_ent
+component = component, 1, com_ent

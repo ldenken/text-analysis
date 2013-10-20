@@ -1,7 +1,7 @@
 module Derivational 
 # find usr/rules/affixes/ -type f -exec rm {} \;
   #----------------------------------------------------------------------------#
-  def Derivational.document(document)
+  def Derivational.text(text)
     # 
     # 
     puts "Derivational"
@@ -13,7 +13,7 @@ module Derivational
     filename = "usr/rules/suffix.rules"
     suffix = FileIO.fileToArray(filename, "")
 
-    document.each do |line|                                # each line
+    text.each do |line|                                # each line
       aryPrefix_loaded = ""
       aryPrefix = []
       arySuffix_loaded = ""
@@ -206,10 +206,10 @@ module Derivational
         end
       end # line["NOR"].each_with_index do |word,index|
 
-    end # document.each do |line|
+    end # text.each do |line|
 
-    return document
-  end # def Derivational.document(document)
+    return text
+  end # def Derivational.text(text)
 end # Derivational
 
 
