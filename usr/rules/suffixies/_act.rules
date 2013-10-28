@@ -1,7 +1,7 @@
-impact = impact, 300, _act
-exact = exact, 28, _act
-interact = interact, 12, _act
+impact = impact, 349, _act
+exact = exact, 31, _act
+interact = interact, 14, _act
 attract = attract, 13, _act
-react = react, 3, _act
-intact = intact, 2, _act
-counteract = counter, 2, _act
+react = react, 4, _act
+intact = intact, 3, _act
+counteract = counter, 3, _act

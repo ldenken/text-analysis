@@ -1,9 +1,9 @@
-subject = subject, 25, sub_
-submit = submit, 116, sub_
-subpoena = subpoena, 16, sub_
+subject = subject, 33, sub_
+submit = submit, 120, sub_
+subpoena = subpoena, 18, sub_
 subpoenas = subpoena, 12, sub_
 subscribe = subscribe, 2, sub_
-subvert = subvert, 63, sub_
-subterfuge = terfuge, 4, sub_, NEW
-subgroup = group, 3, sub_, NEW
-subsystem = system, 3, sub_, NEW
+subvert = subvert, 73, sub_
+subterfuge = terfuge, 5, sub_, NEW
+subgroup = group, 4, sub_, NEW
+subsystem = system, 4, sub_, NEW

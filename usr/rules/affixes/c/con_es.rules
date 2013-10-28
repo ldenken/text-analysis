@@ -1,5 +1,7 @@
-conferences = conference, 99, con_es
-conspiracies = conspiracy, 18, con_es
-continues = continue, 39, con_es
-constitutes = constitute, 38, con_es
-consequences = consequence, 29, con_es
+conferences = conference, 100, con_es
+conspiracies = conspiracy, 23, con_es
+continues = continue, 58, con_es
+constitutes = constitute, 42, con_es
+consequences = consequence, 40, con_es
+concludes = conclude, 5, con_es
+confidantes = confidante, 5, con_es

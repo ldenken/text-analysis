@@ -5,11 +5,80 @@ require 'digest'
 require_relative 'lib/colour'
 require_relative 'lib/fileio'
 require_relative 'lib/var'
-require_relative 'lib/summarise_II'
 
 =begin
 
 =end
+
+
+
+
+
+
+
+def doFile(file)
+  puts "-"*80.bold
+  fileArray = []
+  fileArray << file
+  fileArray.each do |file|
+    puts "#{file}".bold
+  end
+end
+
+def doDir(directory)
+  puts "-"*80
+  fileArray = []
+  Dir.glob(directory + "*.hsh") do |file|
+    next if file == '.' or file == '..'
+    fileArray << file
+  end
+  puts "#{directory}... #{fileArray.length}".bold
+  fileArray.each_with_index do |file,index| 
+    puts "#{file} (#{index+1}/#{fileArray.length})".bold
+  end
+end
+
+#------------------------------------------------------------------------------#
+@column = 14
+invalid ="
+Usage    : ruby #{__FILE__} file.hsh | dir/
+
+"
+if ARGV.size == 1
+  case ARGV[0]
+  when /\.hsh\z/
+    if FileIO.fileExists(ARGV[0], 0) == true
+      doFile(ARGV[0])
+    end
+  when /\/\z/
+    if FileIO.directoryExists(ARGV[0], 2) == true
+      doDir(ARGV[0])
+    end
+  else
+    puts "\nError".ljust(@column) + ": Not found! -> #{ARGV[0]}"
+    puts "#{invalid}"
+    exit(1)    
+  end
+else
+  puts "#{invalid}"
+  exit(1)
+end
+
+
+p 80/4
+
+
+puts ""
+#------------------------------------------------------------------------------#
+__END__
+
+
+
+
+
+
+
+
 
   # FileIO
   #----------------------------------------------------------------------------#
@@ -21,17 +90,17 @@ require_relative 'lib/summarise_II'
     exit(1)
   end
 
-  def fileExists(filename, exit)
-    filetest = File.exist?(filename)
+  def fileExists(file, exit)
+    filetest = File.exist?(file)
     if filetest == false
       case exit
       when 0
         # do nothing!
       when 1
-        puts "Error".ljust(@column) + ": File not found! -> #{filename}"
+        puts "Error".ljust(@column) + ": File not found! -> #{file}"
       when 3
         error = "File not found!"
-        location = "def fileExists(#{filename}, #{exit})"
+        location = "def fileExists(#{file}, #{exit})"
         errorAndExit(error, location)
       end
     else
@@ -63,10 +132,10 @@ require_relative 'lib/summarise_II'
 
 #------------------------------------------------------------------------------#
 
-def doFile(filename)
+def doFile(file)
   puts "-"*80
   fileArray = []
-  fileArray << filename
+  fileArray << file
 
   fileArray.each do |file|
     puts "#{file.bold}"
@@ -92,7 +161,7 @@ def doFile(filename)
           text_subsection << line
         end
       end 
-      text_subsection = Summarise_II.text(filename, text_subsection)
+      text_subsection = Summarise_II.text(file, text_subsection)
     end
 =end
   end # fileAry.each do |file|

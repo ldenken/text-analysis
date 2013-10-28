@@ -329,7 +329,6 @@ def doProcessFile(filename)
   outputFilename = filename.gsub(".txt", ".hsh")
   puts "output : #{outputFilename}"
 
-  infoArray << "summary_text\n"
   tmpHsh = {}
   tmpHsh["TXT"] = infoArray
   FileIO.hashToFile(tmpHsh, ",", outputFilename, "w")

@@ -86,7 +86,12 @@ end
 fileAry.each do |file|
   puts "#{file.bold}"
   puts ""
-  text = FileIO.loadHash(file, 1)
+  info, text = FileIO.loadHash(file, 1)
+  #puts info.inspect
+  #Var.info("info", info)
+  #Var.info("info[\"tags\"]", info["tags"])
+
+  #Var.info("text", text)
 
   #text[#]["INF"] = line, section, subsection, paragraph, sentence, begin, end, tag, text
   #text[#]["INF"] = 0,    1,       2,          3,         4,        5,     6,   7,   8
@@ -100,6 +105,29 @@ fileAry.each do |file|
     words += line["RAW"].length
   end
   puts "word(s)".ljust(column) + words.to_s
+
+  if info["tags"] 
+    print "tag(s)".ljust(column)
+    tmpStr = info["tags"].gsub!(/[\[\]\"]/, "")
+    if tmpStr =~ /,/
+      tmpAry = tmpStr.split(", ")
+      tmpAry.each {|e| print "#{e}, "}
+      puts ""
+    else
+      print "#{info["tags"]}"
+      puts ""
+    end
+
+  end
+
+  if info["categories"]
+    print "tag(s)".ljust(column)
+    tmpStr = info["categories"].gsub!(/[\[\]\"]/, "")
+    tmpAry = tmpStr.split(", ")
+    tmpAry.each {|e| print "#{e}, "}
+    puts ""
+  end
+
 
 
   if ARGV[2] =~ /[A-Z0-9]{3}/ && ARGV[3] =~ /[a-zA-Z0-9 ]/
@@ -160,7 +188,8 @@ fileAry.each do |file|
 
   end # if ARGV[2] =~ /[A-Z0-9]{3}/ && ARGV[3] =~ /[a-zA-Z0-9 ]/
 
-  puts "#{w5hString}"
+  #puts "#{w5hString}"
+  puts ""
 
 end # fileAry.each do |file|
 
@@ -207,14 +236,12 @@ def w5hCounts(line, hash, i, colour)
   return hash
 end
 
-
 def printCountsHash(hash, num)
   if num == 0
     amount = hash.length
   else
     amount = (hash.length / num)    
   end
-
   count = 0
   width = 0
   hash.sort_by {|k,v| v}.reverse.each do |k,v|
@@ -233,7 +260,7 @@ def printCountsHash(hash, num)
 end
 
 fileAry.each do |file|
-  text = FileIO.loadHash(file, 1)
+  info, text = FileIO.loadHash(file, 1)
   text.each do |line|
     (line["W5H"].length).times do |i|
       if line["W5H"][i] =~ /[a-z]/
@@ -269,12 +296,11 @@ printCountsHash(w5hCyanCounts, 0)
 puts "WHY".magenta
 printCountsHash(w5hMagentaCounts, 0)
 
-
 #------------------------------------------------------------------------------#
 tmpAry = FileIO.fileToArray("usr/data/bow_excludes.lst", "")
 nounsBoW = {}
 fileAry.each do |file|
-  text = FileIO.loadHash(file, 1)
+  info, text = FileIO.loadHash(file, 1)
   text.each do |line|
     (line["POS"].length).times do |i|
       if line["POS"][i] =~ /\ANN/
@@ -318,9 +344,8 @@ def bowHash(bow_excludes, hash, token)
 end
 
 fileAry.each do |file|
-  text = FileIO.loadHash(file, 1)
+  info, text = FileIO.loadHash(file, 1)
   text.each do |line|
-
     (line["LEM"].length).times do |i|
       if line["DEP"][i] =~ /root/
         #print "#{line["LEM"][i]} ".bold
@@ -379,7 +404,6 @@ def allBoWHash(allBoW, bow_excludes, hash)
     end    
   end
 end
-
 
 allBoWHash(allBoW, bow_excludes, w5hBlueCounts)
 allBoWHash(allBoW, bow_excludes, w5hGreenCounts)

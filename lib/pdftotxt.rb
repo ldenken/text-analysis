@@ -52,6 +52,12 @@ module Parse
       imgDir = "img"
       tmpDir = "tmp"
     end
+
+    command = "mkdir #{dirName}tmp"
+    output = Parse.doSystemCommand(command)
+    command = "mkdir #{dirName}img"
+    output = Parse.doSystemCommand(command)
+
     #puts "imgDir    : #{imgDir}"
     #puts "tmpDir    : #{tmpDir}"
     pdfFile = inputFile.gsub(/[a-z0-9]{1,255}\.pdf/, "") + "#{hash}.pdf" 

@@ -1,5 +1,5 @@
 communicants = communicant, 35, com_ts
-commitments = commitment, 60, com_ts
-comments = comment, 76, com_ts
-components = component, 9, com_ts
-complaints = complaint, 38, com_ts
+commitments = commitment, 74, com_ts
+comments = comment, 89, com_ts
+components = component, 13, com_ts
+complaints = complaint, 42, com_ts

@@ -1,8 +1,8 @@
-mollify = mollify, 32, _fy
-clarify = clarify, 32, _fy
-identify = identify, 104, _fy
-modify = modify, 14, _fy
+mollify = mollify, 36, _fy
+clarify = clarify, 36, _fy
+identify = identify, 123, _fy
+modify = modify, 16, _fy
 certify = certify, 6, _fy
 qualify = qualify, 6, _fy
 notify = notify, 30, _fy
-classify = classi, 3, _fy, NEW
+classify = classi, 4, _fy, NEW

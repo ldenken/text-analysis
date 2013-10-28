@@ -1,6 +1,6 @@
-precedent = precedent, 32, pre_ent
-preeminent = preeminent, 16, pre_ent
-prescient = prescient, 16, pre_ent
-present = present, 18, pre_ent
-president = president, 281, pre_ent
-prevent = prevent, 175, pre_ent
+precedent = precedent, 36, pre_ent
+preeminent = preeminent, 23, pre_ent
+prescient = prescient, 23, pre_ent
+present = present, 29, pre_ent
+president = president, 421, pre_ent
+prevent = prevent, 209, pre_ent

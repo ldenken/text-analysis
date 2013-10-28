@@ -1,9 +1,9 @@
 artillery = artillery, 7, _ery
-bestrecovery = bestrecovery, 90, _ery
-chancellery = chancellery, 8, _ery
-delivery = delivery, 14, _ery
-every = every, 540, _ery
-mystery = mystery, 30, _ery
-query = query, 34, _ery
+bestrecovery = bestrecovery, 96, _ery
+chancellery = chancellery, 12, _ery
+delivery = delivery, 15, _ery
+every = every, 655, _ery
+mystery = mystery, 32, _ery
+query = query, 50, _ery
 robbery = robbery, 99, _ery
 slippery = slip, 7, _ery

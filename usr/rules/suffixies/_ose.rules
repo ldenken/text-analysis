@@ -1,8 +1,8 @@
-choose = choose, 99, _ose
-chose = choose, 82, _ose
-close = close, 59, _ose
-expose = expose, 32, _ose
-those = those, 990, _ose
-whose = whose, 120, _ose
+choose = choose, 101, _ose
+chose = choose, 127, _ose
+close = close, 102, _ose
+expose = expose, 40, _ose
+those = those, 1238, _ose
+whose = whose, 163, _ose
 oppose = oppose, 20, _ose
-explanation--those = explanation--th, 3, _ose, NEW
+explanation--those = explanation--th, 4, _ose, NEW

@@ -1,7 +1,7 @@
-transformed = transform, 20, tra_ed
-transmitted = transmit, 17, tra_ed
-traversed = traverse, 11, tra_ed
-trained = train, 9, tra_ed
-transferred = transfer, 10, tra_ed
-traced = trace, 9, tra_ed
+transformed = transform, 23, tra_ed
+transmitted = transmit, 20, tra_ed
+traversed = traverse, 15, tra_ed
+trained = train, 13, tra_ed
+transferred = transfer, 11, tra_ed
+traced = trace, 10, tra_ed
 tracked = track, 12, tra_ed

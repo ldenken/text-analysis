@@ -1,8 +1,8 @@
-agency = agency, 3011, _cy
-urgency = urgency, 32, _cy
-policy = policy, 214, _cy
-saliency = saliency, 20, _cy
-dependency = dependent, 11, _cy
-emergency = emergency, 18, _cy
-efficiency = efficient, 7, _cy
-latency = latency, 2, _cy
+agency = agency, 3452, _cy
+urgency = urgency, 36, _cy
+policy = policy, 244, _cy
+saliency = saliency, 24, _cy
+dependency = dependent, 13, _cy
+emergency = emergency, 20, _cy
+efficiency = efficient, 8, _cy
+latency = latency, 3, _cy

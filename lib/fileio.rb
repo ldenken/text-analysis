@@ -87,7 +87,7 @@ module FileIO
         # do nothing!
       when 1
         puts "Error".ljust(@column) + ": File not found! -> #{filename}"
-      when 3
+      when 2
         error = "File not found!"
         location = "def fileExists(#{filename}, #{exit})"
         FileIO.errorAndExit(error, location)
@@ -344,7 +344,7 @@ module FileIO
       text = []   # document
       line = {}   # sentence(s)
       token = ""  # word
-      info = []   # text information
+      info = {}   # text information
       fileArray = []
       begin
         File.foreach(filename) do |string|
@@ -363,9 +363,17 @@ module FileIO
         # comma space used to split string to accommodate comma's in string!
         stringArray = string.split(", ")
         if key == "TXT"
-          #puts "#{key}"
-          #puts "#{stringArray}"
-          info = stringArray
+          last_key = ""
+          stringArray.each do |e|
+            tmpAry = e.split(" : ")
+            if tmpAry.length >= 2
+              key = tmpAry[0].downcase
+              info[key] = tmpAry[1]
+              last_key = key
+            else
+              info[last_key] << ", #{tmpAry}"
+            end
+          end
         end
 
         if key == "INF" 
